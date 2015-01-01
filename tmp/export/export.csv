@@ -1,0 +1,6 @@
+﻿"Booking Number","Check In - Check Out",Method,Customer,Country,Payment,Status,,,
+XQVMN2A7SN,"Oct 29 2013 - Oct 30 2013","Pay on Arrival","Khuynh Luu",Vietnam,$80.00,Reserved,"[ Description ]",Invoice,"[ Cancel ]"
+KUDTZG8VVO,"Oct 13 2013 - Oct 14 2013","Pay on Arrival","Guest Test",Vietnam,$55.00,Reserved,"[ Description ]",Invoice,"[ Cancel ]"
+4PVV6J2BN5,"Oct 13 2013 - Oct 14 2013","Pay on Arrival","Nguyen Tam",Vietnam,$55.00,Reserved,"[ Description ]",Invoice,"[ Cancel ]"
+OVK4RC91S8,"Oct 12 2013 - Oct 14 2013","Pay on Arrival","Nguyen Tam",Vietnam,$120.00,Reserved,"[ Description ]",Invoice,"[ Cancel ]"
+1UN7LD0PAB,"Oct 11 2013 - Oct 12 2013",2CO,Admin,Vietnam,$55.00,Reserved,"[ Description ]",Invoice,"[ Cancel ]"

@@ -1,0 +1,336 @@
+======================================================================================
+- Version 4.0.3 [12.11.2012]
+======================================================================================
+1. Feature: [added] multi-hotel feature
+2. Feature: [added] list of rooms on hotel description page
+3. Feature: [added] possibility to admin to perform reservation in the past
+4. Feature: [added] possibility to define booking module is active on a Whole Site, Front-End/Back-End only or inactive
+5. Feature: [added] possibility to view Rooms Occupancy for all hotel rooms
+6. Feature: [added] possibility to define room prices depending on number of guests
+7. Feature: [added] possibility to define additional guests in room
+
+1. Feature: [improved] Calendar - added Portuguese language translation
+2. Feature: [improved] Customer module - added possibility for admin to add customers with empty account
+3. Feature: [improved] minor changes in templates file header.php
+4. Feature: [improved] minor changes in PDF invoice file
+4. Feature: [improved] minor changes in index.php?page=booking_payment and Reservation class
+5. Feature: [improved] alert messaging for check availability results for special periods of time
+6. Feature: [improved] Additional Payment - not it accepts negative values to add a personal discount as an administrator
+
+1. Bug: [fixed] wrong displaying of non-English characters in exporting PDF file
+2. Bug: [fixed] in drawing check-in and check-out popup calendar when minimum nights is zero
+3. Bug: [fixed] wrong data in drawing Rooms Occupancy calendar for next year
+
+
+======================================================================================
+- Version 3.9.1 [25.06.2012]
+======================================================================================
+ 1. Feature: [added] possibility to dynamically add Extras to the total sum of Shopping Cart (without refreshing the page)
+ 2. Feature: [added] possibility to specify whether to send notification email when reservation expired
+ 3. Feature: [added] possibility to download Invoice in PDF format: Bookings -> Bookings Management -> Download Invoice
+ 4. Feature: [added] possibility to define preferred language for customers
+ 5. Feature: [added] new type of campaigns - 'standard' that allows to define discount for special periods of time in the future
+ 6. Feature: [added] possibility to define 'meal plans' via Bookings -> Settings -> Meal Plans Management
+ 
+ 1. Bug: [fixed] in calculation of extras total sum for non-default currencies
+ 
+
+======================================================================================
+- Version 3.8.4 [08.06.2012]
+======================================================================================
+ 1. Feature: [added] new module FAQ, that allows admin to create/manage FAQs
+ 2. Feature: [added] possibility to send emails via SMTP mailer: General -> Site Settings -> Email Settings
+ 3. Feature: [added] possibility to define Room Equipment via Admin Panel : Hotel Management -> Rooms Management -> Edit
+ 4. Feature: [added] possibility to define whether to show Children Number in rooms via Admin Panel : Hotel Management -> Rooms Settings
+ 5. Feature: [added] possibility to define whether to use WYSIWYG editor for Email Templates via General -> Site Settings -> Email Settings
+ 6. Feature: [added] possibility to export/integrate Reservation Form on other sites: Hotel Management -> Integration
+ 7. Feature: [added] automatically system suggestion on empty search result
+ 8. Feature: [added] possibility to define week starting day via General Settings -> Datetime & Price Settings
+
+ 1. Feature: [improved] VAT value allows now to accept 3 digits after decimal point
+ 2. Feature: [improved] sending "forgotten password" email - now in customer/admin preferred language
+ 3. Feature: [improved] minor changes in Create Account and My Account customer pages
+ 4. Feature: [improved] Rooms Module - added possibility to upload 5 images for each room
+ 5. Feature: [improved] Booking Module - added possibility to define whether to show 'reserved' rooms in search results until booking is complete
+ 6. Feature: [improved] Booking Module - added possibility to define a maximum number of allowed bookings (not complete) per customer
+ 7. Feature: [improved] Booking Module - added possibility to manually [ Cleanup ] pending bookings: Bookings -> Bookings Management -> Cleanup
+ 8. Feature: [improved] Extras - added language translation for extras items
+ 9. Feature: [improved] Booking Module - new payment type "Bank Transfer"
+ 
+ 1. Bug: [fixed] displaying wrong number of adults/children in reservation cart pages and some emails
+ 2. Bug: [fixed] wrong check for min/max nights per booking
+ 3. Bug: [fixed] in drawing of room availability after the changing of a room count in Rooms Management -> Edit
+ 4. Bug: [fixed] in drawing of local datetime for reservation pages
+ 
+
+======================================================================================
+- Version 3.7.5 [10.05.2012]
+======================================================================================
+ 1. Feature: [added] possibility to define whether to show fully booked/unavailable rooms in search
+ 2. Feature: [added] Check Availability block on room description page
+ 3. Feature: [added] Roles and Privileges for admin users
+ 4. Feature: [added] maximum nights per booking to packages
+ 5. Feature: [added] possibility to check prices on search result page for Available Rooms
+ 6. Feature: [added] possibility to force SSL connection via General -> General Settings "Force SSL"
+ 7. Feature: [added] added sending email after password was changed by admin
+ 8. Feature: [added] added possibility to description whether to send email notification for admin on new user registration
+ 9. Feature: [added] added sending email to customer after approval registration by admin
+ 
+ 1. Feature: [improved] minor changes in Languages Module
+ 2. Feature: [improved] minor changes in Email templates
+ 3. Feature: [improved] minor changes in Check Availability date selection
+ 4. Feature: [improved] customer notification procedure after placing an order
+ 5. Feature: [improved] booking statistics - added possibility to filter data by country
+ 6. Feature: [improved] credit card payment procedure - added card holder's name field
+ 7. Feature: [improved] Banners Module - added possibility to use HTML in caption text
+ 8. Feature: [improved] booking emails - added {HOTEL INFO} holder containing info about hotel
+ 9. Feature: [improved] minor changes in RSS Module
+
+ 1. Bug: [fixed] in customer booking cancellation procedure
+ 2. Bug: [fixed] in automatic selection of minimum nights in availability calendar
+ 3. Bug: [fixed] number of children wasn't displayed on Reservation Cart page
+ 4. Bug: [fixed] ltr/rtl direction in drawing invoice/booking description for print
+ 5. Bug: [fixed] displaying wrong value of "Initial Fee" in Booking Description and Invoce pages
+ 
+
+======================================================================================
+- Version 3.6.1 [18.11.2011]
+======================================================================================
+ 1. Feature: [added] possibility to define price format: American and European
+ 2. Feature: [added] possibility to create packages with minimum-stay requirements
+ 3. Feature: [added] possibility to check booking status online
+ 4. Feature: [added] possibility to define a number of days before clients may cancel a reservation
+ 5. Feature: [added] possibility to define Initial Fee via Modules -> Bookings -> Booking Settings
+ 6. Feature: [added] new payment type - Pay on Arrival
+ 7. Feature: [added] possibility to define and use discount coupons on site: Bookings » Promo and Discounts » Coupons Management
+ 8. Feature: [added] possibility to define a maximum number of allowed no completed reservations per client via Modules -> Bookings -> Booking Settings
+ 9. Feature: [added] possibility to add more extras after booking was created
+
+ 1. Feature: [improved] minor changes in Clients Module settings
+ 2. Feature: [improved] cancellation of reservation - added sending email for client and admin
+ 3. Feature: [improved] prepayment types - added 'fixed sum', 'percentage' and 'first night'
+
+ 1. Bug: [fixed] in calculation 'first night' and 'fixed sum' prepayment price
+
+
+======================================================================================
+- Version 3.5.1 [31.10.2011]
+======================================================================================
+ 1. Feature: [added] redirecting of visitor to last visited page after login (booking pages only)
+ 2. Feature: [added] possibility to resend activation email from client login page
+ 3. Feature: [added] possibility to define type of the first night value calculating: real or average
+ 4. Feature: [added] possibility to cancel booking for admin and clients
+ 5. Feature: [added] new status for bookings: payment error
+ 6. Feature: [added] possibility to define discount campaigns for specific client groups
+ 7. Feature: [added] possibility to define a size of page for search of rooms availability
+ 8. Feature: [added] new module Testimonials, that allows admin to manage clients testimonials
+ 9. Feature: [added] possibility to define whether VAT fee included in price or not Bookings -> Booking Settings [VAT Included in Price]
+
+ 1. Feature: [improved] pre-payment feature - added new types: Full Price, First Night Fixed Sum and Percentage
+ 2. Feature: [improved] SEO links redirection on changing language or currency
+ 3. Feature: [improved] search availability form holds selected check-in/check-out dates on booking page too
+ 4. Feature: [improved] system pages - added possibility to edit "system_page" parameter on edit page
+ 5. Feature: [improved] working with session variables
+ 6. Feature: [improved] minor changes in News Module
+ 7. Feature: [improved] booking statuses - added new status 'payment error'
+ 8. Feature: [improved] calculating of discount was removed from extras 
+
+ 1. Bug: [fixed] price for partial payment (first night) was calculating without VAT
+
+
+======================================================================================
+- Version 3.4.4 [04.10.2011]
+======================================================================================
+ 1. Feature: [added] possibility to print (with printable view) a Bookings » Description page
+ 2. Feature: [added] possibility to define room availability for each day of year
+ 3. Feature: [added] possibility for admin to assign a room number to each reservation: Bookings -> Description
+ 4. Feature: [added] possibility for admin to allow client reservation cancellation : Bookings -> Booking Settings [Clients May Cancel Reservation]
+ 5. Feature: [added] possibility for admin to show allow/hide Reservation Form on homepage
+ 6. Feature: [added] possibility for admin to enter Hotel Reservation ID (for internal use only)
+ 7. Feature: [added] new field "fax" to client's accounts
+ 8. Feature: [added] possibility for admin to define a type of booking numbers: random or sequential
+ 9. Feature: [added] possibility for admin to send invoices by email
+
+ 1. Feature: [improved] optimized search rooms availability procedures
+ 2. Feature: [improved] credit cards validation procedure
+ 3. Feature: [improved] "rooms left" message on search result page
+ 4. Feature: [improved] statistics feature - added possibility to view separately taxes and income for bookings
+ 5. Feature: [improved] cleaning of displayed text from tags, code holders etc. in search procedure
+ 6. Feature: [improved] search feature - search in rooms defined as default
+ 7. Feature: [improved] automatic CSS "active" for left menu links in Administration Panel
+ 8. Feature: [improved] minor changes in style and functionality of Administration Panel
+
+ 1. Bug: [fixed] in calculating of rooms availability
+ 2. Bug: [fixed] with order displaying od rooms after searching
+ 3. Bug: [fixed] with preferred language when it was set as inactive
+ 4. Bug: [fixed] admin in Preview Mode couldn't see system pages
+
+
+======================================================================================
+- Version 3.3.0 [02.06.2011]
+======================================================================================
+ 1. Feature: [added] Reports module for administrator: Bookings -> Information and Statistics -> Reports
+ 1. Feature: [added] possibility for admin to add/edit Extras and include them with room booking
+
+ 1. Feature: [improved] reservation and booking information in administrator panel
+
+ 1. Bug: [fixed] with rewrite rules for SEO URLs
+
+======================================================================================
+- Version 3.2.4 [25.05.2011]
+======================================================================================
+ 1. Feature: [added] possibility to embed new module's tag into pages: {module:rooms} 
+ 2. Feature: [added] possibility to customer to delete posted comments
+ 3. Feature: [added] added new status for booking - "Refunded", old status "Pending" renamed into "Reserved"
+ 4. Feature: [added] groups for customers and possibility to send mass mail by customer groups
+ 5. Feature: [added] new layout for pages in Add/Edit mode
+ 6. Feature: [added] possibility to define 3 types of registration confirmation: none, by email, by admin
+ 7. Feature: [added] possibility to see rooms availability by all rooms or single room: Booking Management -> Rooms Availability
+ 8. Feature: [added] possibility to update vocabulary from uploaded file
+ 9. Feature: [added] popular search
+10. Feature: [added] possibility to preview site for admin without log off 
+
+ 1. Feature: [improved] defining price - added possibility to define price for one day
+ 2. Feature: [improved] reservation email - added more information about customer
+ 3. Feature: [improved] admin reservation - added possibility to assign customer to such reservations
+ 4. Feature: [improved] prepayment option - added possibility to define prepayment in percents or first night
+ 5. Feature: [improved] possibility for admin to make reservation - now without collecting credit card info
+ 
+ 1. Bug: [fixed] wrong data in invoice if booking was performed by admin
+ 2. Bug: [fixed] wrong data in calculating "bookings amount" field for customers table
+ 3. Bug: [fixed] with drawing rooms by priority order
+ 4. Bug: [fixed] with search rooms availability for inactive rooms 
+
+======================================================================================
+- Version 3.1.3 [28.04.2011]
+======================================================================================
+ 1. Feature: [added] automatically switch according to minimum night in javascript calendar
+ 2. Feature: [added] possibility to view room prices on Booking page
+ 3. Feature: [added] new system page - Contact Us
+ 4. Feature: [added] possibility to show Google Map on About Us page
+ 5. Feature: [added] possibility to define type of WYSIWYG Editor (2 types) in Admin Panel -> General -> Settings
+ 6. Feature: [added] possibility to cache system and news pages
+ 7. Feature: [added] automatic CSS "active" link for left/right menu
+ 8. Feature: [added] possibility to display separate album, on page with {module:album=code}
+ 9. Feature: [added] possibility to define type of mailer function (2 types) via Admin Panel -> General-> Settings
+10. Feature: [added] automatic removing of "preparing" orders  via Admin Panel -> Booking -> Booking Settings
+
+ 1. Feature: [improved] remove customer account procedure
+ 2. Feature: [improved] SEO links for system pages
+ 3. Feature: [improved] drawing headers - added possibility to add <IMG> tags for headers with text
+ 4. Feature: [improved] availability calendar view in administrator panel Bookings -> Bookings Management -> Rooms Availability
+
+ 1. Bug: [fixed] empty dropdown box if all payment methods were disabled
+ 2. Bug: [fixed] selecting wrongs dates in Check Availability form
+ 3. Bug: [fixed] wrong sum of income on statistics page for bookings with different currency
+
+======================================================================================
+- Version 3.0.9 [07.04.2011]
+======================================================================================
+ 1. Feature: [added] special CSS style for Admin Login/Restore Password page
+ 2. Feature: [added] remainder: ACTION REQUIRED on Home Page in Admin Panel
+ 3. Feature: [added] statistics for users registrations/logins, Accounts -> Statistics
+ 4. Feature: [added] possibility to search avalable rooms, using a number of children parameter
+ 5. Feature: [added] possibility for admin to allow showing fully booked rooms in search
+
+ 1. Feature: [improved] added prefilling of PayPal credit card holder form 
+ 2. Feature: [improved] Securimage module updated to v.2.0 BETA
+ 3. Feature: [improved] working with modules in Admin Panel
+ 4. Feature: [improved] functions files split into admin, common and validation files
+ 5. Feature: [improved] system pages - long links changed into short links
+ 6. Feature: [improved] templates - changes structure of xml description file
+ 7. Feature: [improved] AJAX compatibility with other scripts, all "$" changed with "jQuery"
+ 8. Feature: [improved] minor changes on Bookings page in Admin Panel
+ 9. Feature: [improved] auto-filling of customer data on paypal site 
+
+ 1. Bug: [fixed] on installation with magic_quotes_gpc turned 'On'
+ 2. Bug: [fixed] wrong values in dropdown box, if only online order method allowed
+ 3. Bug: [fixed] wrong calculating avalable rooms when search from the Home page
+ 4. Bug: [fixed] wrong displaying of META tags for system pages
+ 5. Bug: [fixed] wrong calculation room price for split period of time
+ 6. Bug: [fixed] on dublicate account update for if returning customer, if account registration is not required
+ 7. Bug: [fixed] wrong drawing minimum pre-payment percent on Reservation page
+ 8. Bug: [fixed] wrong META tags for system pages
+ 9. Bug: [fixed] on language switching, when visitor is found on Check Availability page
+
+======================================================================================
+- Version 2.3.2 [17.12.2010]
+======================================================================================
+ 1. Feature [added] possibility to pay via 2Checkout processing company
+
+ 1. Feature: [improved] possibility to change system page name and automatical drawing of system pages at the top and bottom
+ 2. Feature: [improved] statistics for bookings: added montly "Income" calculation
+
+ 1. Bug: [fixed] wrong time zone sincronization between Hotel and Rooms Avalibility calendar
+ 2. Bug: [fixed] wrong prices values on room description page
+
+======================================================================================
+- Version 2.2.7 [13.12.2010]
+======================================================================================
+ 1. Feature [added] Header Text, Slogan and Footer text for each language: General -> Settings -> Visual Settings
+ 2. Feature [added] Meta Tags <TITLE>, <KEYWORDS> and <DESCRIPTION> for each language: General -> Settings -> Visual Settings
+ 3. Feature [added] new settings in Contact Us module: time delay between sending emails and captcha verification
+ 4. Feature [added] possibility for admin to define whether to send or not copy of booking email to admin
+ 5. Feature [added] possibility for admin to ban users by IP or email: General -> Ban List
+ 6. Feature [added] possibility for admin to pre-moderate comments via  Modules -> Comments Management
+ 7. Feature [added] possibility for admin to reserve rooms via Bookings -> Make a Reservation 
+ 8. Feature [added] possibility for admin to create/edit email templates via Mass Mail & Templates -> Email Templates
+ 9. Feature [added] possibility for admin to sens mass mail to customers via Mass Mail & Templates -> Mass Mail
+10. Feature [added] possibility for admin to create and manage discount campaigns
+
+ 1. Feature: [improved] Contact Us module - added telephone field and text-direction
+ 2. Feature: [improved] drawing local time on Front-End: now it show date/time translated into local language
+
+ 1. Bug: [fixed] removed \' from the search result text
+ 2. Bug: [fixed] in saving meta tags for pages
+ 3. Bug: [fixed] "Web Page exired" message after serach availability page
+ 4. Bug: [fixed] on creating new customer with password encryption md5
+ 5. Bug: [fixed] in drawing images for rooms in Front-End
+ 6. Bug: [fixed] wrong currency displayed on Room Description page
+ 
+======================================================================================
+- Version 2.1.5 [24.11.2010]
+======================================================================================
+ 1. Feature [added] possibility for admin to change date format
+ 2. Feature [added] possibility for admin to define availability for rooms Hotel Management -> Rooms Management -> [ Availability ]
+ 3. Feature [added] WYSIWYG editor for Room Description fields and Hotel Info
+ 4. Feature [added] possibility to search available rooms with new parameter: max. adults
+ 5. Feature [added] possibility for admin to define minimum nights stay per booking Modules -> Booking Settings 
+ 6. Feature [added] possibility for customer to leave additional info while booking and admin can read this
+ 7. Feature [added] possibility for admin to define VAT for whole site or for separate country. General -> Countries [VAT]
+ 8. Feature [added] new system page "Terms & Conditions". Menu & Pages -> Edit System Pages [Terms and Conditions]
+ 9. Feature [added] automatical translation via Google: Languages Settings -> Vocabulary [Edit] [Translate via Google]
+10. Feature [added] possibility for admin to enter additional payment value: Bookings -> [Edit]
+
+ 1. Feature: [improved] minor changes in installation module
+ 2. Feature: [improved] minor changes in admin panel style
+ 3. Feature: [improved] security against session hijacking attempts
+ 4. Feature: [improved] SEO links generating, also added SEO links for news pages
+ 5. Feature: [improved] site styles renamed in templates and added xml description for each template
+ 6. Feature: [improved] on rooms availability page added more info, like price per night etc.
+ 7. Feature: [improved] css styles in default and x-brown templates 
+ 8. Feature: [improved] added possibility to edit date/time for news
+ 9. Feature: [improved] added some changes in Gallery Module
+
+ 1. Bug: [fixed] on create account page, when password encryption is turned 'On'
+ 2. Bug: [fixed] in drawing of module links in footer menu when module was inistalled
+ 3. Bug: [fixed] in drawing calendar for availability search
+ 4. Bug: [fixed] in calculating room price for booking, shown in booking description in admin panel
+ 5. Bug: [fixed] on creating new room with empty images
+
+======================================================================================
+- Version 2.0.1 [13.08.2010]
+======================================================================================
+
+ 1. Feature [added] possibility for admin to change date format
+ 2. Feature [added] possibility to define preferred language for admin
+ 3. Feature [added] possibility to define page order
+ 4. Feature [added] possibility to create home page on some languages
+ 5. Feature [added] system page About Us
+ 
+ 1. Feature: [improved] session authentication for logged users 
+ 2. Feature: [improved] Templates & Styles feature in Admin Panel
+ 2. Feature: [improved] protection against vulnerability
+ 
+ 1. Bug: [fixed] in characters encoding for RSS file
+ 2. Bug: [fixed] in navigation by letters on Vocabulary page 

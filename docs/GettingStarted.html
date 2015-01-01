@@ -1,0 +1,1043 @@
+<html>
+<head>
+    <title>ApPHP Hotel Site :: Getting Started</title>
+
+    <style>
+      .req { color:#960096; }
+      .method { color:#009600; }
+      .comments { color:#7a7a7a; }
+      .comments_b { color:#575757; }
+      .code { color:#000096; }
+    
+      LI { margin-left:2px; }
+      IMG { border:1px solid #cccccc; }
+	  BODY { padding:10px; }
+      PRE { background-color:#f1f2f3; border:1px solid #cccccc; padding:3px 5px 3px 5px; }	  
+    </style>
+    
+</head>
+<body>    
+
+<!-- last changing 23.07.2012 -->
+<a id=top name=top></a>
+<div class="post">
+
+    <h2 id="post-1">Getting Started with ApPHP Hotel Site (for version 2.0.0 or above)</h2>  
+    <div class="storycontent">
+
+        <table>
+        <tbody>
+        <tr>
+            <td>
+				<ul>
+					<li>
+                    <a href="GettingStarted.html#General"><span>1.</span> <span>General.</span></a>
+                    <ul>
+                        <li><a href="GettingStarted.html#Settings"><span>1.1</span> <span>Settings.</span></a></li>
+						<li><a href="GettingStarted.html#Banning"><span>1.2</span> <span>Banning Emails/IP Addresses.</span></a></li>
+                        <li><a href="GettingStarted.html#Countries"><span>1.3</span> <span>Countries.</span></a></li>
+                        <li><a href="GettingStarted.html#Preview"><span>1.4</span> <span>Site Preview.</span></a></li>
+                    </ul>
+                    <br />                    
+    
+                    <a href="GettingStarted.html#Accounts"><span>2.</span> <span>Acounts.</span></a>
+                    <ul>
+                        <li><a href="GettingStarted.html#My_Account"><span>2.1</span> <span>My Account.</span></a></li>
+						<li><a href="GettingStarted.html#Accounts_Statistics"><span>2.2</span> <span>Accounts Statistics.</span></a></li>
+						<li><a href="GettingStarted.html#Roles_Privileges"><span>2.3</span> <span>Roles & Privileges.</span></a></LI>
+                        <li><a href="GettingStarted.html#Admins"><span>2.4</span> <span>Admins.</span></a></li>
+                        <li><a href="GettingStarted.html#Customers"><span>2.5</span> <span>Customers Management.</span></a></li>
+                    </ul>
+                    <br />                    
+    
+                    <a href="GettingStarted.html#Hotel_Management"><span>3.</span> <span>Hotel Management.</span></a>
+                    <ul>
+                        <li><a href="GettingStarted.html#Hotel_Info"><span>3.1</span> <span>Hotel Info.</span></a></li>
+                        <li><a href="GettingStarted.html#Integration"><span>3.2</span> <span>Integration.</span></a></li>						
+                        <li><a href="GettingStarted.html#Rooms_Settings"><span>3.3</span> <span>Rooms Settings.</span></a></li>
+                        <li><a href="GettingStarted.html#Rooms_Management"><span>3.4</span> <span>Rooms Management.</span></a></li>
+                    </ul>
+                    <br />                    
+    
+                    <a href="GettingStarted.html#Booking"><span>4.</span> <span>Booking.</span></a>
+                    <ul>
+                        <li class=toclevel-2><a href="GettingStarted.html#Booking_Settings"><span>4.1</span> <span>General Settings.</span></a>
+							<ul>
+								<li><a href="GettingStarted.html#Currencies"><span>4.1.1</span> <span>Currencies.</span></a></li>
+								<li><a href="GettingStarted.html#Packages"><span>4.1.2</span> <span>Packages.</span></a></li>
+								<li><a href="GettingStarted.html#Meal_Plans"><span>4.1.3</span> <span>Meal Plans.</span></a></li>
+								<li><a href="GettingStarted.html#Extras"><span>4.1.4</span> <span>Extras.</span></a></li>
+							</ul>
+							<br />
+                        </li>
+                        <li class=toclevel-2><a href="GettingStarted.html#Bookings_Management"><span>4.2</span> <span>Bookings Management.</span></a>
+							<ul>
+								<li><a href="GettingStarted.html#Make_Reservation"><span>4.2.1</span> <span>Make a Reservation.</span></a></li>
+								<li><a href="GettingStarted.html#Bookings"><span>4.2.2</span> <span>Bookings.</span></a></li>
+							</ul>
+                            <br />
+                        </li>
+                        <li class=toclevel-2><a href="GettingStarted.html#Promo_and_Discounts"><span>4.3</span> <span>Promo and Discounts.</span></a>
+							<ul>
+								<li><a href="GettingStarted.html#Campaigns"><span>4.3.1</span> <span>Campaigns.</span></a></li>
+                                <li><a href="GettingStarted.html#Coupons"><span>4.3.2</span> <span>Coupons.</span></a></li>								
+							</ul>
+                            <br />
+                        </li>
+                        <li class=toclevel-2><a href="GettingStarted.html#Information_and_Statistics"><span>4.4</span> <span>Information and Statistics.</span></a>
+							<ul>
+								<li><a href="GettingStarted.html#Rooms_Occupancy"><span>4.4.1</span> <span>Rooms Occupancy.</span></a></li>
+								<li><a href="GettingStarted.html#Reports"><span>4.4.2</span> <span>Reports.</span></a></li>
+								<li><a href="GettingStarted.html#Statistics"><span>4.4.3</span> <span>Statistics.</span></a></li>
+							</ul>						
+                        </li>
+                    </ul>
+                    <br />                    
+    
+                    <a href="GettingStarted.html#Menu_Management"><span>5.</span> <span>Menu Management.</span></a> 
+                    <ul>
+                        <li><a href="GettingStarted.html#Creating_menu_categories"><span>5.1</span> <span>Creating menu categories.</span></a>
+                        <li><a href="GettingStarted.html#Editing_menu_categories"><span>5.2</span> <span>Editing menu categories.</span></a>
+                    </ul>
+                    <br />                    
+    
+                    <a href="GettingStarted.html#Pages_Management"><span>6.</span> <span>Pages Management.</span></a> 
+                    <ul>
+                        <li><a href="GettingStarted.html#Editing_homepage"><span>6.1</span> <span>Editing Homepage.</span></a>
+                        <li><a href="GettingStarted.html#Creating_new_pages"><span>6.2</span> <span>Creating New Pages.</span></a>
+                        <li><a href="GettingStarted.html#Editing_pages"><span>6.3</span> <span>Editing Pages.</span></a>
+                        <li><a href="GettingStarted.html#Editing_system_pages"><span>6.4</span> <span>Editing System Pages.</span></a>
+                        <li><a href="GettingStarted.html#Remove_Restore_pages"><span>6.5</span> <span>Remove/Restore pages.</span></a>
+                    </ul>
+                    <br />
+                    
+                    <a href="GettingStarted.html#Languages_Settings"><span>7.</span> <span>Languages Settings.</span></a> 
+                    <ul>
+                        <li><a href="GettingStarted.html#Inserting_Editing_language"><span>7.1</span> <span>Inserting/Editing Language.</span></a>
+                        <li><a href="GettingStarted.html#Editing_language_vocabulary"><span>7.2</span> <span>Editing Language Vocabulary.</span></a>
+                    </ul>
+                    <br />                    
+
+                    <a href="GettingStarted.html#Mass_Mail_Templates"><span>8.</span> <span>Mass Mail & Email Templates.</span></a> 
+                    <ul>
+                        <li><a href="GettingStarted.html#Email_Templates"><span>8.1</span> <span>Email Templates.</span></a>
+                        <li><a href="GettingStarted.html#Mass_Mail"><span>8.2</span> <span>Mass Mail.</span></a>
+                    </ul>
+                    <br />		
+    
+                    <a href="GettingStarted.html#Modules"><span>9.</span> <span>Modules.</span></a> 
+                    <ul>
+                        <li><a href="GettingStarted.html#Modules_Management"><span>9.1</span> <span>Modules Management.</span></a></li>
+						<li><a href="GettingStarted.html#Pages_Module"><span>9.2</span> <span>Pages Module.</span></a></li>
+                        <li><a href="GettingStarted.html#Rooms_Module"><span>9.3</span> <span>Rooms Module.</span></a></li>
+                        <li><a href="GettingStarted.html#Customers_Module"><span>9.4</span> <span>Customers Module.</span></a></li>
+                        <li><a href="GettingStarted.html#ContactUs_Module"><span>9.5</span> <span>Contact Us Module.</span></a></li>
+                        <li><a href="GettingStarted.html#Comments_Module"><span>9.6</span> <span>Comments Module.</span></a></li>
+                        <li><a href="GettingStarted.html#Booking_Module"><span>9.7</span> <span>Booking Module.</span></a></li>
+                        <li><a href="GettingStarted.html#News_Module"><span>9.8</span> <span>News Module.</span></a>						
+                        <li><a href="GettingStarted.html#Gallery_Module"><span>9.9</span> <span>Gallery Module.</span></a></li>
+                        <li><a href="GettingStarted.html#Banners_Module"><span>9.10</span> <span>Banners Module.</span></a></li>                    
+                        <li><a href="GettingStarted.html#Testimonials_Module"><span>9.11</span> <span>Testimonials Module.</span></a></li>                    
+                        <li><a href="GettingStarted.html#FAQ_Module"><span>9.12</span> <span>FAQ Module.</span></a></li>                    
+                        <li><a href="GettingStarted.html#Backup_and_Restore_Module"><span>9.13</span> <span>Backup & Restore Module.</span></a>
+                    </ul>    
+                    <br /><br />
+					</li>	
+				</ul>
+            </td>
+        </tr>
+        </tbody>
+        </table>
+
+		<!--
+		GENERAL
+		-->
+        <a name="General"></a>
+        <h3><b>1. General.</b></h3>
+        <p>
+        This section describes how to manage General Settings of your site.        
+        </p>
+		<hr>
+        <p></p>
+        
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Settings"></a>
+			<h4><b>1.1 Settings.</b></h4>
+			<a href="getting_started/general_settings.png" rel="lytebox[section_1_1]" title="General Settings"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/general_settings_thumb.png" width="120" alt="" title="General Settings" border="0" /></a>
+			<p>
+				Select <b>Settings</b> from the <b>General Menu</b>. On this page you can easy magane and change important settings
+				of your site. 
+			</p>        
+			<p>
+				There are 3 tabs on this page: General Settings, Visual Settings and Templates & Styles.<br /><br />
+				
+				On General Settings tab you can change:
+				<ul>
+					<li>- Site Offline</li>
+					<li>- Offline Message</li>
+					<li>- Force SSL</li>
+					<li>- SEO URLs</li>
+					<li>- WYSIWYG Editors</li>
+					<li>- RSS Feed Type</li>
+					<li>- Caching</li>
+				</ul><br />
+				
+				On Visual Settings Tab you can change: (change value in dropdown box to make changes for appropriate language)
+				<ul>
+					<li>- Header Text</li>
+					<li>- Slogan</li>
+					<li>- Footer Text</li>
+					<li>- Tag &lt;TITLE&gt;</li>
+					<li>- Meta Tag &lt;KEYWORDS&gt;</li>
+					<li>- Meta &lt;DESCRIPTION&gt;</li>
+				</ul><br />
+	
+				On Datetime & Price Settings Tab you can change:
+				<ul>
+					<li>- Date Format: </li>
+					<li>- Time Zone: </li>
+					<li>- Week Start Day: </li>
+					<li>- Price Format: </li>
+				</ul><br />
+
+				On Email Settings Tab you can change:
+				<ul>
+					<li>- PHP Mailer</li>
+					<li>- E-mail address - address that used for system messages in "FROM" field</li>
+					<li>- SMTP Settings</li>
+				</ul><br />
+
+				On Templates & Styles Tab you can change:
+				<ul>
+					<li>- Template </li>
+				</ul><br />
+	
+				On Server Info Tab you can view the important info about yuor server:
+				<ul>
+					<li>- PHP and MySQL versions</li>
+					<li>- Server parameters</li>
+					<li>- etc</li>
+				</ul><br />
+	
+				On Site Info Tab you can view the ranks of your site (click on update button to refresh them):
+				<ul>
+					<li>- Google and Alexa</li>
+				</ul><br />
+	
+				On Cron Jobs Tab you can define using of Cron job commands
+				<ul>
+					<li>- Cron Jobs</li>
+				</ul>
+			</p>        
+			<p><br /></p>
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Banning"></a>
+			<h4><b>1.2 Banning Emails/IP Addresses.</b></h4>
+			<a href="getting_started/banning.png" rel="lytebox[section_1_2]" title="Banning Email/IP Address"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/banning_thumb.png" width="120" alt="" title="Banning Email/IP Address" border="0" /></a>
+			<p>
+				Select <b>Ban List</b> from the <b>General Menu</b>. On this page you can easy add/change or remove banned email or
+				IP address.
+			</p>
+			<p><br /></p>
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Countries"></a>
+			<h4><b>1.3 Countries.</b></h4>
+			<p>
+				Select <b>Countries</b> from the <b>General Menu</b>. On this page you can manage a list of countries with a standard
+				MicroGrid page. You can add, edit or delete existing country. Also you may change a VAT value, priority order, activate country
+				or define whether it's a default country or not.
+			</p>        
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Preview"></a>
+			<h4><b>1.4 Preview.</b></h4>
+			<p>
+				Preview allows admin to view the site without logging out. To preview the site simply click the
+				General -> Preview link. If you want back to Administrator Panel click the [Back to Admin Panel] link
+				that will appear instead of the slogan text.
+			</p>        
+			<p><br /></p>
+
+		<!--
+		ACCOUNTS 
+		-->
+        <a name="Accounts"></a>
+        <h3><b>2. Accounts.</b></h3>
+        <p>
+        This section describes how to manage accounts on your site.        
+        </p>
+		<hr>
+		<a href="getting_started/my_account.png" rel="lytebox[section_2]" title="My Account"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/my_account_thumb.png" width="120" alt="" title="My Account" border="0" /></a>
+		<a href="getting_started/roles_and_privileges.png" rel="lytebox[section_2]" title="Roles & Privileges"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/roles_and_privileges_thumb.png" width="120" alt="" title="Role & Privileges" border="0" /></a>
+        <p></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="My_Account"></a>
+			<h4><b>2.1 My Account.</b></h4>
+			<p>
+                Log into Admin Panel, using administrator username and password. Then select My Account
+                from Accounts Menu or from the top links of the page. You will see a page, where you can change your
+				email, password and preferred language. To change data simply enter new values and then click 
+				on "Change" button.
+			</p>
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Accounts_Statistics"></a>
+			<h4><b>2.2 Accounts Statistics.</b></h4>
+			<p>
+				Select <b>Statistics</b> from <b>Accounts Menu</b>. On this page you can view a general statistics of account on your site:
+				<ul>
+					<li>- Customers (Map Overlay)</li>
+					<li>- Customers (Registrations)</li>
+					<li>- Customers (Logins)</li>
+					<li>- etc</li>
+				</ul>			
+			</p>
+			<p><br /></p>
+			
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+            <a name="Roles_Privileges"></a>
+            <h3><b>2.3 Roles & Privileges.</b></h3>
+            <p>
+                Select <b>Roles & Privileges</b> from <b>Accounts Menu</b>. You will see a page, where existing site roles are defined:
+				Owner, Main Admin and Simple Admin. You may specify the privileges for each role by clicking on [ Privileges ]
+				link. Privileges for Site Owner cannot be changed by anyone. Generally, the Main Admin is the role that has all
+				rights, like a Site Owner (but may be deleted by the Owner) and a Simple Admin type is the type which has
+				reduced rights. 
+			</p>
+			<p><br /></p>		
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Admins"></a>
+			<h4><b>2.4 Admins (for Main Admin only).</b></h4>
+			<p>
+                Select <b>Admins</b> from <b>Accounts -> Admins Management</b> menu. On this page you can manage all site administrator
+				accounts. You may add, edit or delete existing accounts. When you create a new admin account you have to
+				define an account type(role): Simple Admin or Main Admin. The privileges for selected role will be applied
+				automatically for created account.
+			</p>
+			<p><br /></p>
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Customers"></a>
+			<h4><b>2.5 Customers Management.</b></h4>
+			<p>
+				<u>Customer Groups:</u><br>
+                Select <b>Customer Groups</b> from <b>Accounts Menu</b>. On this page you can add, edit or delete existing groups of Customers.
+				You have to enter Group Name and description (optional). Customers can be assigned to zero, one or more groups.
+				<br /><br />
+				
+				<u>Customers:</u><br />
+                Select <b>Customers</b> from <b>Accounts Menu</b>. You will see the Customers Management page. On this page you can add,
+				edit or delete existing accounts of Customers. 
+			</p>
+			<p><br /></p>
+
+
+        <!--
+			HOTEL MANAGEMENT
+		-->
+        <a name="Hotel_Management"></a>
+        <h3><b>3. Hotel Management.</b></h3>
+        <p>
+        This section describes how to manage hotel rooms and other important hotel settings.        
+        </p>
+		<hr>
+        <p></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Hotel_Info"></a>
+			<h4><b>3.1 Hotel Info.</b></h4>
+			<a href="getting_started/hotel_info.png" rel="lytebox[section_3_1]" title="Hotel Info"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/hotel_info_thumb.png" width="120" alt="" title="Hotel Info" border="0" /></a>
+			<p>
+				This page allows you to manage important hotel info, like: timezone, phone and fax numbers,
+				hotel location and code for Google Maps. You may also translate this information into other
+				languages, unstallated on your site.
+			</p>
+			<p><br /></p>
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Integration"></a>
+			<h4><b>3.2 Integration.</b></h4>
+			<p>
+				Integration allows you to generate JavaScript code and put it in appropriate place on your web site to get
+				a Search Availability block.	
+			</p>
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Rooms_Settings"></a>
+			<h4><b>3.3 Rooms Settings.</b></h4>
+			<p>
+				This page allows you to define Rooms settings, like:<br />
+				- Number of rooms that will be displayed on the Search Availability results page<br />
+				- Types of rooms to show in search result: all or available rooms only<br />
+				- Whether to show a number of children in the room<br />
+				- Whether to show system suggestion feature on empty search results<br />
+			</p>
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Rooms_Management"></a>
+			<h4><b>3.4 Rooms Management.</b></h4>
+			<p>
+				Rooms Management is an important part of the Hotel Management system. This page allows you to create
+				room types, define amount of guests in each room type, activate rooms, translate room's description
+				into other languages (link [Description]), define default price for room, room facilities etc. Also you may
+				define room prices for spesific periods of time and set a price of room for each week day separately.
+				To do this click a <b>[Prices]</b> link in appropriate row. To set availability for specific room,
+				click the <b>[Availability]</b> link.
+			</p>
+			<p><br /></p>        
+        
+
+        <!--
+		BOOKINGS
+		-->
+        <a name="Booking"></a>
+        <h3><b>4. Booking.</b></h3>
+        <p>
+        This section describes how to check booking statistics, available rooms, extras, meal plans, manage customer's bookings etc.
+        </p>
+		<hr>
+        <p></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Booking_Settings"></a>
+			<h4><b>4.1 Booking Settings.</b></h4>
+			<hr style="border:1px solid #dedede">
+			<p>
+				<a name="Currencies"></a>
+				<h4><b>4.1.1 Currencies.</b></h4>				
+				<p>
+					ApPHP Hotel Site supports multiple currencies work. On Currencies Management page you can
+                    manage existing currencies on your site: add, edit or delete. Administrator also can edit
+                    exchange rates for each currency.
+				</p>
+
+				<a name="Packages"></a>
+				<h4><b>4.1.2 Packages.</b></h4>
+				<p>
+					Packages page gives admin ability to create and manage Packages for Hotel Site. Admin may create
+                    a package for specific period of time, define a minimum and maximumn nights stay for this time,
+					enable or disable any package etc.
+				</p>                
+
+				<a name="Meal_Plans"></a>
+				<h4><b>4.1.3  Meal Plans.</b></h4>
+				<p>
+					A meal plan is a plan that is added to a room rate for providing a room and meals to guests at a hotel.
+					Administrator can add meal plans to the hotel, making it easy for guests to see the additional cost
+					of each plan near the room after getting search result of rooms availability.
+				</p>                
+
+				<a name="Extras"></a>
+				<h4><b>4.1.4 Extras.</b></h4>
+				<p>
+					On this page administartor may define Extras (services for which an additional charge will be made).
+					For example: Extra Bed, Internet, Airport Pickup etc.				
+				</p>
+			</p>
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Bookings_Management"></a>
+			<h4><b>4.2 Bookings Management.</b></h4>
+			<hr style="border:1px solid #dedede">
+			<p>
+				<a name="Make_Reservation"></a>
+				<h4><b>4.2.1 Make a Reservation.</b></h4>
+				<p>
+					This page allows administrator to make a room reservation. To do this open the page, enter
+					required period of time, choose available rooms, select meal plans and perfom a reservation
+					(follow instructions on the screen).
+				</p>
+
+				<a name="Bookings"></a>
+				<h4><b>4.2.2 Bookings.</b></h4>
+				<p>
+					On this page you can manage all bookings made by customers on your site: you may view
+					details, edit them, view and print invoices, approve or cancel existing room reservation.  
+				</p>
+
+			</p>
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Promo_and_Discounts"></a>
+			<h4><b>4.3 Promo and Discounts.</b></h4>
+			<hr style="border:1px solid #dedede">
+			<p>
+				<a name="Campaigns"></a>
+				<h4><b>4.3.1 Campaigns.</b></h4>
+				<p>
+					Campaigns page gives administrator possibility to create and manage discount campaigns for your Hotel Site.
+					There are 2 types of campaigns, that may be created - Global & Targeted. Global allows booking for any date and
+					runs (visible) within a defined period of time only. Targeted allows booking in a specified period of time only
+					and runs (visible) till the first date is beginning.
+				</p>                
+
+				<a name="Coupons"></a>
+				<h4><b>4.3.2 Coupons.</b></h4>
+				<p>
+					Coupons page gives administrator possibility to create and manage discount coupons for Hotel Site.
+				</p>                
+			</p>
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Information_and_Statistics"></a>
+			<h4><b>4.4 Information and Statistics.</b></h4>
+			<hr style="border:1px solid #dedede">
+			<p>
+				<a name="Rooms_Occupancy"></a>
+				<h4><b>4.4.1 Rooms Occupancy.</b></h4>
+				<p>
+					This page represents a visual tool (calendar) for checking available rooms in your hotel.
+					You may display them by Weekly, Monthly, Yearly or List views. Easy navigation bars allow you to
+					select a wished period of time to check availability for the room reservations.
+				</p>
+
+				<a name="Reports"></a>
+				<h4><b>4.4.2 Reports.</b></h4>
+				<p>
+					Reports feature allows administrator to get some important system reports, like: People Arriving Report,
+					People Departing Report, People Staying Report etc.
+				</p>			
+
+				<a name="Statistics"></a>
+				<h4><b>4.4.3 Statistics.</b></h4>
+				<p>
+					Statistics page allows you to see all your stats on a single page. You may check distribution
+					of bookings by months for appropriate year, booking income, booking taxes or map overlay for your customers.
+				</p>			
+			</p>
+			<p><br /></p>
+
+		<!--
+		MENU MANAGEMENT
+		-->
+        <a name="Menu_Management"></a>
+        <h4><b>5. Managing menu.</b></h4>
+        <p>
+        This section describes how to manage menu categories and menu items.        
+        </p>
+		<hr>
+        <p></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Creating_menu_categories"></a>
+			<h4><b>5.1 Creating menu categories.</b></h4>
+			<p>
+				Click the <b>Add New Menu</b> link from <b>Menus Management</b>. Enter a proper name in the textbox for menu
+				category and select a placement (left, top, right or bottom - depending on whether your template supports it)
+				from dropdown box, then choose a language. You may define access level for the menu: Public(All) or Registered only users.
+				Press the <b>Create</b> button to finish creating new menu category. Menu categories will appear sorted by
+				order from smallest to highest (last added category automatically gets lowest priority).
+			</p>        
+			<p><br /></p>
+			
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Editing_menu_categories"></a>
+			<h4><b>5.2 Editing menu categories.</b></h4>
+			<p>
+				To edit existing menu category - click the <b>Edit Menus</b> from <b>Menus Management</b> page, then select
+				an appropriate category from the list. Perform all changes you need and click <b>Save Changes</b> button.
+				You may change also the display order of each category.
+				<br /><br />
+				If you want to delete existing menu category, go to <b>Menus Management -> Edit Menus</b>, then select
+				an appropriate menu from the list and click the <b>Delete</b> link at the right side.
+			</p>        
+			<p><br /><br /></p>
+
+
+
+        <!--
+        PAGES MANAGEMENT 
+        -->
+        <a name="Pages_Management"></a>
+        <h3><b>6. Pages Management.</b></h3>
+        <p>
+        This section describes how to manage pages on your site.        
+        </p>
+		<hr>
+        <p></p>
+        
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Editing_homepage"></a>
+			<h4><b>6.1 Editing Homepage.</b></h4>
+			<p>
+				To edit Homepage - select <b>Edit Home Page</b> from the <b>Pages Management</b> menu. Perform all
+				changes you need and then press <b>Save Changes</b> button. You may also:
+				<ul>
+					<li>- define meta tags: title, description and keywords</li>
+					<li>- define whether to show this page in search results or not</li>
+				</ul>
+				<br /><br />
+				If you need to insert/upload images - click on Insert Image icon in the toolbar of
+				WYSIWYG editor, then upload/select your image and press <b>Submit</b> button.
+			</p>        
+			<p><br /></p>
+			
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Creating_new_pages"></a>
+			<h4><b>6.2 Creating new pages.</b></h4>
+			<p>
+				Click <b>Add New Page</b> link in the <b>Pages Management</b> menu. In the Page Header text box enter
+				a proper name for this page. Choose appropriate value from dropdown list to connect this page to required menu
+				and enter a text in the Page Text textarea. You may also define if this page will be an article or just a link,
+				allow/block comments, specify access level, meta tags, publish or just save changes without publishing etc.
+				Click a <b>Create</b> button to finish the process.
+				<br /><br />
+				If you need to insert/upload images into page text - click on Insert Image icon in
+				the toolbar of WYSIWYG editor, then upload/select your image and press <b>Submit</b> button.
+			</p>        
+			<p><br /></p>	
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Editing_pages"></a>
+			<h4><b>6.3 Editing pages.</b></h4>
+			<p>
+				To edit existing page - click <b>Edit Pages</b> in the <b>Pages Management</b> menu, then select an 
+				appropriate page from the list. Perform all changes you need and then press <b>Save Changes</b>
+				button to save the result. 
+				<br /><br />
+				If you need to insert/upload images into page text - click on Insert Image icon in
+				the toolbar of WYSIWYG editor, then upload/select your image and press <b>Submit</b> button.
+			</p>        
+			<p><br /></p>	
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Editing_system_pages"></a>
+			<h4><b>6.4 Editing system pages.</b></h4>
+			<p>
+				To edit system pages - click <b>Edit System Pages</b> in the <b>Pages Management</b> menu, then select an 
+				appropriate page from the list. Perform all changes you need and then press "Save Changes" button
+				to save the result. 
+				<br /><br />
+				If you need to insert/upload images into page text - click on Insert Image icon in
+				the toolbar of WYSIWYG editor, then upload/select your image and press <b>Submit</b> button.
+				<br /><br />
+				On each page you may add available modules. To do this just copy and paste into the text in
+				appropriate place a special module tag, for example: {module:gallery}, {module:rooms}, {module:testimonials} etc.
+			</p>        
+			<p><br /></p>	
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Remove_Restore_pages"></a>
+			<h4><b>6.5 Remove/Restore pages.</b></h4>
+			<p>
+				To remove existing page - click <b>Edit Pages</b> in the <b>Pages Management</b> menu, then select an 
+				appropriate page from the list and click <b>Remove</b> link from the right side. This page will be
+				placed in the Trash.
+				<br /><br />
+				To restore removed page click <b>Trash</b> from the <b>Pages Management</b>, find an appropriate page and click 
+				<b>Restore</b> link. The page will be restored. If you want to permanently delete this page, click <b>Delete</b>
+				link.
+			</p>        
+			<p><br /><br /></p>
+
+
+		<!--
+		LANGUAGES
+		-->
+        <a name="Languages_Settings"></a>
+        <h3><b>7. Languages Settings.</b></h3>
+        <p>
+        This section describes how to manage languages and define language settings.        
+        </p>
+		<hr>
+        <p></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Inserting_Editing_language"></a>
+			<h4><b>7.1 Inserting/Editing Language.</b></h4>
+			<p>
+				Click <b>Languages</b> in the <b>Languages Settings</b> menu. On this page you will see a list of existing
+				languages. You can add new language or edit existing, change display order etc. When you add or edit
+				existing language you have to insert a name of the language, abbreviation, text direction, icon image and
+				some other data. When all needed data is entered - click <b>Create/Update</b> button to save it. You have to
+				define one language to be a default language of the site.
+				<br /><br />
+				When you add new language the system creates for it a copy of vocabulary (a list of predefined constants,
+				used by the system) from the default language and you will need to translate them into the new language.
+			</p>        
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Editing_language_vocabulary"></a>
+			<h4><b>7.2 Editing Language Vocabulary.</b></h4>
+			<a href="getting_started/vocabulary.png" rel="lytebox[section_7_2]" title="Editing Vocabulary"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/vocabulary_thumb.png" width="120" alt="" title="Editing Vocabulary" border="0" /></a>
+			<p>
+				Click <b>Vocabulary</b> in the <b>Languages Settings</b> menu. On this page you can edit all vocabulary
+				constants of existing languages. To change a text of the constant, select an appropriate language from dropdown list,
+				then click <b>[Edit]</b> link and enter a new text in the textarea. You may use Google automatic translation to help
+				yourself in this work. To do this simply past in textarea default language text and then click on
+				Translate via Google button (works for Google paid accounts only).
+				<br /><br />
+				You may also update your vocabulary by uploading a vocabulary file (if you created such file before or already have it
+				from the previous instalaltion). To do this simply click <b>[Upload from File]</b> link, then select vocabulary
+				file, language to update and press on <b>Upload and Process</b> button. 
+			</p>        
+			<p><br /><br /></p>	
+
+
+		<!--
+		MASS MAIL
+		-->
+        <a name="Mass_Mail_Templates"></a>
+        <h3><b>8. Mass Mail & Email Templates.</b></h3>
+        <p>
+        This section describes how to work with Mass Mail & Email Templates.        
+        </p>
+		<hr>
+		<p></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Email_Templates"></a>
+			<h4><b>8.1 Email Templates.</b></h4>
+			<p>
+				To edit <b>Email Templates</b> go to <b>Mass Mail & Templates -> Email Templates</b> page. On this page you can 
+				see a list of existing email templates. Email Templates are managed with a standard MicroGrid page.
+				You can add, delete or edit existing records. There some templates that signed as "system" templates
+				that cannot be deleted, because they are used in the system.
+			</p>        
+			<p><br /></p>
+			
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Mass_Mail"></a>
+			<h4><b>8.2 Mass Mail.</b></h4>
+			<p>
+				With the Mass Mail feature, it's possible to create and send powerful mass mail messages to registered
+				customers and/or admins. To do this go to <b>Mass Mail & Templates -> Mass Mail</b> page. On this page you can select 
+				the templates, define targeting group of receivers (or send a test email) and prepare/edit the text of email
+				message. There are some pre-defined constants you may use in the text of email that will be replaced
+				with appropriate values before sending an email. For example: {YEAR} will be replaced with the current
+				year in YYYY format etc.				
+			</p>        
+			<p><br /><br /></p>
+
+
+
+        <!--
+        MODULES MANAGEMENT
+        -->
+        <a name="Modules"></a>
+        <h3><b>9. Modules.</b></h3>
+        <p>
+        This section describes how to work with embedded(exisiting) modules.        
+        </p>
+		<hr>
+        <p></p>		
+		
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Modules_Management"></a>
+			<h4><b>9.1 Modules Management.</b></h4>
+			<p>
+				Select <b>Modules Management</b> from the <b>Modules Menu</b>. On this page you can easy install/uninstall exisiting
+				modules, for example: News, Backup etc.            
+			</p>        
+			<p><br /></p>
+			
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Pages_Module"></a>
+			<h4><b>9.2 Pages Module.</b></h4>
+			<p>
+			This section describes how to work with the Pages Module.
+			</p>
+			<p>
+				<b>This is a system module and the script doesn't allow to uninstall it.</b><br />
+			</p>        
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Rooms_Module"></a>
+			<h4><b>9.3 Rooms Module.</b></h4>
+			<p>
+			This section describes how to work with the Rooms Module.
+			</p>
+			<p>
+				<b>This is a system module and the script doesn't allow to uninstall it.</b><br /><br />
+				<b>Rooms Module settings.</b><br />				
+				   See <a href="GettingStarted.html#Rooms_Settings">here</a>.<br />
+			</p>        
+			<p><br /></p>
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Customers_Module"></a>
+			<h4><b>9.4 Customers Module.</b></h4>
+			<p>
+			This section describes how to work with the Customers Module.
+			</p>
+			<p>
+				<b>Customers Module settings.</b><br />
+				This page allows you to define Customers Module settings, like:<br />
+				- Possibility to add new customers by Admin<br />
+				- Whether confirmation (which type of) is required for registration<br />
+				- Allow image verification (captcha) on customer registration page<br />
+				- Allow existing customers to login<br />
+				- Allow registration of new customers<br />
+				- Allow changing customer password by Admin<br />
+				- Allow customers to restore their passwords<br />
+				- alert administrator on new customer registration<br />
+				- Allow Remember Me feature<br />
+			</p>        
+			<p><br /></p>
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="ContactUs_Module"></a>
+			<h4><b>9.5 Contact Us Module.</b></h4>
+			<p>
+			This section describes how to work with the Contact Us Module.
+			</p>
+			<p>
+				<b>Contact Us module settings.</b><br />
+				This page allows you to define Contact Us settings, like:<br />
+				- The keyword that will be replaced with Contact Us form (copy and paste it into the page)<br />
+				- The email address, that will be used to receive information<br />
+				- Specifies whether to allow time delay between sending emails.<br />
+				- Defines a length of delay between emails in seconds.<br /> 
+				- Specifies whether to allow image verification<br /> 				
+			</p>        
+			<p><br /></p>
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Comments_Module"></a>
+			<h4><b>9.6 Comments Module.</b></h4>
+			<p>
+			This section describes how to work with the Comments Module.
+			</p>
+			<p>
+				<b>Comments module settings.</b><br />
+				This page allows you to define Comments settings, like:<br />
+				- Specifies whether to allow comments to articles<br />
+				- Type of users, who can post comments<br />
+				- The maximum length of comments<br />
+				- Specifies whether to allow image verification (captcha)<br />
+				- Defines how much comments will be shown on one page<br />
+				- Specifies whether to allow pre-modaration for comments<br />
+				- The maximum pending time for deleting of comment in minutes<br />			
+				<br />
+				
+				<b>Comments Management page.</b><br />
+				On this page admin can manage comments: approve, deny or delete them.
+			</p>        
+			<p><br /></p>
+			
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Booking_Module"></a>
+			<h4><b>9.7 Booking Module.</b></h4>
+			<p>
+			This section describes how to work with the Booking Module.
+			</p>
+			<p>
+				This page allows you to define Booking Module settings, like:<br />
+				- Activation of booking module<br />
+				- Enable/Disable 'POA' payment type<br />
+				- Enable/Disable 'On-line Order' payment type<br />
+				- Enable/Disable collecting of credit card info for 'On-line Orders'<br />				
+				- Enable/Disable 'Bank Transfer' payment type<br />
+				- Enable/Disable banking information: name of the bank, branch, account number etc.	<br />
+				- Enable/Disable 'PayPal' payment type<br />
+				- PayPal (business) email <br />				
+				- Enable/Disable '2CO' payment type<br />
+				- Specifies 2CO Vendor ID<br />
+				- Enable/Disable 'Authorize.Net' payment type<br />
+				- Specifies Authorize.Net Login ID and Transaction Key<br />				
+				- Default payment processing system <br />				
+				- Enable/Disable sending a copy of order to admin<br />				
+				- Enable/Disable creating account for booking<br />				
+				- Defines a pre-payment type<br />
+				- Defines a pre-payment value for 'fixed sum' or 'percentage' types<br />
+				- Specifies default VAT value for order (in %)<br />
+				- Defines a minimum number of nights per booking<br />
+				- Defines a maximum number of nights per booking<br />				
+				- Specifies mode for Booking Module: DEMO/REAL<br />				
+				- Specifies whether to allow showing of fully booked/unavailable rooms in search<br />
+				- Defines a timeout for 'preparing' orders before automatic deleting (in hours)<br />				
+				- Specifies the number of days before customers may cancel a reservation<br />				
+				- Specifies whether to show Reservation Form on homepage or not<br />				
+				- Start (initial) fee - the sum that will be added to each booking<br />
+				- Specifies the type of booking numbers<br />				
+				- Specifies whether VAT fee is included in room and extras prices or not<br />				
+				- Specifies whether to show Booking Status Form on homepage or not<br />				
+				- Specifies the maximum allowed room reservations (not completed) per customer<br />				
+				- Specifies a type of the 'first night' value calculating: real or average<br />
+				- Specifies whether to show 'reserved' rooms in search results until booking is complete<br />
+				- Specifies whether to send email alert to customer when reservation has expired<br />
+			</p>        
+			<p><br /></p>
+			
+			
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="News_Module"></a>
+			<h4><b>9.8 News Module.</b></h4>
+			<p>
+			This section describes how to work with the News Module.
+			</p>
+			<a href="getting_started/news_module.png" rel="lytebox[section_8_9]" title="News Module"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/news_module_thumb.png" width="120" alt="" title="News Module" border="0" /></a>
+			<p>
+				<b>News Settings.</b><br />
+				This page allows you to define News settings, like:<br />
+				- How many news will be shown in the News block<br />
+				- Length of news header in block<br />
+				- Using of RSS channel for news<br />
+				- Defines whether to show News side block or not<br />
+				- Defines whether to show Newsletter Subscription block or not<br />
+				<br /><br />
+	
+				<b>Creation and Management.</b><br />
+				The News module allows you to create and manage news on your site.
+				To do this go to <b>Modules -> News -> News Management</b>. On this page you will
+				see a list of previously added news. News are managed with a standard
+				MicroGrid page. You can add, edit or delete news records.
+				<br /><br />
+				There are two type of news that may be created: news or events.
+				If you create event, visitors could register to this event via online form.
+				All registered users may be viewed via <b>Modules -> News -> News Management -> events()</b>				
+				<br /><br />
+				
+				<b>Subscription Management (Newsletter Subscription).</b><br />
+				The News module allows you to create and manage Mailing Lists on your site. You may place
+				a Subscription block on the Front-End of your site and allow visitors to subscribe for
+				news or manually add/remove subscribers via <b>Modules -> News -> Subscription Management</b> page.
+                To send newsletter for subscribers go to <b>Mass Mail -> Templates -> Mass Mail</b> page, then select
+				from Email Address dropdown box "Newsletter Subscribers", prepare the newsletter text and click
+				the <b>"Send"</b> button.
+				<br />
+			</p>        
+			<p><br /></p>
+
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Gallery_Module"></a>
+			<h4><b>9.9 Gallery.</b></h4>
+			<p>
+			This section describes how to work with the Gallery Module.
+			</p>
+			<p>
+				<b>Gallery Settings.</b><br />
+				This page allows you to define Gallery settings, like:<br />
+				- The keyword that will be replaced with gallery<br />
+				- The keyword that will be replaced with a certain album images<br />
+				- Allowed types of Gallery<br />				
+				- Album icon width<br />
+				- Album icon height<br />
+				- Number of album icons per line<br />
+				- Allowed types of Video Gallery<br />
+				- Defines a wrapper type for gallery<br />
+				- Specifies whether to show count of images/video under album name<br />
+				<br />
+	
+				<b>Gallery Management.</b><br />
+				The Gallery module allows you to create and manage gallery albums on your site.
+				To do this go to <b>Modules -> Gallery -> Gallery Management</b>. On this page you will
+				see a list of existing albums. Albums are managed with a standard MicroGrid page.
+				You can add, delete or edit albums info. To upload/delete images from the certain
+				album - click Upload link.
+				<br />
+			</p>        
+			<p><br /></p>
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Banners_Module"></a>
+			<h4><b>9.10 Banners.</b></h4>
+			<p>
+			This section describes how to work with the Banners Module.
+			</p>
+			<a href="getting_started/banners_settings.png" rel="lytebox[section_8_8]" title="Banners Settings"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/banners_settings_thumb.png" width="120" alt="" title="Banners Settings" border="0" /></a>
+			<a href="getting_started/banners_management.png" rel="lytebox[section_8_8]" title="Banners Management"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/banners_management_thumb.png" width="120" alt="" title="Banners Management" border="0" /></a>
+			<p>
+				<b>Banners Settings.</b><br />
+				This page allows you to define Banners settings, like:<br />
+				- Whether banners module is active or not<br />
+				- Type of banner rotation<br />
+				- Banners rotation delay in seconds<br />
+				- Using of HTML in slideshow captions or not<br />
+				<br />
+	
+				<b>Banners Management.</b><br />
+				The Banners module allows you to create, upload and manage banners on your site.
+				To do this go to <b>Modules -> Banners -> Banners Management</b>. On this page you will
+				see a list of existing banners, that are managed with a standard MicroGrid page.
+				You can add, delete or edit records, upload banner images. 
+				<br />		
+			</p>       
+			<p><br /></p>
+	
+
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Testimonials_Module"></a>
+			<h4><b>9.11 Testimonials Module.</b></h4>
+			<p>
+			This section describes how to work with the Testimonials Module.
+			</p>
+			<p>
+				<b>Testimonials Settings.</b><br />
+				This page allows you to define Testimonials settings, like:<br />
+				- Keyword that will be replaced with a list of customer testimonials<br />
+				<br />
+	
+				<b>Testimonials Management.</b><br />
+				The Testimonials module allows you to add and manage testimonials on your site.
+				To do this go to <b>Modules -> Testimonials -> Testimonials Management</b>. On this page you will
+				see a list of existing testimonials, that are managed with a standard MicroGrid page.
+				You can add, delete or edit records, upload banner images. 
+				<br />		
+			</p>       
+			<p><br /></p>
+			  
+			  
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="FAQ_Module"></a>
+			<h4><b>9.12 FAQ Module.</b></h4>
+			<p>
+			This section describes how to work with the FAQ Module.
+			</p>
+			<p>
+				<b>FAQ Settings.</b><br />
+				This page allows you to define Banners settings, like:<br />
+				- Whether FAQ module is active or not<br />
+				<br />
+				
+				<b>FAQ Management.</b><br />
+				The FAQ module allows you to create FAQ categories knowladge base. To do this go to
+				<b>Modules -> FAQ -> FAQ Management</b>. On this page you will see a list of existing FAQ categories.
+				You can add, edit or delete categories records. Once FAQ category is created, you may add
+				category questions and answers. To do this simply click on "Question" link of appropriate category
+				and on the new page create/edit the pairs: question/answer.
+				<br /><br />			
+			</p>       
+			<p><br /></p>
+			
+	
+			<div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="GettingStarted.html#top">top</a>]</div>
+			<a name="Backup_and_Restore_Module"></a>
+			<h4><b>9.13 Backup & Restore Module.</b></h4>
+			<a href="getting_started/backup_module.png" rel="lytebox[section_8_10]" title="Backup Module"><img class="opacity_hotel" onmouseover="opacity_onmouseover(this)" onmouseout="opacity_onmouseout(this)" src="getting_started/backup_module_thumb.png" width="120" alt="" title="Backup Module" border="0" /></a>
+			<p>
+				<b>Creating a backup.</b><br />
+				This script allows you easily create backup of your database. To do this go
+				to <b>Modules -> Backup & Restore -> Backup Installation</b>. On this page you can see a list
+				of existing backups. If you want to add new backup click on "Backup" button.
+				After the backup is complete it will appear in the list below.        
+				<br /><br />
+	
+				<b>Restoring from backup.</b><br />
+				To restore database from existing backup go to <b>Modules -> Backup & Restore -> Backup Restore</b>
+				page and look on the list of existing backups. Select a backup you want to restore and click
+				on "Restore" link at the right side. After backup restore is complete, refresh the site or
+				re-login.        
+				<br />            
+			</p>        
+			<p><br /></p>
+
+    </div>
+</div>
+        
+</body>
+</html>

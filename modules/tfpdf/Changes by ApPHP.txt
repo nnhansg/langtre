@@ -1,0 +1,10 @@
+CHANGES
+---------------
+1. [27.07.2009] [#001] added error handling on file opening in method Output
+2. [06.09.2010] [#002] changes for different type of export table: tabular and columnar
+3. [04.04.2011] [#003] added is_array() check
+4. [10.08.2012] [#004] changed if(!class_exists()) with if(!defined('tFPDF_VERSION')) define('tFPDF_VERSION','1.53');
+5. [30.09.2012] [#005] changed $ttfontstream = $ttf->makeSubset($font['ttffile'], $subset);
+                       with $ttfontstream = $ttf->makeSubset($this->fontpath.'unifont/DejaVuSansCondensed.ttf', $subset);
+6. [04.10.2012] [#006] added possibility to draw table Caption
+                       

@@ -1,0 +1,146 @@
+<html>
+<head>
+    <title>ApPHP Hotel Site :: Installation</title>
+    <style>
+        BODY { padding-left:10px; padding-right:10px; }
+        IMG  { border:1px solid #cccccc; }
+        PRE { background-color:#f1f2f3; border:1px solid #cccccc; padding:3px 5px 3px 5px; }
+    </style>
+</head>
+<body>    
+
+<!-- last update 07.07.2012 -->
+<a name=top></a>
+<div style="float:right;">
+<div id="content-0">
+<div class="post-0">
+
+    <h2 id="post-1">Installation of ApPHP Hotel Site (version 2.0.0 or above)</h2>  
+    <div class="storycontent">
+    
+        <table>
+        <tbody>
+        <tr>
+            <td>
+                <ul>
+                    <li>
+                    <a href="Installation.html#Installation_of_ApPHP_Hotel_Site"><span>1.</span> <span>Installation of ApPHP Hotel Site</span></a><br /><br /> 
+                    <ul>	
+                        <li>&nbsp;&nbsp;&nbsp;<a href="Installation.html#Step_1._Uncompressing_downloaded_file."><span>1.1</span> <span>Step 1. Uncompressing downloaded file.</span></a> 
+                        <li>&nbsp;&nbsp;&nbsp;<a href="Installation.html#Step_2._Uploading_files."><span>1.2</span> <span>Step 2. Uploading files.</span></a>                      
+                        <li>&nbsp;&nbsp;&nbsp;<a href="Installation.html#Step_3._Creating_database."><span>1.3</span> <span>Step 3. Creating database.</span></a>
+                        <li>&nbsp;&nbsp;&nbsp;<a href="Installation.html#Step_4._Setting_up_access_permissions."><span>1.4</span> <span>Step 4. Setting up access permissions.</span></a>
+                        <li>&nbsp;&nbsp;&nbsp;<a href="Installation.html#Step_5._Running_install_file."><span>1.5</span> <span>Step 5. Running install.php file.</span></a>
+                        <li>&nbsp;&nbsp;&nbsp;<a href="Installation.html#Step_6._Deleting_install.php_file."><span>1.6</span> <span>Step 6. Deleting install.php file.</span></a>
+                    </ul>
+                    </li>	
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+        </table>
+    
+    
+        <a name=Installation_of_ApPHP_Hotel_Site></a>
+    
+        <p>(for version 2.0.0 or above) </p>
+    
+        <p>A new installation of ApPHP Hotel Site is a very straight forward process: </p>
+        <br />
+        
+        <div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="Installation.html#top">top</a>]</div>
+        <a name="Step_1._Uncompressing_downloaded_file."></a>
+        <h3><b>Step 1. Uncompressing downloaded file.</b></h3>
+        <hr>
+    
+        <p>Uncompress the ApPHP Hotel Site script archive. The archive will create a directory called "PHPHS_xxx".</p>
+        <p><br /></p>
+        
+        <div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="Installation.html#top">top</a>]</div>
+        <a name="Step_2._Uploading_files."></a>
+        <h3><b>Step 2. Uploading files.</b></h3>
+    
+        <hr>
+    
+        <p>Upload content of this folder (all files and sub-directories it includes) to your
+        document root (public_html, www, httpdocs etc.) or your hotel site directory using FTP.<br>
+        <b>Pay attention</b> to DON'T use the capital letters in the name of the folder (for Linux users).</p>
+     
+        <p>For example: </p>
+        <PRE>public_html/</PRE>
+        or
+        <PRE>public_html/{hotel-site directory}/<br /></PRE>
+
+        Uncomment in .htaccess following line of code, if you need to add PHP5 handler.
+        # AddHandler application/x-httpd-php5 .php
+        <p><br /></p>
+       
+
+    
+        <div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="Installation.html#top">top</a>]</div>
+        <a name="Step_3._Creating_database."></a>
+        <h3><b>Step 3. Creating database.</b></h3>
+        <hr>	
+        <p> Using your hosting Control Panel, phpMyAdmin or another tool, create your database
+            and user, and assign that user to the database. Write down the name of the
+            database, username, and password for the site installation procedure.
+        </p>
+        <p><br /></p>
+
+
+        <div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="Installation.html#top">top</a>]</div>
+        <a name="Step_4._Setting_up_access_permissions."></a>
+        <h3><b>Step 4. Setting up access permissions.</b></h3>
+        <hr>
+        <p>
+            4.1. Check access permissions to <b>images/</b> and <b>tmp/</b> directories. You have to set up
+            write permissions (755) to them. Also check if you have write access to <b>include/</b> folder.
+            If not, set manually 755 or 777 rights (depends on your system settings) to this directory and return
+            them back after the installation is completed.<br /> <br /> 
+            
+            4.2. If you run this script on IIS, you have to allow rewrite mode for Windows.
+            To do this, open the <b>httpd.conf</b> file and uncomment the following lines (remove the trailing #s):<br /> 
+            <PRE>#LoadModule rewrite_module modules/mod_rewrite.so<br />#AddModule mod_rewrite.c</PRE>                        
+            
+            If you're running this script on Apache with a web hosting company you have <b>mod_rewrite</b> already enabled in most of cases.
+            How to enable <b>mod_rewrite</b> on your localhost read here: http://httpd.apache.org/docs/current/rewrite/
+        </p>
+        <p><br /></p>
+
+
+        <div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="Installation.html#top">top</a>]</div>
+        <a name="Step_5._Running_install_file."></a>
+        <h3><b>Step 5. Running install.php file.</b></h3>
+        <hr>
+        <p>Now you can run install.php file. To do this, open Internet browser and type in Address Bar</p>
+        <pre>http://{www.mydomain.com}/install.php</pre>
+        or
+        <pre>http://{www.mydomain.com}/{hotel-site directory}/install.php</pre>
+        <p>Follow instructions on the screen. You will be asked to enter: database host,
+        database name, username and password. Also you need to enter admin username and
+        admin password, that will be used to get access to administration area of the
+        site.</p>
+        <p><br /></p>	
+
+
+        <div style="FLOAT: right; MARGIN-LEFT: 5px">[<a href="Installation.html#top">top</a>]</div>
+        <a name="Step_6._Deleting_install.php_file."></a>
+        <h3><b>Step 6. Deleting install.php file.</b></h3>
+        <hr>
+        <p>After successful installation you will get an appropriate message and warning about 
+           removing of install.php file. For security reasons, please delete installation files
+           immediately.</p>
+        <p><br /></p>
+
+        Congratulations, you now have ApPHP Hotel Site installed!
+        <br /><br /><br />
+    </div>                
+
+</div>
+</div>
+</div>
+    
+    
+
+</body>
+</html>

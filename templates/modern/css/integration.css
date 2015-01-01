@@ -1,0 +1,79 @@
+.integration {
+	background: #a9968a;
+	padding: 30px 0 30px 30px;
+	font-family: Myriad-Pro, 'Myriad Pro', Arial, sans-serif;
+}
+
+.integration  .header-1 {
+	padding: 0 0 20px 0;
+	border-bottom: 1px solid #605452;
+	margin: 0 30px 20px 0;
+}
+
+.integration  .header-1,
+.integration  .header-1 h3,
+.integration  .header-1 h5 {
+	color: #fff;
+}
+
+.integration  .header-1 h3 {
+	font-size: 23px;
+	padding: 0;
+	margin: 0 0 10px 0;
+}
+
+.integration  .header-1 h5 {
+	font-size: 13px;
+	font-weight: 300;
+	padding: 0;
+	margin: 0 0 5px 0;
+}
+
+.integration  .title {
+	font-size: 41px;
+	color: #605452;
+	margin-right: 30px;
+}
+
+.integration  .content {
+	width: 100%;
+	height: auto;
+	padding: 0;
+}
+
+.integration  .content .info {
+	background: #605452;
+	padding: 4%;
+	width: 96%;
+	height: auto;
+	margin: 0 0 30px 0;
+	color:#fff!important;
+}
+
+.integration  .content .info label {
+	color:#fff!important;
+}
+
+.integration  .content .info td.row {
+	padding-bottom: 10px;
+}
+
+.integration  .content select {
+	padding: 5px;
+	margin-right: 10px !important;
+}
+
+.integration  .content .inte-col-1 {
+	padding-right: 30px;
+}
+
+.integration  .content #reservation-form  .button-reserve {
+}
+
+.integration  .content #reservation-form  .button-reserve {
+	float: right
+}
+
+.headline {
+	font-family: Archer, 'Archer Medium', 'Times New Roman', sans-serif;
+}

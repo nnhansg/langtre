@@ -1,0 +1,11 @@
+/* SEARCH  */
+.header-search  { float:left; }
+
+/* MAIN NAVIGATION */
+UL.nav_bg    { padding:16px 240px 0px 0px; height:38px; background: url(../images/background_bottom_rtl.gif) no-repeat; list-style-type: none; }
+UL.nav_bg li { float:right; }
+
+#languages-wrap { margin: 5px 18px 0px 0px; }
+#languages-wrap DIV { float:right; }
+
+SELECT { margin-right:0px; margin-left:3px; }
