@@ -1,4 +1,0 @@
-<FILES ~ "\.txt$">  
-    Order allow,deny
-    Allow from all  
-</FILES>
