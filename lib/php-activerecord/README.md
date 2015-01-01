@@ -2,13 +2,13 @@
 
 [![Build Status](https://travis-ci.org/kla/php-activerecord.png?branch=master)](https://travis-ci.org/kla/php-activerecord)
 
-by 
+by
 
 * [@kla](https://github.com/kla) - Kien La
 * [@jpfuentes2](https://github.com/jpfuentes2) - Jacques Fuentes
 * [And these terrific Contributors](https://github.com/kla/php-activerecord/contributors)
 
-<http://www.phpactiverecord.org/> 
+<http://www.phpactiverecord.org/>
 
 ## Introduction ##
 A brief summarization of what ActiveRecord is:
@@ -164,3 +164,4 @@ $post->delete();
 # DELETE FROM `posts` WHERE id=1
 echo $post->title; # 'New real title'
 ```
+UPDATE
