@@ -29,10 +29,11 @@ $max_adults 			= isset($_POST['max_adults']) ? (int)$_POST['max_adults'] : '';
 $max_children 			= isset($_POST['max_children']) ? (int)$_POST['max_children'] : '';
 $sort_by                = isset($_POST['sort_by']) ? prepare_input($_POST['sort_by']) : '';
 $hotel_sel_id           = isset($_POST['hotel_sel_id']) ? prepare_input($_POST['hotel_sel_id']) : '';
-$hotel_sel_loc_id       = isset($_POST['hotel_sel_loc_id']) ? prepare_input($_POST['hotel_sel_loc_id']) : ''; 
+$hotel_sel_loc_id       = isset($_POST['hotel_sel_loc_id']) ? prepare_input($_POST['hotel_sel_loc_id']) : '';
 
 $nights = nights_diff($checkin_year.'-'.$checkin_month.'-'.$checkin_day, $checkout_year.'-'.$checkout_month.'-'.$checkout_day);
 
+$rooms_quantity = isset($_POST['rooms_quantity']) ? (int)$_POST['rooms_quantity'] : '';
 
 draw_title_bar(_AVAILABLE_ROOMS);
 
@@ -95,12 +96,24 @@ if($checkin_year_month == '0' || $checkin_day == '0' || $checkout_year_month == 
 			'sort_by'          => $sort_by,
 			'hotel_sel_id'     => $hotel_sel_id,
 			'hotel_sel_loc_id' => $hotel_sel_loc_id,
+            'rooms_quantity' => $rooms_quantity,
 		);
-		
+
 		$rooms_count = $objRooms->SearchFor($params);
-		
+        $rooms_count_all = $objRooms->CountRoomsAvailable($params);
+
 		if($rooms_count > 0){
-			$objRooms->DrawSearchResult($params, $rooms_count);			
+            if($rooms_count_all < $rooms_quantity) {
+                draw_important_message(_NO_ENOUGH_ROOMS_FOUND);
+                draw_message(_SEARCH_ROOM_TIPS);
+
+                if(ModulesSettings::Get('rooms', 'allow_system_suggestion') == 'yes'){
+                    Rooms::DrawTrySystemSuggestionForm($room_id, $checkin_day, $checkin_year_month, $checkout_day, $checkout_year_month, $max_adults, $max_children);
+                }
+            }
+            else {
+                $objRooms->DrawSearchResult($params, $rooms_count);
+            }
 		}else{
 			draw_important_message(_NO_ROOMS_FOUND);
 			draw_message(_SEARCH_ROOM_TIPS);
@@ -109,6 +122,7 @@ if($checkin_year_month == '0' || $checkin_day == '0' || $checkout_year_month == 
 				Rooms::DrawTrySystemSuggestionForm($room_id, $checkin_day, $checkin_year_month, $checkout_day, $checkout_year_month, $max_adults, $max_children);				
 			}
 		}
+
 		draw_content_end();	
 	}
 }

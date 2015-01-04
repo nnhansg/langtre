@@ -944,7 +944,7 @@ class MicroGrid {
 			echo '</tr>';
 			echo '<tr><td colspan="'.$colspan.'" height="3px" nowrap="nowrap">'.draw_line('no_margin_line', IMAGE_DIRECTORY, false).'</td></tr>';
 			for($i=0; $i<$arrRecords[1]; $i++){
-				echo '<tr '.(($this->isAlterColorsAllowed) ? highlight(0) : '').' onmouseover="oldColor=this.style.backgroundColor;this.style.backgroundColor=\'#635952\';" onmouseout="this.style.backgroundColor=oldColor">';
+				echo '<tr '.(($this->isAlterColorsAllowed) ? highlight(0) : '').' onmouseover="oldColor=this.style.backgroundColor;this.style.backgroundColor=\'#EDD6C7\';" onmouseout="this.style.backgroundColor=oldColor">';
 					foreach($this->arrViewModeFields as $key => $val){
 						if(isset($val['align']) && $val['align'] == 'left' && Application::Get('defined_left') == 'right'){
 							$align = ' align="right"';
@@ -2160,7 +2160,7 @@ class MicroGrid {
 	protected function IsEmail($field = '')
 	{
 		$strict = false;
-		$regex = $strict ? '/^([.0-9a-z_-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i' :  '/^([*+!.&#$¦\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i';
+		$regex = $strict ? '/^([.0-9a-z_-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i' :  '/^([*+!.&#$ï¿½\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i';
 		
 		if(preg_match($regex, trim($field))) {
 		   return true;

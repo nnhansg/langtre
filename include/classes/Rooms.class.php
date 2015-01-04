@@ -205,7 +205,7 @@ class Rooms extends MicroGrid {
 			'link_room_occupancy'    => array('title'=>'', 'type'=>'label', 'align'=>'center', 'width'=>'', 'maxlength'=>'', 'nowrap'=>'nowrap', 'visible'=>(($booking_active == 'global') ? true : false)),
 			'_empty_'  	      => array('title'=>'', 'type'=>'label', 'align'=>'left', 'width'=>'15px'), 
 		);
-		
+
 		//---------------------------------------------------------------------- 
 		// ADD MODE
 		// Validation Type: alpha|numeric|float|alpha_numeric|text|email
@@ -227,7 +227,8 @@ class Rooms extends MicroGrid {
 				'beds'           => array('title'=>_BEDS, 'type'=>'enum', 'width'=>'', 'required'=>false, 'readonly'=>false, 'default'=>'', 'source'=>$this->arrBeds, 'default_option'=>false, 'unique'=>false, 'javascript_event'=>'', 'view_type'=>'dropdownlist', 'multi_select'=>false),
 				'bathrooms'      => array('title'=>_BATHROOMS, 'type'=>'enum', 'width'=>'', 'required'=>false, 'readonly'=>false, 'default'=>'', 'source'=>$this->arrBathrooms, 'default_option'=>false, 'unique'=>false, 'javascript_event'=>'', 'view_type'=>'dropdownlist', 'multi_select'=>false),
 				'room_area'      => array('title'=>_ROOM_AREA, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'5', 'default'=>'0', 'validation_type'=>'float|positive', 'validation_maximum'=>'999', 'post_html'=>' m<sup>2</sup>'),
-				'default_price'  => array('title'=>_DEFAULT_PRICE, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'10', 'default'=>'0', 'validation_type'=>'float|positive', 'pre_html'=>$default_currency.' '),
+				'default_price'  => array('title'=>_DEFAULT_PRICE_LIMITED_OFFER, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'10', 'default'=>'0', 'validation_type'=>'float|positive', 'pre_html'=>$default_currency.' '),
+                'default_price_flexible_offer'  => array('title'=>_DEFAULT_PRICE_FlEXIBLE_OFFER, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'10', 'default'=>'0', 'validation_type'=>'float|positive', 'pre_html'=>$default_currency.' '),
 				'additional_guest_fee' => array('title'=>_ADDITIONAL_GUEST_FEE, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'10', 'default'=>'0', 'validation_type'=>'float|positive', 'pre_html'=>$default_currency.' '),
 				'priority_order' => array('title'=>_ORDER, 'type'=>'textbox',  'width'=>'35px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'3', 'default'=>'0', 'validation_type'=>'numeric|positive'),
 				'is_active'      => array('title'=>_ACTIVE, 'type'=>'checkbox', 'readonly'=>false, 'default'=>'1', 'true_value'=>'1', 'false_value'=>'0'),
@@ -618,6 +619,18 @@ class Rooms extends MicroGrid {
 		$price_new_fri = isset($_POST['price_new_fri']) ? prepare_input($_POST['price_new_fri']) : $default_price;
 		$price_new_sat = isset($_POST['price_new_sat']) ? prepare_input($_POST['price_new_sat']) : $default_price;
 		$price_new_sun = isset($_POST['price_new_sun']) ? prepare_input($_POST['price_new_sun']) : $default_price;
+
+		$adults_new_2    = isset($_POST['adults_new_2']) ? prepare_input($_POST['adults_new_2']) : $max_adults;
+		$children_new_2  = isset($_POST['children_new_2']) ? prepare_input($_POST['children_new_2']) : $max_children;
+		$guest_fee_new_2 = isset($_POST['guest_fee_new_2']) ? prepare_input($_POST['guest_fee_new_2']) : $guest_fee;
+		$price_new_mon_2 = isset($_POST['price_new_mon_2']) ? prepare_input($_POST['price_new_mon_2']) : $default_price;
+		$price_new_tue_2 = isset($_POST['price_new_tue_2']) ? prepare_input($_POST['price_new_tue_2']) : $default_price;
+		$price_new_wed_2 = isset($_POST['price_new_wed_2']) ? prepare_input($_POST['price_new_wed_2']) : $default_price;
+		$price_new_thu_2 = isset($_POST['price_new_thu_2']) ? prepare_input($_POST['price_new_thu_2']) : $default_price;
+		$price_new_fri_2 = isset($_POST['price_new_fri_2']) ? prepare_input($_POST['price_new_fri_2']) : $default_price;
+		$price_new_sat_2 = isset($_POST['price_new_sat_2']) ? prepare_input($_POST['price_new_sat_2']) : $default_price;
+		$price_new_sun_2 = isset($_POST['price_new_sun_2']) ? prepare_input($_POST['price_new_sun_2']) : $default_price;
+
 		$ids_list 	   = '';
 		$width         = '53px';
 		$text_align    = (Application::Get('defined_alignment') == 'left') ? 'right' : 'left';
@@ -660,7 +673,8 @@ class Rooms extends MicroGrid {
 		$output .= '<tr style="text-align:center;font-weight:bold;">';
 		$output .= '  <td width="5px"></td>';
 		$output .= '  <td colspan="3"></td>';
-		$output .= '  <td>'._ADULTS.' '._CHILDREN.' '._GUEST_FEE.'</td>';
+        $output .= '  <td width="20px">' . _PRICE_TYPE . '</td>';
+		$output .= '  <td>'._ADULTS.' | '._CHILDREN.' | '._GUEST_FEE.'</td>';
 		$output .= '  <td width="10px"></td>';
 		$output .= '  <td>'._MON.'</td>';
 		$output .= '  <td>'._TUE.'</td>';
@@ -672,32 +686,56 @@ class Rooms extends MicroGrid {
 		$output .= '  <td></td>';
 		$output .= '</tr>';
 
-		$sql = 'SELECT *
-				FROM '.TABLE_ROOMS_PRICES.'
-				WHERE room_id = '.(int)$rid.'
-				ORDER BY is_default DESC, date_from ASC';
+		$sql = 'SELECT rpr.`id` id,
+                          `room_id`,
+                          `date_from`,
+                          `date_to`,
+                          `adults`,
+                          `children`,
+                          `guest_fee`,
+                          `mon`,
+                          `tue`,
+                          `wed`,
+                          `thu`,
+                          `fri`,
+                          `sat`,
+                          `sun`,
+                          `is_default`,
+                          rprext.`id` rooms_prices_extend_id,
+                          `rooms_prices_id`,
+                          `price_type`,
+                          `terms`
+				FROM '.TABLE_ROOMS_PRICES.' rpr LEFT JOIN ' . TABLE_ROOMS_PRICES_EXTEND . ' rprext ON rpr.id = rprext.rooms_prices_id
+				WHERE rpr.room_id = '.(int)$rid.'
+				ORDER BY rpr.is_default DESC, rpr.date_from ASC';
+
 		$room = database_query($sql, DATA_AND_ROWS, ALL_ROWS);
+
 		for($i=0; $i < $room[1]; $i++){
 			$output .= '<tr align="center" style="'.(($i%2==0) ? '' : 'background-color:#f1f2f3;').'">';
 
 			$output .= '  <td></td>';
-			if($i == 0){
-				$output .= '<td align="left" nowrap="nowrap" colspan="3"><b>'._STANDARD_PRICE.'</b></td>';	
-				$output .= '<td>';
+
+			if ($room[0][$i]['is_default'] == 1) {//if($i == 0 || $i == 1){
+				$output .= '  <td align="left" nowrap="nowrap" colspan="3"><b>'._STANDARD_PRICE.'</b></td>';
+                $output .= '  <td align="left"><select name="price_type_' . $room[0][$i]['id'] . '" id="price_type_' . $room[0][$i]['id'] . '" disabled><option value="1" ' . ($room[0][$i]['price_type'] == 1 ? ' selected' : '') . '>' . _LIMITED_OFFER . '</option><option value="2" ' . ($room[0][$i]['price_type'] == 2 ? ' selected' : '') . '>' . _FLEXIBLE_OFFER . '</option></select>' . draw_hidden_field('rooms_prices_extend_id_' . $room[0][$i]['id'], $room[0][$i]['rooms_prices_extend_id'], false, 'rooms_prices_extend_id_' . $room[0][$i]['id']) . '</td>';
+				$output .= '  <td>';
 				$output .= '  &nbsp;'.draw_numbers_select_field('adults_'.$room[0][$i]['id'], $max_adults, 1, $max_adults, 1, '', 'disabled', false);
 				$output .= '  &nbsp;'.draw_numbers_select_field('children_'.$room[0][$i]['id'], $max_children, 0, $max_children, 1, '', 'disabled', false);
 				$output .= '  &nbsp;'.$currency_l_sign.' <input type="text" maxlength="7" name="guest_fee_'.$room[0][$i]['id'].'" value="'.(isset($_POST['guest_fee_'.$room[0][$i]['id']]) ? prepare_input($_POST['guest_fee_'.$room[0][$i]['id']]) : $room[0][$i]['guest_fee']).'" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'"> '.$currency_r_sign;
 				$output .= '  </td>';
 			}else{
 				$output .= '  <td align="left" nowrap="nowrap"><input type="text" readonly="readonly" name="date_from_'.$room[0][$i]['id'].'" style="width:85px;border:0px;'.(($i%2==0) ? '' : 'background-color:#f1f2f3;').'" value="'.format_datetime($room[0][$i]['date_from'], $field_date_format).'" /></td>';
-				$output .= '  <td align="left" nowrap="nowrap" width="20px">-</td>';
-				$output .= '  <td align="left" nowrap="nowrap"><input type="text" readonly="readonly" name="date_to_'.$room[0][$i]['id'].'" style="width:85px;border:0px;'.(($i%2==0) ? '' : 'background-color:#f1f2f3;').'" value="'.format_datetime($room[0][$i]['date_to'], $field_date_format).'" /></td>';	
+				$output .= '  <td align="left" nowrap="nowrap">-</td>';
+				$output .= '  <td align="left" nowrap="nowrap"><input type="text" readonly="readonly" name="date_to_'.$room[0][$i]['id'].'" style="width:85px;border:0px;'.(($i%2==0) ? '' : 'background-color:#f1f2f3;').'" value="'.format_datetime($room[0][$i]['date_to'], $field_date_format).'" /></td>';
+                $output .= '  <td align="left"><select name="price_type_' . $room[0][$i]['id'] . '" id="price_type_' . $room[0][$i]['id'] . '" disabled><option value="1" ' . ($room[0][$i]['price_type'] == 1 ? ' selected' : '') . '>' . _LIMITED_OFFER . '</option><option value="2" ' . ($room[0][$i]['price_type'] == 2 ? ' selected' : '') . '>' . _FLEXIBLE_OFFER . '</option></select>' . draw_hidden_field('rooms_prices_extend_id_' . $room[0][$i]['id'], $room[0][$i]['rooms_prices_extend_id'], false, 'rooms_prices_extend_id_' . $room[0][$i]['id']) . '</td>';
 				$output .= '  <td>';
 				$output .= '  &nbsp;'.draw_numbers_select_field('adults_'.$room[0][$i]['id'], (isset($_POST['adults_'.$room[0][$i]['id']]) ? $_POST['adults_'.$room[0][$i]['id']] : $room[0][$i]['adults']), 1, $max_adults, 1, '', 'disabled', false);
 				$output .= '  &nbsp;'.draw_numbers_select_field('children_'.$room[0][$i]['id'], (isset($_POST['children_'.$room[0][$i]['id']]) ? $_POST['children_'.$room[0][$i]['id']] : $room[0][$i]['children']), 0, $max_children, 1, '', 'disabled', false);
 				$output .= '  &nbsp;'.$currency_l_sign.' <input type="text" maxlength="7" name="guest_fee_'.$room[0][$i]['id'].'" value="'.(isset($_POST['guest_fee_'.$room[0][$i]['id']]) ? prepare_input($_POST['guest_fee_'.$room[0][$i]['id']]) : $room[0][$i]['guest_fee']).'" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'"> '.$currency_r_sign;
 				$output .= '  </td>';
-			}			
+			}
+
 			$output .= '  <td></td>';
 			$output .= '  <td nowrap="nowrap">'.$currency_l_sign.' <input type="text" name="price_'.$room[0][$i]['id'].'_mon" value="'.(isset($_POST['price_'.$room[0][$i]['id'].'_mon']) ? prepare_input($_POST['price_'.$room[0][$i]['id'].'_mon']) : $room[0][$i]['mon']).'" maxlength="7" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
 			$output .= '  <td nowrap="nowrap">'.$currency_l_sign.' <input type="text" name="price_'.$room[0][$i]['id'].'_tue" value="'.(isset($_POST['price_'.$room[0][$i]['id'].'_tue']) ? prepare_input($_POST['price_'.$room[0][$i]['id'].'_tue']) : $room[0][$i]['tue']).'" maxlength="7" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
@@ -706,11 +744,12 @@ class Rooms extends MicroGrid {
 			$output .= '  <td nowrap="nowrap">'.$currency_l_sign.' <input type="text" name="price_'.$room[0][$i]['id'].'_fri" value="'.(isset($_POST['price_'.$room[0][$i]['id'].'_fri']) ? prepare_input($_POST['price_'.$room[0][$i]['id'].'_fri']) : $room[0][$i]['fri']).'" maxlength="7" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
 			$output .= '  <td style="background-color:#ffcc33;">'.$currency_l_sign.' <input type="text" name="price_'.$room[0][$i]['id'].'_sat" value="'.(isset($_POST['price_'.$room[0][$i]['id'].'_sat']) ? prepare_input($_POST['price_'.$room[0][$i]['id'].'_sat']) : $room[0][$i]['sat']).'" maxlength="7" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
 			$output .= '  <td style="background-color:#ffcc33;">'.$currency_l_sign.' <input type="text" name="price_'.$room[0][$i]['id'].'_sun" value="'.(isset($_POST['price_'.$room[0][$i]['id'].'_sun']) ? prepare_input($_POST['price_'.$room[0][$i]['id'].'_sun']) : $room[0][$i]['sun']).'" maxlength="7" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
-			$output .= '  <td width="30px" align="center">'.(($i > 0) ? '<img src="images/delete.gif" alt="'._DELETE_WORD.'" title="'._DELETE_WORD.'" style="cursor:pointer;" onclick="javascript:submitPriceForm(\'delete\',\''.$room[0][$i]['id'].'\')" />' : '').'</td>';
+			$output .= '  <td width="30px" align="center">'.(($room[0][$i]['is_default'] != 1) ? '<img src="images/delete.gif" alt="'._DELETE_WORD.'" title="'._DELETE_WORD.'" style="cursor:pointer;" onclick="javascript:submitPriceForm(\'delete\',\''.$room[0][$i]['id'].'\')" />' : '').'</td>';
 			$output .= '</tr>';
 			if($ids_list != '') $ids_list .= ','.$room[0][$i]['id'];
 			else $ids_list = $room[0][$i]['id'];
-		}		
+		}
+
 		$output .= '<tr><td colspan="11"></td><td colspan="2" style="height:5px;background-color:#ffcc33;"></td><td></td></tr>';
 		$output .= '<tr><td colspan="14">&nbsp;</td></tr>';
 		$output .= '<tr>';
@@ -723,19 +762,23 @@ class Rooms extends MicroGrid {
 		$output .= '<tr align="center">';
 		$output .= '  <td></td>';
 		$output .= '  <td colspan="3" align="right">'._FROM.': <input type="text" id="from_new" name="from_new" style="color:#808080;width:80px" readonly="readonly" value="'.$from_new.'" /><img id="from_new_cal" src="images/cal.gif" alt="" title="'._SET_DATE.'" style="margin-left:5px;margin-right:5px;cursor:pointer;" /><br />'._TO.': <input type="text" id="to_new" name="to_new" style="color:#808080;width:80px" readonly="readonly" value="'.$to_new.'" /><img id="to_new_cal" src="images/cal.gif" alt="" title="'._SET_DATE.'" style="margin-left:5px;margin-right:5px;cursor:pointer;" /></td>';
-		$output .= '  <td>';
+        $output .= '  <td align="left">' . _LIMITED_OFFER . '<br/>' . _FLEXIBLE_OFFER . '</td>';
+        $output .= '  <td>';
 		$output .= '  &nbsp;'.draw_numbers_select_field('adults_new', $adults_new, 1, $max_adults, 1, '', '', false);
 		$output .= '  &nbsp;'.draw_numbers_select_field('children_new', $children_new, 0, $max_children, 1, '', '', false);
 		$output .= '  &nbsp;'.$currency_l_sign.' <input type="text" maxlength="7" name="guest_fee_new" value="'.$guest_fee_new.'" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'"> '.$currency_r_sign;
+		$output .= '<br/>&nbsp;' . draw_numbers_select_field('adults_new_2', $adults_new_2, 1, $max_adults, 1, '', '', false);
+		$output .= '  &nbsp;' . draw_numbers_select_field('children_new_2', $children_new_2, 0, $max_children, 1, '', '', false);
+		$output .= '  &nbsp;' . $currency_l_sign . ' <input type="text" maxlength="7" name="guest_fee_new_2" value="' . $guest_fee_new_2 . '" style="color:#808080;padding:0 2px;text-align:' . $text_align . ';width:' . $width . '"> ' . $currency_r_sign;
 		$output .= '  </td>';
 		$output .= '  <td></td>';
-		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_mon" value="'.$price_new_mon.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
-		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_tue" value="'.$price_new_tue.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
-		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_wed" value="'.$price_new_wed.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
-		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_thu" value="'.$price_new_thu.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
-		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_fri" value="'.$price_new_fri.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
-		$output .= '  <td style="background-color:#ffcc33;">'.$currency_l_sign.' <input type="text" name="price_new_sat" value="'.$price_new_sat.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
-		$output .= '  <td style="background-color:#ffcc33;">'.$currency_l_sign.' <input type="text" name="price_new_sun" value="'.$price_new_sun.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
+		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_mon" value="'.$price_new_mon.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'<br/>' . $currency_l_sign . ' <input type="text" name="price_new_mon_2" value="'.$price_new_mon_2.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
+		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_tue" value="'.$price_new_tue.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'<br/>' . $currency_l_sign . ' <input type="text" name="price_new_tue_2" value="'.$price_new_tue_2.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
+		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_wed" value="'.$price_new_wed.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'<br/>'.$currency_l_sign.' <input type="text" name="price_new_wed_2" value="'.$price_new_wed_2.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
+		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_thu" value="'.$price_new_thu.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'<br/>'.$currency_l_sign.' <input type="text" name="price_new_thu_2" value="'.$price_new_thu_2.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
+		$output .= '  <td>'.$currency_l_sign.' <input type="text" name="price_new_fri" value="'.$price_new_fri.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'<br/>'.$currency_l_sign.' <input type="text" name="price_new_fri_2" value="'.$price_new_fri_2.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
+		$output .= '  <td style="background-color:#ffcc33;">'.$currency_l_sign.' <input type="text" name="price_new_sat" value="'.$price_new_sat.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'<br/>'.$currency_l_sign.' <input type="text" name="price_new_sat_2" value="'.$price_new_sat_2.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
+		$output .= '  <td style="background-color:#ffcc33;">'.$currency_l_sign.' <input type="text" name="price_new_sun" value="'.$price_new_sun.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'<br/>'.$currency_l_sign.' <input type="text" name="price_new_sun_2" value="'.$price_new_sun_2.'" maxlength="7" style="color:#808080;padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
 		$output .= '  <td></td>';
 		$output .= '</tr>';			
 
@@ -965,10 +1008,16 @@ class Rooms extends MicroGrid {
 		}
 
 		$sql = 'DELETE FROM '.TABLE_ROOMS_PRICES.' WHERE id = '.(int)$rpid;
+
 		if(!database_void_query($sql)){
 			$this->error = _TRY_LATER;
 			return false;
 		}
+
+		$sql = 'DELETE FROM ' . TABLE_ROOMS_PRICES_EXTEND . ' 
+				WHERE rooms_prices_id NOT IN (SELECT id FROM ' . TABLE_ROOMS_PRICES . ')';
+		database_void_query($sql);
+		
 		return true;
 	}
 	
@@ -1066,7 +1115,18 @@ class Rooms extends MicroGrid {
 		$price_new_thu = isset($_POST['price_new_thu']) ? prepare_input($_POST['price_new_thu']) : '';
 		$price_new_fri = isset($_POST['price_new_fri']) ? prepare_input($_POST['price_new_fri']) : '';
 		$price_new_sat = isset($_POST['price_new_sat']) ? prepare_input($_POST['price_new_sat']) : '';
-		$price_new_sun = isset($_POST['price_new_sun']) ? prepare_input($_POST['price_new_sun']) : '';		
+		$price_new_sun = isset($_POST['price_new_sun']) ? prepare_input($_POST['price_new_sun']) : '';
+
+		$adults_new_2    = isset($_POST['adults_new_2']) ? prepare_input($_POST['adults_new_2']) : '1';
+		$children_new_2  = isset($_POST['children_new_2']) ? prepare_input($_POST['children_new_2']) : '0';
+		$guest_fee_new_2 = isset($_POST['guest_fee_new_2']) ? prepare_input($_POST['guest_fee_new_2']) : '0';
+		$price_new_mon_2 = isset($_POST['price_new_mon_2']) ? prepare_input($_POST['price_new_mon_2']) : '';
+		$price_new_tue_2 = isset($_POST['price_new_tue_2']) ? prepare_input($_POST['price_new_tue_2']) : '';
+		$price_new_wed_2 = isset($_POST['price_new_wed_2']) ? prepare_input($_POST['price_new_wed_2']) : '';
+		$price_new_thu_2 = isset($_POST['price_new_thu_2']) ? prepare_input($_POST['price_new_thu_2']) : '';
+		$price_new_fri_2 = isset($_POST['price_new_fri_2']) ? prepare_input($_POST['price_new_fri_2']) : '';
+		$price_new_sat_2 = isset($_POST['price_new_sat_2']) ? prepare_input($_POST['price_new_sat_2']) : '';
+		$price_new_sun_2 = isset($_POST['price_new_sun_2']) ? prepare_input($_POST['price_new_sun_2']) : '';
 				
 		if($objSettings->GetParameter('date_format') == 'mm/dd/yyyy'){
 			$from_new = substr($from_new, 6, 4).'-'.substr($from_new, 0, 2).'-'.substr($from_new, 3, 2);
@@ -1083,35 +1143,36 @@ class Rooms extends MicroGrid {
 		}else if($from_new > $to_new){
 			$this->error = _FROM_TO_DATE_ALERT;
 			return false;			
-		}else if(!$this->IsFloat($guest_fee_new) || $guest_fee_new < 0){
+		}else if(!$this->IsFloat($guest_fee_new) || $guest_fee_new < 0 || !$this->IsFloat($guest_fee_new_2) || $guest_fee_new_2 < 0){
 			$this->error = str_replace('_FIELD_', '<b>'._GUEST_FEE.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
 			return false;
-		}else if($price_new_mon == '' || $price_new_tue == '' || $price_new_wed == '' || $price_new_thu == '' || $price_new_fri == '' || $price_new_sat == '' || $price_new_sun == ''){
+		}else if($price_new_mon == '' || $price_new_tue == '' || $price_new_wed == '' || $price_new_thu == '' || $price_new_fri == '' || $price_new_sat == '' || $price_new_sun == ''
+					|| $price_new_mon_2 == '' || $price_new_tue_2 == '' || $price_new_wed_2 == '' || $price_new_thu_2 == '' || $price_new_fri_2 == '' || $price_new_sat_2 == '' || $price_new_sun_2 == ''){
 			$this->error = _PRICE_EMPTY_ALERT;
 			return false;
-		}else if(!$this->IsFloat($price_new_mon) || $price_new_mon < 0){
+		}else if(!$this->IsFloat($price_new_mon) || $price_new_mon < 0 || !$this->IsFloat($price_new_mon_2) || $price_new_mon_2 < 0){
 			$this->error = str_replace('_FIELD_', '<b>'._MON.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
 			return false;
-		}else if(!$this->IsFloat($price_new_tue) || $price_new_tue < 0){
+		}else if(!$this->IsFloat($price_new_tue) || $price_new_tue < 0 || !$this->IsFloat($price_new_tue_2) || $price_new_tue_2 < 0){
 			$this->error = str_replace('_FIELD_', '<b>'._TUE.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
 			return false;
-		}else if(!$this->IsFloat($price_new_wed) || $price_new_wed < 0){
+		}else if(!$this->IsFloat($price_new_wed) || $price_new_wed < 0 || !$this->IsFloat($price_new_wed_2) || $price_new_wed_2 < 0){
 			$this->error = str_replace('_FIELD_', '<b>'._WED.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
 			return false;
-		}else if(!$this->IsFloat($price_new_thu) || $price_new_thu < 0){
+		}else if(!$this->IsFloat($price_new_thu) || $price_new_thu < 0 || !$this->IsFloat($price_new_thu_2) || $price_new_thu_2 < 0){
 			$this->error = str_replace('_FIELD_', '<b>'._THU.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
 			return false;
-		}else if(!$this->IsFloat($price_new_fri) || $price_new_fri < 0){
+		}else if(!$this->IsFloat($price_new_fri) || $price_new_fri < 0 || !$this->IsFloat($price_new_fri_2) || $price_new_fri_2 < 0){
 			$this->error = str_replace('_FIELD_', '<b>'._FRI.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
 			return false;
-		}else if(!$this->IsFloat($price_new_sat) || $price_new_sat < 0){
+		}else if(!$this->IsFloat($price_new_sat) || $price_new_sat < 0 || !$this->IsFloat($price_new_sat_2) || $price_new_sat_2 < 0){
 			$this->error = str_replace('_FIELD_', '<b>'._SAT.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
 			return false;
-		}else if(!$this->IsFloat($price_new_sun) || $price_new_sun < 0){
+		}else if(!$this->IsFloat($price_new_sun) || $price_new_sun < 0 || !$this->IsFloat($price_new_sun_2) || $price_new_sun_2 < 0){
 			$this->error = str_replace('_FIELD_', '<b>'._SUN.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
 			return false;
 		}else{
-			$sql = 'SELECT * FROM '.TABLE_ROOMS_PRICES.'
+			$sql = 'SELECT * FROM ' . TABLE_ROOMS_PRICES . '
 					WHERE
 						room_id = '.(int)$rid.' AND
 						adults = '.(int)$adults_new.' AND
@@ -1120,19 +1181,44 @@ class Rooms extends MicroGrid {
 						(((\''.$from_new.'\' >= date_from) AND (\''.$from_new.'\' <= date_to)) OR
 						((\''.$to_new.'\' >= date_from) AND (\''.$to_new.'\' <= date_to))) ';	
 			$result = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
 			if($result[1] > 0){
 				$this->error = _TIME_PERIOD_OVERLAPPING_ALERT;
 				return false;
 			}
 		}
 
-		if($from_new != '' && $to_new != ''){
+		if ($from_new != '' && $to_new != '') {
+			// Room price limited offer
 			$sql = 'INSERT INTO '.TABLE_ROOMS_PRICES.' (id, room_id, date_from, date_to, adults, children, guest_fee, mon, tue, wed, thu, fri, sat, sun, is_default)
 					VALUES (NULL, '.(int)$rid.', \''.$from_new.'\', \''.$to_new.'\', \''.$adults_new.'\', \''.$children_new.'\', \''.$guest_fee_new.'\', '.$price_new_mon.', '.$price_new_tue.', '.$price_new_wed.', '.$price_new_thu.', '.$price_new_fri.', '.$price_new_sat.', '.$price_new_sun.', 0)';
-			if(database_void_query($sql)){
-				unset($_POST);
+			
+			if (database_void_query($sql)) {
+				$sql = 'SELECT MAX(id) max_id FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = ' . (int)$rid;
+				$rooms_prices_new = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+				$sql = 'INSERT INTO ' . TABLE_ROOMS_PRICES_EXTEND . ' (id, rooms_prices_id, price_type, terms) 
+						VALUES (NULL, ' . $rooms_prices_new[0]['max_id'] . ', 1, \'\')';
+				database_void_query($sql);
+
+				// Room price flexible offer				
+				$sql = 'INSERT INTO '.TABLE_ROOMS_PRICES.' (id, room_id, date_from, date_to, adults, children, guest_fee, mon, tue, wed, thu, fri, sat, sun, is_default)
+					VALUES (NULL, '.(int)$rid.', \''.$from_new.'\', \''.$to_new.'\', \''.$adults_new_2.'\', \''.$children_new_2.'\', \''.$guest_fee_new_2.'\', '.$price_new_mon_2.', '.$price_new_tue_2.', '.$price_new_wed_2.', '.$price_new_thu_2.', '.$price_new_fri_2.', '.$price_new_sat_2.', '.$price_new_sun_2.', 0)';
+				
+				if (database_void_query($sql)) {
+					$sql = 'SELECT MAX(id) max_id FROM ' . TABLE_ROOMS_PRICES . ' WHERE room_id = ' . (int)$rid;
+					$rooms_prices_new = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+					$sql = 'INSERT INTO ' . TABLE_ROOMS_PRICES_EXTEND . ' (id, rooms_prices_id, price_type, terms) 
+							VALUES (NULL, ' . $rooms_prices_new[0]['max_id'] . ', 2, \'\')';
+					database_void_query($sql);
+				} else {
+					$this->error = _TRY_LATER;
+					return false;
+				}
+
 				return true;
-			}else{
+			} else {
 				$this->error = _TRY_LATER;
 				return false;
 			}
@@ -1204,9 +1290,11 @@ class Rooms extends MicroGrid {
 		// input validation
 		$arrPrices = array();			
 		$count = 0;
-		foreach($ids_list_array as $key){
 
-			$adults    = (isset($_POST['adults_'.$key]) ? prepare_input($_POST['adults_'.$key]) : '1');
+		foreach($ids_list_array as $key){
+            $price_type = (isset($_POST['price_type_'.$key]) ? prepare_input($_POST['price_type_'.$key]) : '1');
+            $rooms_prices_extend_id= (isset($_POST['rooms_prices_extend_id_'.$key]) ? prepare_input($_POST['rooms_prices_extend_id_'.$key]) : 0);
+            $adults    = (isset($_POST['adults_'.$key]) ? prepare_input($_POST['adults_'.$key]) : '1');
 			$children  = (isset($_POST['children_'.$key]) ? prepare_input($_POST['children_'.$key]) : '0');
 			$guest_fee = (isset($_POST['guest_fee_'.$key]) ? prepare_input($_POST['guest_fee_'.$key]) : '0');			
 			$price_mon = (isset($_POST['price_'.$key.'_mon']) ? prepare_input($_POST['price_'.$key.'_mon']) : '0');
@@ -1259,10 +1347,27 @@ class Rooms extends MicroGrid {
 						sun = \''.$price_sun.'\',
 						is_default = '.(($count == 0) ? '1' : '0').'
 					WHERE id = '.$key.' AND room_id = '.(int)$rid;
-			if(!database_void_query($sql)){
+
+            if(!database_void_query($sql)){
 				$this->error = _TRY_LATER;
 				return false;
 			}
+
+//            include 'init_activerecord.php';
+//            $listRoomsPriceExtend = RoomsPricesExtend::find;
+//            var_dump(RoomsPricesExtend::update_all());
+
+            $sql_update_rooms_prices_extend = 'UPDATE ' . TABLE_ROOMS_PRICES_EXTEND . '
+                                                SET price_type = ' . $price_type . '
+                                                WHERE id = ' . $rooms_prices_extend_id;
+
+//            echo $sql_update_rooms_prices_extend;
+//            echo '<br/>';
+            if(!database_void_query($sql_update_rooms_prices_extend)){
+                $this->error = _TRY_LATER;
+                return false;
+            }
+
 			$count++;
 		}
 		unset($_POST);
@@ -1280,7 +1385,8 @@ class Rooms extends MicroGrid {
 			return false;
 		}
 
-		$default_price 			= isset($_POST['default_price']) ? prepare_input($_POST['default_price']) : '0';				
+		$default_price 			= isset($_POST['default_price']) ? prepare_input($_POST['default_price']) : '0';
+        $default_price_flexible_offer = isset($_POST['default_price_flexible_offer']) ? prepare_input($_POST['default_price_flexible_offer']) : '0';
 		$room_type 			    = isset($_POST['room_type']) ? prepare_input($_POST['room_type']) : '';
 		$room_count 			= isset($_POST['room_count']) ? (int)$_POST['room_count'] : '0';
 		$room_short_description = isset($_POST['room_short_description']) ? prepare_input($_POST['room_short_description']) : '';
@@ -1290,6 +1396,7 @@ class Rooms extends MicroGrid {
 		// ---------------------------------------------------------------------
 		$sql = 'SELECT * FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = '.$this->lastInsertId;
 		$room = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
 		if($room[1] > 0){
 			$sql = 'UPDATE '.TABLE_ROOMS_PRICES.'
 					SET
@@ -1306,9 +1413,48 @@ class Rooms extends MicroGrid {
 					WHERE room_id = '.$this->lastInsertId;
 			$result = database_void_query($sql);			
 		}else{
+            // // ActiveRecord
+            // include 'init_activerecord.php';
+
+            // $roomsPrice = RoomsPrices();
+            // $roomsPrice->room_id = $this->lastInsertId;
+            // // $roomsPrice->date_from = date('Y-m-d', strtotime('0000-00-00'));
+            // // $roomsPrice->date_to = date('Y-m-d', strtotime('0000-00-00'));
+            // $roomsPrice->mon = $default_price;
+            // $roomsPrice->tue = $default_price;
+            // $roomsPrice->wed = $default_price;
+            // $roomsPrice->thu = $default_price;
+            // $roomsPrice->fri = $default_price;
+            // $roomsPrice->sat = $default_price;
+            // $roomsPrice->sun = $default_price;
+            // $roomsPrice->is_default = 1;
+            // $roomsPrice->save();
+            // echo $roomsPrice->id;
+
+
+            // Default price limited offer
 			$sql = 'INSERT INTO '.TABLE_ROOMS_PRICES.' (id, room_id, date_from, date_to, mon, tue, wed, thu, fri, sat, sun, is_default)
 					VALUES (NULL, '.$this->lastInsertId.', \'0000-00-00\', \'0000-00-00\', \''.$default_price.'\', \''.$default_price.'\', \''.$default_price.'\', \''.$default_price.'\', \''.$default_price.'\', \''.$default_price.'\', \''.$default_price.'\', 1)';
-			$result = database_void_query($sql);			
+			$result = database_void_query($sql);
+
+			$sql = 'SELECT MAX(id) max_id FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = '.$this->lastInsertId;
+			$rooms_prices_new = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+			$sql = 'INSERT INTO ' . TABLE_ROOMS_PRICES_EXTEND . ' (id, rooms_prices_id, price_type, terms) 
+					VALUES (NULL, ' . $rooms_prices_new[0]['max_id'] . ', 1, \'\')';
+			$result = database_void_query($sql);
+
+            // Default price flexible offer
+            $sql = 'INSERT INTO '.TABLE_ROOMS_PRICES.' (id, room_id, date_from, date_to, mon, tue, wed, thu, fri, sat, sun, is_default)
+					VALUES (NULL, '.$this->lastInsertId.', \'0000-00-00\', \'0000-00-00\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', 1)';
+            $result = database_void_query($sql);
+
+            $sql = 'SELECT MAX(id) max_id FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = '.$this->lastInsertId;
+			$rooms_prices_new = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+			$sql = 'INSERT INTO ' . TABLE_ROOMS_PRICES_EXTEND . ' (id, rooms_prices_id, price_type, terms) 
+					VALUES (NULL, ' . $rooms_prices_new[0]['max_id'] . ', 2, \'\')';
+			$result = database_void_query($sql);
 		}
 		
 		// add room availability
@@ -1384,8 +1530,14 @@ class Rooms extends MicroGrid {
 
 		$sql = 'DELETE FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = '.(int)$rid;
 		database_void_query($sql);	
+
+		$sql = 'DELETE FROM ' . TABLE_ROOMS_PRICES_EXTEND . ' 
+				WHERE rooms_prices_id NOT IN (SELECT id FROM ' . TABLE_ROOMS_PRICES . ')';
+		database_void_query($sql);
+
 		$sql = 'DELETE FROM '.TABLE_ROOMS_AVAILABILITIES.' WHERE room_id = '.(int)$rid;
 		database_void_query($sql);	
+		
 		$sql = 'DELETE FROM '.TABLE_ROOMS_DESCRIPTION.' WHERE room_id = '.(int)$rid;		
 		database_void_query($sql);
 	}
@@ -1395,7 +1547,7 @@ class Rooms extends MicroGrid {
 	 * 		@param $params
 	 */
 	public function SearchFor($params = array())
-	{		
+	{
 		$checkin_date 	= $params['from_year'].'-'.$params['from_month'].'-'.$params['from_day'];
 		$checkout_date 	= $params['to_year'].'-'.$params['to_month'].'-'.$params['to_day'];
 		$max_adults 	= isset($params['max_adults']) ? $params['max_adults'] : '';
@@ -1423,7 +1575,7 @@ class Rooms extends MicroGrid {
 					'.(($max_adults != '') ? ' AND r.max_adults >= '.(int)$max_adults : '').'
 					'.(($max_children != '') ? ' AND r.max_children >= '.(int)$max_children : '').'
 				ORDER BY '.$order_by_clause;
-				
+
 		$rooms = database_query($sql, DATA_AND_ROWS, ALL_ROWS);
 		if($rooms[1] > 0){
 			// loop by rooms
@@ -1447,6 +1599,7 @@ class Rooms extends MicroGrid {
 								OR
 								(\''.$checkin_date.'\' >= checkin  AND \''.$checkout_date.'\' < checkout)
 							)';
+
 				$rooms_booked = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
 				if($rooms_booked[1] > 0){
 					$max_booked_rooms = (int)$rooms_booked[0]['max_booked_rooms'];
@@ -1476,6 +1629,94 @@ class Rooms extends MicroGrid {
 		
 		return $rooms_count;		
 	}
+
+    /**
+     * Count rooms available
+     * 		@param $params
+     */
+    public function CountRoomsAvailable($params = array())
+    {
+        $checkin_date 	= $params['from_year'].'-'.$params['from_month'].'-'.$params['from_day'];
+        $checkout_date 	= $params['to_year'].'-'.$params['to_month'].'-'.$params['to_day'];
+        $max_adults 	= isset($params['max_adults']) ? $params['max_adults'] : '';
+        $max_children 	= isset($params['max_children']) ? $params['max_children'] : '';
+        $room_id 	    = isset($params['room_id']) ? $params['room_id'] : '';
+        $hotel_sel_id   = isset($params['hotel_sel_id']) ? $params['hotel_sel_id'] : '';
+        $hotel_sel_loc_id  = isset($params['hotel_sel_loc_id']) ? $params['hotel_sel_loc_id'] : '';
+
+        $order_by_clause = (isset($params['sort_by'])) ? (($params['sort_by'] == '1-5') ? 'h.stars ASC' : 'h.stars DESC') : 'r.priority_order ASC';
+        $hotel_where_clause = (!empty($hotel_sel_id)) ? 'h.id = '.(int)$hotel_sel_id.' AND ' : '';
+        $hotel_where_clause .= (!empty($hotel_sel_loc_id)) ? 'h.hotel_location_id = '.(int)$hotel_sel_loc_id.' AND ' : '';
+
+        $rooms_count    = 0;
+        $show_fully_booked_rooms = ModulesSettings::Get('booking', 'show_fully_booked_rooms');
+
+        $sql = 'SELECT
+					r.id, r.hotel_id, r.room_count
+			    FROM '.TABLE_ROOMS.' r
+					INNER JOIN '.TABLE_HOTELS.' h ON r.hotel_id = h.id
+				WHERE 1=1 AND
+					'.$hotel_where_clause.'
+					h.is_active = 1 AND
+					r.is_active = 1
+					'.(($room_id != '') ? ' AND r.id='.(int)$room_id : '').'
+					'.(($max_adults != '') ? ' AND r.max_adults >= '.(int)$max_adults : '').'
+					'.(($max_children != '') ? ' AND r.max_children >= '.(int)$max_children : '').'
+				ORDER BY '.$order_by_clause;
+
+        $rooms = database_query($sql, DATA_AND_ROWS, ALL_ROWS);
+        if($rooms[1] > 0){
+            // loop by rooms
+            for($i=0; $i < $rooms[1]; $i++){
+                //echo '<br />'.$rooms[0][$i]['id'].' '.$rooms[0][$i]['room_count'];
+
+                // maximum available rooms in hotel for one day
+                $maximal_rooms = (int)$rooms[0][$i]['room_count'];
+                $max_booked_rooms = '0';
+                $sql = 'SELECT
+							MAX('.TABLE_BOOKINGS_ROOMS.'.rooms) as max_booked_rooms
+						FROM '.TABLE_BOOKINGS.'
+							INNER JOIN '.TABLE_BOOKINGS_ROOMS.' ON '.TABLE_BOOKINGS.'.booking_number = '.TABLE_BOOKINGS_ROOMS.'.booking_number
+						WHERE
+                            ('.TABLE_BOOKINGS.'.status = 1 OR '.TABLE_BOOKINGS.'.status = 2) AND
+							'.TABLE_BOOKINGS_ROOMS.'.room_id = '.(int)$rooms[0][$i]['id'].' AND
+							(
+								(\''.$checkin_date.'\' <= checkin AND \''.$checkout_date.'\' > checkin)
+								OR
+								(\''.$checkin_date.'\' < checkout AND \''.$checkout_date.'\' >= checkout)
+								OR
+								(\''.$checkin_date.'\' >= checkin  AND \''.$checkout_date.'\' < checkout)
+							)';
+
+                $rooms_booked = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+                if($rooms_booked[1] > 0){
+                    $max_booked_rooms = (int)$rooms_booked[0]['max_booked_rooms'];
+                }
+
+                // this is only a simple check if there is at least one room wirh available num > booked rooms
+                $available_rooms = (int)($maximal_rooms - $max_booked_rooms);
+                // echo '<br> Room ID: '.$rooms[0][$i]['id'].' Max: '.$maximal_rooms.' Booked: '.$max_booked_rooms.' Av:'.$available_rooms;
+
+                // this is advanced check that takes in account max availability for each spesific day is selected period of time
+                $fully_booked_rooms = true;
+                if($available_rooms > 0){
+                    $available_rooms_updated = $this->CheckAvailabilityForPeriod($rooms[0][$i]['id'], $checkin_date, $checkout_date, $available_rooms);
+                    if($available_rooms_updated){
+                        $rooms_count += $available_rooms;
+                        $this->arrAvailableRooms[$rooms[0][$i]['hotel_id']][] = array('id'=>$rooms[0][$i]['id'], 'available_rooms'=>$available_rooms_updated);
+                        $fully_booked_rooms = false;
+                    }
+                }
+
+                if($show_fully_booked_rooms == 'yes' && $fully_booked_rooms){
+                    $rooms_count += $maximal_rooms;
+                    $this->arrAvailableRooms[$rooms[0][$i]['hotel_id']][] = array('id'=>$rooms[0][$i]['id'], 'available_rooms'=>'0');
+                }
+            }
+        }
+
+        return $rooms_count;
+    }
 
     /**
 	 * Draws search result
@@ -2499,23 +2740,29 @@ class Rooms extends MicroGrid {
 		$output_locations = '';
 		$output_sort_by = '';
 		$total_hotels = Hotels::GetAllActive();
+
 		if($total_hotels[1] > 1){
 			$selected_hotel_id = isset($_POST['hotel_sel_id']) ? prepare_input($_POST['hotel_sel_id']) : '';
 			$output_hotels .= '<select class="" style="width:191px" name="hotel_sel_id">';
 			$output_hotels .= '<option value="">-- '._ALL.' --</option>';
-			foreach($total_hotels[0] as $key => $val){
+
+			foreach ($total_hotels[0] as $key => $val){
 				$output_hotels .= '<option'.(($selected_hotel_id == $val['id']) ? ' selected="selected"' : '').' value="'.$val['id'].'">'.$val['name'].'</option>';
 			}
+
 			$output_hotels .= '</select>';			
 
 			$total_hotels_locations = HotelsLocations::GetHotelsLocations();
 			$hotel_sel_loc_id = isset($_POST['hotel_sel_loc_id']) ? prepare_input($_POST['hotel_sel_loc_id']) : '';
-			if($total_hotels_locations[1] > 1){
+
+			if ($total_hotels_locations[1] > 1){
 				$output_locations .= '<select class="" style="width:191px" name="hotel_sel_loc_id">';
 				$output_locations .= '<option value="">-- '._ALL.' --</option>';
+
 				foreach($total_hotels_locations[0] as $key => $val){
 					$output_locations .= '<option'.(($hotel_sel_loc_id == $val['id']) ? ' selected="selected"' : '').' value="'.$val['id'].'">'.$val['name'].'</option>';
 				}
+
 				$output_locations .= '</select>';			
 			}			
 
@@ -2529,19 +2776,24 @@ class Rooms extends MicroGrid {
 		$output1 = '<select id="checkin_day" name="checkin_monthday" class="checkin_day" onchange="cCheckDateOrder(this,\'checkin_monthday\',\'checkin_year_month\',\'checkout_monthday\',\'checkout_year_month\');cUpdateDaySelect(this);">
 						<option class="day prompt" value="0">'._DAY.'</option>';
 						$selected_day = isset($_POST['checkin_monthday']) ? prepare_input($_POST['checkin_monthday']) : date('d');
+
 						for($i=1; $i<=31; $i++){													
 							$output1  .= '<option value="'.$i.'" '.(($selected_day == $i) ? 'selected="selected"' : '').'>'.$i.'</option>';
 						}
+
 					$output1 .= '</select>
 					<select id="checkin_year_month" name="checkin_year_month" class="checkin_year_month" onchange="cCheckDateOrder(this,\'checkin_monthday\',\'checkin_year_month\',\'checkout_monthday\',\'checkout_year_month\');cUpdateDaySelect(this);">
 						<option class="month prompt" value="0">'._MONTH.'</option>';
 						$selected_year_month = isset($_POST['checkin_year_month']) ? prepare_input($_POST['checkin_year_month']) : date('Y-n');
+
 						for($i=0; $i<12; $i++){
 							$cur_time = mktime(0, 0, 0, date('m')+$i, '1', date('Y'));
 							$val = date('Y', $cur_time).'-'.(int)date('m', $cur_time);
 							$output1 .= '<option value="'.$val.'" '.(($selected_year_month == $val) ? 'selected="selected"' : '').'>'.get_month_local(date('n', $cur_time)).' \''.date('y', $cur_time).'</option>';
 						}
+
 					$output1 .= '</select>';
+
 					if($show_calendar) $output1 .= '<a class="calendar" onclick="cShowCalendar(this,\'calendar\',\'checkin\');" href="javascript:void(0);"><img title="'._PICK_DATE.'" alt="calendar" src="templates/'.Application::Get('template').'/images/button-calendar.png" width="22" /></a>';
 		
 		$output2 = '<select id="checkout_monthday" name="checkout_monthday" class="checkout_day" onchange="cCheckDateOrder(this,\'checkout_monthday\',\'checkout_year_month\');cUpdateDaySelect(this);">
@@ -2562,13 +2814,24 @@ class Rooms extends MicroGrid {
 					$output2 .= '</select>';
 					if($show_calendar) $output2 .= '<a class="calendar" onclick="cShowCalendar(this,\'calendar\',\'checkout\');" href="javascript:void(0);"><img title="'._PICK_DATE.'" alt="calendar" src="templates/'.Application::Get('template').'/images/button-calendar.png" width="22 /></a>';
 					
-		$output3 = '<label class="label-inline">'._ADULTS.': </label>
+		$output3 = '<label class="label-inline">'._ROOMS.': </label>
+					<select class="max_occupation" name="rooms_quantity" id="rooms_quantity">';
+        $rooms_quantity = isset($_POST['rooms_quantity']) ? (int)$_POST['rooms_quantity'] : '1';
+        $maximum_rooms = 100;
+
+        for($i=1; $i<=$maximum_rooms; $i++){
+            $output3 .= '<option value="'.$i.'" '.(($rooms_quantity == $i) ? 'selected="selected"' : '').'>'.$i.'&nbsp;</option>';
+        }
+
+        $output3 .= '</select>&nbsp;<div style="width:100%; clear:both; height:4px;"></div>';
+
+        $output3 .= '<label class="label-inline">'._ADULTS.': </label>
 					<select class="max_occupation" name="max_adults" id="max_adults">';
 						$max_adults = isset($_POST['max_adults']) ? (int)$_POST['max_adults'] : '1';
 						for($i=1; $i<=$maximum_adults; $i++){
 							$output3 .= '<option value="'.$i.'" '.(($max_adults == $i) ? 'selected="selected"' : '').'>'.$i.'&nbsp;</option>';
 						}
-					$output3 .= '</select>&nbsp;<div style="width:100%; clear:both; height:4px;"></div>';
+        $output3 .= '</select>&nbsp;<div style="width:100%; clear:both; height:4px;"></div>';
 					
 					if($allow_children == 'yes'){
 						$output3 .= '<label class="label-inline">'._CHILDREN.': </label>';

@@ -15,7 +15,7 @@ define('DEFAULT_TEMPLATE', 'default'); // default
 define('DEFAULT_DIRECTION', 'ltr');    // ltr|rtl
 
 // (list of supported Timezones - http://us3.php.net/manual/en/timezones.php)    
-define('TIME_ZONE', 'America/Los_Angeles'); 
+define('TIME_ZONE', 'Asia/Saigon');
 
 // return types for database_query function
 // --------------------------------------------------------------
@@ -80,7 +80,9 @@ define('TABLE_SEARCH_WORDLIST', DB_PREFIX.'search_wordlist');
 define('TABLE_SETTINGS', DB_PREFIX.'settings');      
 define('TABLE_SITE_DESCRIPTION', DB_PREFIX.'site_description');
 define('TABLE_TESTIMONIALS', DB_PREFIX.'testimonials');      
-define('TABLE_VOCABULARY', DB_PREFIX.'vocabulary');      
+define('TABLE_VOCABULARY', DB_PREFIX.'vocabulary');
+
+define('TABLE_ROOMS_PRICES_EXTEND', DB_PREFIX_NTDT.'rooms_prices_extend');
 
 //------------------------------------------------------------------------------
 // set errors handling

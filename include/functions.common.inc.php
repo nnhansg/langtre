@@ -703,6 +703,7 @@ function get_timezone_by_offset($offset)
 	   'Asia/Dhaka' => 6.00,
 	   'Asia/Rangoon' => 6.50,
 	   'Asia/Bangkok' => 7.00,
+        'Asia/Saigon' => 7.00,
 	   'Asia/Brunei' => 8.00,
 	   'Australia/Eucla' => 8.75,      
 	   'Asia/Tokyo' => 9.00,
