@@ -50,7 +50,7 @@ if(Modules::IsModuleInstalled('booking')){
 		if($objLogin->IsLoggedInAsAdmin()) draw_title_bar(prepare_breadcrumbs(array(_BOOKING=>'')));
 		
 		draw_content_start();
-		draw_reservation_bar('selected_rooms');		
+		draw_reservation_bar('selected_rooms');
 
 		// test mode alert
 		if(Modules::IsModuleInstalled('booking')){
@@ -59,8 +59,8 @@ if(Modules::IsModuleInstalled('booking')){
 			}        
 		}
 
-		Campaigns::DrawCampaignBanner('standard');
-		Campaigns::DrawCampaignBanner('global');
+//		Campaigns::DrawCampaignBanner('standard');
+//		Campaigns::DrawCampaignBanner('global');
 
 		$objReservation->ShowReservationInfo();
 		draw_content_end();

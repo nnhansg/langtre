@@ -412,12 +412,13 @@ class Reservation {
 				</tr>
 				</table>
 				<div style="float: right;">
-					<input type="button" class="form_button" onclick="javascript:appGoTo(\'page=booking_details\')" value="'._BOOK.'" />
+					<input type="button" class="form_button" onclick="javascript:appGoTo(\'page=booking_details\')" value="'._BOOK.' AAAA" />
 				</div>
 				<div class="clear"></div>';
 		}else{
 			draw_message(_RESERVATION_CART_IS_EMPTY_ALERT, true, true);
 		}
+        echo "<script>window.location.href='/index.php?page=booking_details'</script>";
 	}
 
     /** 

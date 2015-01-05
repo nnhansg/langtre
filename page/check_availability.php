@@ -33,8 +33,8 @@ $hotel_sel_loc_id       = isset($_POST['hotel_sel_loc_id']) ? prepare_input($_PO
 
 $nights = nights_diff($checkin_year.'-'.$checkin_month.'-'.$checkin_day, $checkout_year.'-'.$checkout_month.'-'.$checkout_day);
 
-
-draw_title_bar(_AVAILABLE_ROOMS);
+draw_reservation_bar('selected_rooms');
+//draw_title_bar(_AVAILABLE_ROOMS);
 
 // Check if there is a page 
 if($checkin_year_month == '0' || $checkin_day == '0' || $checkout_year_month == '0' || $checkout_day == '0'){

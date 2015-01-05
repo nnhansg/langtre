@@ -36,6 +36,9 @@ header('content-type: text/html; charset=utf-8');
 
 	<!-- Opacity Module -->
 	<link href="<?php echo APPHP_BASE; ?>modules/opacity/opacity.css" type="text/css" rel="stylesheet" />
+
+    <link href="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/boostrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/boostrap/js/bootstrap.min.js"></script>
         
 	<script type="text/javascript" src="<?php echo APPHP_BASE; ?>modules/opacity/opacity.js"></script>
 
@@ -46,9 +49,9 @@ header('content-type: text/html; charset=utf-8');
         <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700&subset=latin,vietnamese,latin-ext' rel='stylesheet' type='text/css' />
         <link href="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/css/orbit-1.2.3.css" rel="stylesheet" type="text/css">
         
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/jquery.min.js"></script>
+        <script src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/jquery-1.10.1.min.js"></script>
+        <script src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/jquery-migrate-1.2.1.min.js"></script>
         <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/top-nav.js"></script>
         <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/jquery.orbit-1.2.3.min.js"></script>
         
