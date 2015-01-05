@@ -1596,11 +1596,12 @@ class Rooms extends MicroGrid {
 						$output .= draw_hidden_field('checkout_year_month', $params['to_year'].'-'.(int)$params['to_month'], false).$nl;
 						$output .= draw_hidden_field('checkout_monthday', $params['to_day'], false).$nl;
 						$output .= draw_token_field(false).$nl;
-						
-						$output .= '<div class="room-item-bldr">'.$nl;
-							$output .= '<div class="right">';
-								$output .= '<table border="0" width="100%">';					
-								$room_price = $this->GetRoomPrice($room[0]['id'], $params);							
+
+
+						$output .= '<div class="row room-item-bldr">'.$nl;
+							$output .= '<div class="left">';
+								$output .= '<table border="0" width="100%">';
+								$room_price = $this->GetRoomPrice($room[0]['id'], $params);
 								if(empty($key['available_rooms'])) $rooms_descr = '<span class="gray">('._FULLY_BOOKED.')</span>';
 								else if($room[0]['room_count'] > '1' && $key['available_rooms'] == '1') $rooms_descr = '<span class="red">('._ROOMS_LAST.')</span>';
 								else if($room[0]['room_count'] > '1' && $key['available_rooms'] <= '5') $rooms_descr = '<span class="red">('.$key['available_rooms'].' '._ROOMS_LEFT.')</span>';
@@ -1650,7 +1651,7 @@ class Rooms extends MicroGrid {
 								//$output .= '<tr><td colspan="2"><a class="price_link" href="javascript:void(0);" onclick="javascript:appToggleElement(\'row_prices_'.$room[0]['id'].'\')" title="'._CLICK_TO_SEE_PRICES.'">'._PRICES.' (+)</a></td></tr>';
 								$output .= '</table>';
 							$output .= '</div>';
-							$output .= '<div class="left">';
+							$output .= '<div class="col-md-4">';
 								if($room[0]['first_room_image'] != '') $output .= '<a href="images/rooms_icons/'.$room[0]['first_room_image'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1">';
 								//$output .= '<img class="room_icon" src="images/rooms_icons/'.$room[0]['room_icon_thumb'].'" alt="" />';
 								$output .= '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />';

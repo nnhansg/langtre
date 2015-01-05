@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="abccfe37-ed44-4f78-9dd9-ed9ab75a46b6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/langtre.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="D:\TAMNGUYEN\chonoi\Project\langtre\langtre\LICENSE" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/classes/Reservation.class.php" afterPath="$PROJECT_DIR$/include/classes/Reservation.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/booking.php" afterPath="$PROJECT_DIR$/page/booking.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/classes/Rooms.class.php" afterPath="$PROJECT_DIR$/include/classes/Rooms.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/booking_details.php" afterPath="$PROJECT_DIR$/page/booking_details.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/check_availability.php" afterPath="$PROJECT_DIR$/page/check_availability.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/modern/default.php" afterPath="$PROJECT_DIR$/templates/modern/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/modern/header.php" afterPath="$PROJECT_DIR$/templates/modern/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/feeds/rss.xml" afterPath="$PROJECT_DIR$/feeds/rss.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web.config" afterPath="$PROJECT_DIR$/web.config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="langtre.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="booking_details.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="booking_details.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/page/booking_details.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4345" max-vertical-offset="5525">
-              <caret line="123" column="17" selection-start-line="123" selection-start-column="17" selection-end-line="123" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.4738878" vertical-offset="2203" max-vertical-offset="5593">
+              <caret line="149" column="17" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -70,12 +61,170 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="check_availability.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="check_availability.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/check_availability.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6238532" vertical-offset="204" max-vertical-offset="1972">
-              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state vertical-scroll-proportion="-10.5" vertical-offset="1376" max-vertical-offset="1972">
+              <caret line="102" column="36" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rooms.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/classes/Rooms.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.9615383" vertical-offset="26670" max-vertical-offset="54910">
+              <caret line="1608" column="0" selection-start-line="1608" selection-start-column="0" selection-end-line="1608" selection-end-column="0" />
+              <folding>
+                <marker date="1420469764591" expanded="true" signature="29132:29199" placeholder="SELECT * FRO..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="31380:32310" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="31422:31954" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="31449:31573" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="31598:31779" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="31646:31769" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="31829:31949" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="32006:32299" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="32139:32294" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="32876:32989" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="33025:33182" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="33081:33092" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="33233:33401" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="33289:33300" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="34679:34722" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="34752:34793" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="35270:35311" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="35429:35578" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+                <marker date="1420469764591" expanded="false" signature="37689:37700" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="38011:38088" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="38199:38276" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="38393:38470" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="38848:38915" placeholder="SELECT * FRO..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="41564:42186" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="41605:42175" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="41632:41750" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="41775:42002" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="41823:41992" placeholder="{...}" />
+                <marker date="1420469764591" expanded="true" signature="42052:42166" placeholder="{...}" />
+                <marker date="1420469764591" expanded="false" signature="43132:43167" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="43281:43292" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="43461:43496" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="43897:43922" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="43967:43992" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="44071:44189" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+                <marker date="1420469764591" expanded="false" signature="45350:45372" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="45717:45739" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="47080:47127" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="47454:47501" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="47828:47875" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="48202:48249" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="48576:48623" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="48694:48719" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="48968:49015" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="49086:49111" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="49360:49407" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="49902:49938" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="50227:50238" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="50611:50635" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="50761:50809" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="50880:50904" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="51026:51074" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="51745:51806" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="51978:52039" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="52211:52272" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="52444:52505" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="52677:52738" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="52808:52833" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="52944:53005" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="53075:53100" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="53211:53272" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="53580:53591" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="53880:54277" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="54845:54886" placeholder="SELECT * FRO..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="55805:56095" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+                <marker date="1420469764591" expanded="true" signature="58845:58886" placeholder="SELECT * FRO..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="59078:59368" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+                <marker date="1420469764591" expanded="true" signature="62455:62509" placeholder="DELETE FROM ..." />
+                <marker date="1420469764591" expanded="true" signature="62870:62916" placeholder="DELETE FROM ..." />
+                <marker date="1420469764591" expanded="true" signature="64612:64880" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+                <marker date="1420469764591" expanded="true" signature="65104:65405" placeholder="INSERT INTO ..." />
+                <marker date="1420469764591" expanded="true" signature="69356:69700" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+                <marker date="1420469764591" expanded="true" signature="69924:70349" placeholder="INSERT INTO ..." />
+                <marker date="1420469764591" expanded="true" signature="76556:76609" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+                <marker date="1420469764591" expanded="true" signature="77193:77555" placeholder="INSERT INTO ..." />
+                <marker date="1420469764591" expanded="true" signature="77720:77781" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+                <marker date="1420469764591" expanded="true" signature="77966:78027" placeholder="INSERT INTO ..." />
+                <marker date="1420469764591" expanded="true" signature="78638:78978" placeholder="INSERT INTO ..." />
+                <marker date="1420469764591" expanded="true" signature="79950:80001" placeholder="DELETE FROM ..." />
+                <marker date="1420469764591" expanded="true" signature="80054:80113" placeholder="DELETE FROM ..." />
+                <marker date="1420469764591" expanded="true" signature="80166:80222" placeholder="DELETE FROM ..." />
+                <marker date="1420469764591" expanded="true" signature="81448:81915" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="85502:86477" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="false" signature="87118:87132" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="90580:90626" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="91720:91734" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="91801:91815" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="92218:92483" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="92295:92483" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="94469:94487" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="95663:95677" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="96947:96991" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="102985:103984" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="false" signature="106975:106991" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="107625:107641" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="108869:108887" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="112838:113569" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="115585:116275" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="116579:116898" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="117225:117544" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="118797:118896" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+                <marker date="1420469764591" expanded="true" signature="119307:119406" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+                <marker date="1420469764591" expanded="true" signature="120665:120853" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+                <marker date="1420469764591" expanded="true" signature="121974:122152" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+                <marker date="1420469764591" expanded="true" signature="124910:125451" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="126149:126690" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="false" signature="128674:128685" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="129280:129291" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="129860:130100" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="129950:130091" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="130063:130091" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="130344:130405" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="130957:131022" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="132018:132079" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="132596:132661" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="133926:133961" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="134555:135068" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="134564:134678" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="134687:134826" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="134863:134873" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="135738:135748" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="135954:135964" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="137744:137755" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="138350:138361" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="139375:139436" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="139988:140053" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="141049:141110" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="141627:141692" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="143453:143966" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="143462:143576" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="143585:143724" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="143761:143771" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="145005:145015" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="147092:147103" placeholder="..." />
+                <marker date="1420469764591" expanded="false" signature="147698:147709" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="148723:148784" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="149336:149401" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="150397:150458" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="150975:151040" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="151885:152004" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="152865:153300" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="160809:161006" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="161120:161366" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="161166:161366" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="164465:164769" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+                <marker date="1420469764591" expanded="true" signature="165730:166144" placeholder="..." />
+                <marker date="1420469764591" expanded="true" signature="167561:167988" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -175,8 +324,8 @@
       <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/modern/default.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="26.807692" vertical-offset="1479" max-vertical-offset="2193">
-              <caret line="51" column="102" selection-start-line="51" selection-start-column="102" selection-end-line="51" selection-end-column="102" />
+            <state vertical-scroll-proportion="-14.384615" vertical-offset="510" max-vertical-offset="2193">
+              <caret line="57" column="38" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -220,10 +369,12 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/page/booking.php" />
-        <option value="$PROJECT_DIR$/templates/modern/default.php" />
         <option value="$PROJECT_DIR$/include/classes/Reservation.class.php" />
         <option value="$PROJECT_DIR$/templates/modern/header.php" />
         <option value="$PROJECT_DIR$/page/check_availability.php" />
+        <option value="$PROJECT_DIR$/include/classes/Rooms.class.php" />
+        <option value="$PROJECT_DIR$/templates/modern/default.php" />
+        <option value="$PROJECT_DIR$/page/booking_details.php" />
       </list>
     </option>
   </component>
@@ -545,14 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/page/booking_details.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4345" max-vertical-offset="5525">
-          <caret line="123" column="17" selection-start-line="123" selection-start-column="17" selection-end-line="123" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.461538" vertical-offset="779" max-vertical-offset="1360">
@@ -641,14 +784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/modern/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="26.807692" vertical-offset="1479" max-vertical-offset="2193">
-          <caret line="51" column="102" selection-start-line="51" selection-start-column="102" selection-end-line="51" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/modern/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.796296" vertical-offset="500" max-vertical-offset="1258">
@@ -679,8 +814,180 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/page/check_availability.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6238532" vertical-offset="204" max-vertical-offset="1972">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        <state vertical-scroll-proportion="-10.5" vertical-offset="1376" max-vertical-offset="1972">
+          <caret line="102" column="36" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/classes/Rooms.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.9615383" vertical-offset="26670" max-vertical-offset="54910">
+          <caret line="1608" column="0" selection-start-line="1608" selection-start-column="0" selection-end-line="1608" selection-end-column="0" />
+          <folding>
+            <marker date="1420469764591" expanded="true" signature="29132:29199" placeholder="SELECT * FRO..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="31380:32310" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="31422:31954" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="31449:31573" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="31598:31779" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="31646:31769" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="31829:31949" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="32006:32299" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="32139:32294" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="32876:32989" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="33025:33182" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="33081:33092" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="33233:33401" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="33289:33300" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="34679:34722" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="34752:34793" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="35270:35311" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="35429:35578" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+            <marker date="1420469764591" expanded="false" signature="37689:37700" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="38011:38088" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="38199:38276" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="38393:38470" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="38848:38915" placeholder="SELECT * FRO..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="41564:42186" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="41605:42175" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="41632:41750" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="41775:42002" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="41823:41992" placeholder="{...}" />
+            <marker date="1420469764591" expanded="true" signature="42052:42166" placeholder="{...}" />
+            <marker date="1420469764591" expanded="false" signature="43132:43167" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="43281:43292" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="43461:43496" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="43897:43922" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="43967:43992" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="44071:44189" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+            <marker date="1420469764591" expanded="false" signature="45350:45372" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="45717:45739" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="47080:47127" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="47454:47501" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="47828:47875" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="48202:48249" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="48576:48623" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="48694:48719" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="48968:49015" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="49086:49111" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="49360:49407" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="49902:49938" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="50227:50238" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="50611:50635" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="50761:50809" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="50880:50904" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="51026:51074" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="51745:51806" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="51978:52039" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="52211:52272" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="52444:52505" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="52677:52738" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="52808:52833" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="52944:53005" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="53075:53100" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="53211:53272" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="53580:53591" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="53880:54277" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="54845:54886" placeholder="SELECT * FRO..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="55805:56095" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+            <marker date="1420469764591" expanded="true" signature="58845:58886" placeholder="SELECT * FRO..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="59078:59368" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+            <marker date="1420469764591" expanded="true" signature="62455:62509" placeholder="DELETE FROM ..." />
+            <marker date="1420469764591" expanded="true" signature="62870:62916" placeholder="DELETE FROM ..." />
+            <marker date="1420469764591" expanded="true" signature="64612:64880" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+            <marker date="1420469764591" expanded="true" signature="65104:65405" placeholder="INSERT INTO ..." />
+            <marker date="1420469764591" expanded="true" signature="69356:69700" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+            <marker date="1420469764591" expanded="true" signature="69924:70349" placeholder="INSERT INTO ..." />
+            <marker date="1420469764591" expanded="true" signature="76556:76609" placeholder="SELECT * FRO..TABLE_ROOMS_PRICES..." />
+            <marker date="1420469764591" expanded="true" signature="77193:77555" placeholder="INSERT INTO ..." />
+            <marker date="1420469764591" expanded="true" signature="77720:77781" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+            <marker date="1420469764591" expanded="true" signature="77966:78027" placeholder="INSERT INTO ..." />
+            <marker date="1420469764591" expanded="true" signature="78638:78978" placeholder="INSERT INTO ..." />
+            <marker date="1420469764591" expanded="true" signature="79950:80001" placeholder="DELETE FROM ..." />
+            <marker date="1420469764591" expanded="true" signature="80054:80113" placeholder="DELETE FROM ..." />
+            <marker date="1420469764591" expanded="true" signature="80166:80222" placeholder="DELETE FROM ..." />
+            <marker date="1420469764591" expanded="true" signature="81448:81915" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="85502:86477" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="false" signature="87118:87132" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="90580:90626" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="91720:91734" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="91801:91815" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="92218:92483" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="92295:92483" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="94469:94487" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="95663:95677" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="96947:96991" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="102985:103984" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="false" signature="106975:106991" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="107625:107641" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="108869:108887" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="112838:113569" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="115585:116275" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="116579:116898" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="117225:117544" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="118797:118896" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+            <marker date="1420469764591" expanded="true" signature="119307:119406" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+            <marker date="1420469764591" expanded="true" signature="120665:120853" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+            <marker date="1420469764591" expanded="true" signature="121974:122152" placeholder="SELECT * FRO..TABLE_ROOMS_AVAILABILITIES..." />
+            <marker date="1420469764591" expanded="true" signature="124910:125451" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="126149:126690" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="false" signature="128674:128685" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="129280:129291" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="129860:130100" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="129950:130091" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="130063:130091" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="130344:130405" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="130957:131022" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="132018:132079" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="132596:132661" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="133926:133961" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="134555:135068" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="134564:134678" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="134687:134826" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="134863:134873" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="135738:135748" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="135954:135964" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="137744:137755" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="138350:138361" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="139375:139436" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="139988:140053" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="141049:141110" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="141627:141692" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="143453:143966" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="143462:143576" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="143585:143724" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="143761:143771" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="145005:145015" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="147092:147103" placeholder="..." />
+            <marker date="1420469764591" expanded="false" signature="147698:147709" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="148723:148784" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="149336:149401" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="150397:150458" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="150975:151040" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="151885:152004" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="152865:153300" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="160809:161006" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="161120:161366" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="161166:161366" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="164465:164769" placeholder="SELECT r.id,..TABLE_ROOMS..." />
+            <marker date="1420469764591" expanded="true" signature="165730:166144" placeholder="..." />
+            <marker date="1420469764591" expanded="true" signature="167561:167988" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/modern/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.384615" vertical-offset="510" max-vertical-offset="2193">
+          <caret line="57" column="38" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/booking_details.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4738878" vertical-offset="2203" max-vertical-offset="5593">
+          <caret line="149" column="17" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
           <folding />
         </state>
       </provider>

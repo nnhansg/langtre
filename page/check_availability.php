@@ -100,7 +100,7 @@ if($checkin_year_month == '0' || $checkin_day == '0' || $checkout_year_month == 
 		$rooms_count = $objRooms->SearchFor($params);
 		
 		if($rooms_count > 0){
-			$objRooms->DrawSearchResult($params, $rooms_count);			
+			$objRooms->DrawSearchResult($params, $rooms_count);
 		}else{
 			draw_important_message(_NO_ROOMS_FOUND);
 			draw_message(_SEARCH_ROOM_TIPS);
