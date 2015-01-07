@@ -1597,81 +1597,149 @@ class Rooms extends MicroGrid {
 						$output .= draw_hidden_field('checkout_monthday', $params['to_day'], false).$nl;
 						$output .= draw_token_field(false).$nl;
 
+                        /**Begin panel**/
+                        $output .= '<div class="panel panel-default">';
+                        $output .= '<header class="panel-heading panel-bgl">';
+                        $output .= '<h2 class="panel-title">'.prepare_link('rooms', 'room_id', $room[0]['id'], $room[0]['loc_room_type'], $room[0]['loc_room_type'], '', _CLICK_TO_VIEW).' '.$rooms_descr.'</h2>';
+                        $output .= '</header>';
+                        $output .= '<div class="panel-body panel-body-bg">';
+                        $output .= '<div class="col-md-4">' . '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />' . '</div>';
+                        $output .= '<div class="col-md-6">';
+                        $output .= '<table border="0" width="100%">';
+                        $room_price = $this->GetRoomPrice($room[0]['id'], $params);
+//                        if(empty($key['available_rooms'])) $rooms_descr = '<span class="gray">('._FULLY_BOOKED.')</span>';
+//                        else if($room[0]['room_count'] > '1' && $key['available_rooms'] == '1') $rooms_descr = '<span class="red">('._ROOMS_LAST.')</span>';
+//                        else if($room[0]['room_count'] > '1' && $key['available_rooms'] <= '5') $rooms_descr = '<span class="red">('.$key['available_rooms'].' '._ROOMS_LEFT.')</span>';
+//                        else $rooms_descr = '<span class="green">('._AVAILABLE.')</span>';
+
+//                        $output .= '<tr><td colspan="2"><h3 class="headline">'.prepare_link('rooms', 'room_id', $room[0]['id'], $room[0]['loc_room_type'], $room[0]['loc_room_type'], '', _CLICK_TO_VIEW).' '.$rooms_descr.'</h3></td></tr>';
+//                        $output .= '<tr><td colspan="2" height="70px">'.$room[0]['loc_room_short_description'].'</td></tr>';
+                        $output .= '<tr><td colspan="2" nowrap="nowrap" height="5px"></td></tr>';
+                        $output .= '<tr><td colspan="2">'._MAX_ADULTS.': '.$room[0]['max_adults'].(($allow_children == 'yes') ? ', '._MAX_CHILDREN.': '.$room[0]['max_children'] : '').'</td></tr>';
+                        if($key['available_rooms']){
+                            $output .= '<tr><td>' . _RATE /*_ROOMS*/ . ':</td>';
+                            $output .= '<td><select name="available_rooms" class="available_rooms_ddl" '.($allow_booking ? '' : 'disabled="disabled"').'>';
+                            $options = '';
+                            for($i = 1; $i <= $key['available_rooms']; $i++){
+                                $room_price_i = $room_price * $i;
+                                $room_price_i_formatted = Currencies::PriceFormat(($room_price * $i) / $currency_rate, '', '', $currency_format);
+                                $options .= '<option value="'.$i.'-'.$room_price_i.'" ';
+                                $options .= ($i == '0') ? 'selected="selected" ' : '';
+                                $options .= '>'.$i.(($i != 0) ? ' ('.$room_price_i_formatted.')' : '').'</option>';
+                            }
+                            $output .= $options.'</select>';
+                            if($params['nights'] > 1){
+                                $output .= '<span class="rooms_description"> <span class="red">*</span> '._RATE_PER_NIGHT;
+                                $output .= ': '.Currencies::PriceFormat(($room_price / $currency_rate) / $params['nights'], '', '', $currency_format).'</span>';
+                            }
+                            $output .= '</td>';
+                            $output .= '</tr>';
+                            if($meal_plans[1] > 0){
+                                $output .= '<tr>';
+                                $output .= '<td>'._MEAL_PLANS.':</td>';
+                                $output .= '<td>';
+                                $output .= MealPlans::DrawMealPlansDDL($meal_plans, $currency_rate, $currency_format, $allow_booking, false);
+                                $output .= '<span class="meal_plans_description"> <span class="red">*</span> '._PERSON_PER_NIGHT.'</span>';
+                                $output .= '</td>';
+                                $output .= '</tr>';
+                            }
+                            if($allow_guests == 'yes' && $room[0]['max_guests'] > 0){
+                                $output .= '<tr>';
+                                $output .= '<td>'._GUESTS.':</td>';
+                                $output .= '<td>';
+                                $output .= $this->DrawGuestsDDL($room[0]['id'], $room[0]['max_guests'], $params, $currency_rate, $currency_format, $allow_booking, false);
+                                $output .= '<span class="guests_description"> <span class="red">*</span> '._PER_NIGHT.'</span>';
+                                $output .= '</td>';
+                                $output .= '</tr>';
+                            }
+                        }
+                        //$output .= '<tr><td colspan="2"><a class="price_link" href="javascript:void(0);" onclick="javascript:appToggleElement(\'row_prices_'.$room[0]['id'].'\')" title="'._CLICK_TO_SEE_PRICES.'">'._PRICES.' (+)</a></td></tr>';
+                        $output .= '</table>';
+                        $output .=  '</div>';
+                        $output .= '<div class="col-md-2 text-left">';
+                        if($allow_booking && $key['available_rooms']) $output .= '<div class="book-button"><input type="submit" class="form_button_middle btn" value="'._BOOK_NOW.' >" /></div>';
+                        $output .= '</div>';
+                        $output .= '</div>';
+                        $output .= '</div>';
+                        /**End panel**/
+
 
 						$output .= '<div class="row room-item-bldr">'.$nl;
                         $output .= '<div class="col-md-11">';
-                        $output .= '<table><tr>';
-                        $output .= '<td class=col-md-4>' . '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />' . '</td>';
-                        $output .= '<td class=col-md-4>B' . '</td>';
-                        $output .= '<td class=col-md-4>C' . '</td>';
-                        $output .= '</tr></table>';
+//                        $output .= '<table><tr>';
+//                        $output .= '<td class=col-md-4>' . '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />' . '</td>';
+//                        $output .= '<td class=col-md-4>B' . '</td>';
+//                        $output .= '<td class=col-md-4>C' . '</td>';
+//                        $output .= '</tr></table>';
                         $output .= '</div>';
-							$output .= '<div class="left">';
-								$output .= '<table border="0" width="100%">';
-								$room_price = $this->GetRoomPrice($room[0]['id'], $params);
-								if(empty($key['available_rooms'])) $rooms_descr = '<span class="gray">('._FULLY_BOOKED.')</span>';
-								else if($room[0]['room_count'] > '1' && $key['available_rooms'] == '1') $rooms_descr = '<span class="red">('._ROOMS_LAST.')</span>';
-								else if($room[0]['room_count'] > '1' && $key['available_rooms'] <= '5') $rooms_descr = '<span class="red">('.$key['available_rooms'].' '._ROOMS_LEFT.')</span>';
-								else $rooms_descr = '<span class="green">('._AVAILABLE.')</span>';
+//							$output .= '<div class="left">';
+//								$output .= '<table border="0" width="100%">';
+//								$room_price = $this->GetRoomPrice($room[0]['id'], $params);
+//								if(empty($key['available_rooms'])) $rooms_descr = '<span class="gray">('._FULLY_BOOKED.')</span>';
+//								else if($room[0]['room_count'] > '1' && $key['available_rooms'] == '1') $rooms_descr = '<span class="red">('._ROOMS_LAST.')</span>';
+//								else if($room[0]['room_count'] > '1' && $key['available_rooms'] <= '5') $rooms_descr = '<span class="red">('.$key['available_rooms'].' '._ROOMS_LEFT.')</span>';
+//								else $rooms_descr = '<span class="green">('._AVAILABLE.')</span>';
+//
+//								$output .= '<tr><td colspan="2"><h3 class="headline">'.prepare_link('rooms', 'room_id', $room[0]['id'], $room[0]['loc_room_type'], $room[0]['loc_room_type'], '', _CLICK_TO_VIEW).' '.$rooms_descr.'</h3></td></tr>';
+//								$output .= '<tr><td colspan="2" height="70px">'.$room[0]['loc_room_short_description'].'</td></tr>';
+//								$output .= '<tr><td colspan="2" nowrap="nowrap" height="5px"></td></tr>';
+//								$output .= '<tr><td colspan="2">'._MAX_ADULTS.': '.$room[0]['max_adults'].(($allow_children == 'yes') ? ', '._MAX_CHILDREN.': '.$room[0]['max_children'] : '').'</td></tr>';
+//								if($key['available_rooms']){
+//									$output .= '<tr><td>' . _RATE /*_ROOMS*/ . ':</td>';
+//									$output .= '<td><select name="available_rooms" class="available_rooms_ddl" '.($allow_booking ? '' : 'disabled="disabled"').'>';
+//										$options = '';
+//										for($i = 1; $i <= $key['available_rooms']; $i++){
+//											$room_price_i = $room_price * $i;
+//											$room_price_i_formatted = Currencies::PriceFormat(($room_price * $i) / $currency_rate, '', '', $currency_format);
+//											$options .= '<option value="'.$i.'-'.$room_price_i.'" ';
+//											$options .= ($i == '0') ? 'selected="selected" ' : '';
+//											$options .= '>'.$i.(($i != 0) ? ' ('.$room_price_i_formatted.')' : '').'</option>';
+//										}
+//										$output .= $options.'</select>';
+//										if($params['nights'] > 1){
+//											$output .= '<span class="rooms_description"> <span class="red">*</span> '._RATE_PER_NIGHT;
+//											$output .= ': '.Currencies::PriceFormat(($room_price / $currency_rate) / $params['nights'], '', '', $currency_format).'</span>';
+//										}
+//									$output .= '</td>';
+//									$output .= '</tr>';
+//									if($meal_plans[1] > 0){
+//										$output .= '<tr>';
+//											$output .= '<td>'._MEAL_PLANS.':</td>';
+//											$output .= '<td>';
+//											$output .= MealPlans::DrawMealPlansDDL($meal_plans, $currency_rate, $currency_format, $allow_booking, false);
+//											$output .= '<span class="meal_plans_description"> <span class="red">*</span> '._PERSON_PER_NIGHT.'</span>';
+//											$output .= '</td>';
+//										$output .= '</tr>';
+//									}
+//									if($allow_guests == 'yes' && $room[0]['max_guests'] > 0){
+//										$output .= '<tr>';
+//											$output .= '<td>'._GUESTS.':</td>';
+//											$output .= '<td>';
+//											$output .= $this->DrawGuestsDDL($room[0]['id'], $room[0]['max_guests'], $params, $currency_rate, $currency_format, $allow_booking, false);
+//											$output .= '<span class="guests_description"> <span class="red">*</span> '._PER_NIGHT.'</span>';
+//											$output .= '</td>';
+//										$output .= '</tr>';
+//									}
+//								}
+//								//$output .= '<tr><td colspan="2"><a class="price_link" href="javascript:void(0);" onclick="javascript:appToggleElement(\'row_prices_'.$room[0]['id'].'\')" title="'._CLICK_TO_SEE_PRICES.'">'._PRICES.' (+)</a></td></tr>';
+//								$output .= '</table>';
+//							$output .= '</div>';
 
-								$output .= '<tr><td colspan="2"><h3 class="headline">'.prepare_link('rooms', 'room_id', $room[0]['id'], $room[0]['loc_room_type'], $room[0]['loc_room_type'], '', _CLICK_TO_VIEW).' '.$rooms_descr.'</h3></td></tr>';
-								$output .= '<tr><td colspan="2" height="70px">'.$room[0]['loc_room_short_description'].'</td></tr>';
-								$output .= '<tr><td colspan="2" nowrap="nowrap" height="5px"></td></tr>';
-								$output .= '<tr><td colspan="2">'._MAX_ADULTS.': '.$room[0]['max_adults'].(($allow_children == 'yes') ? ', '._MAX_CHILDREN.': '.$room[0]['max_children'] : '').'</td></tr>';
-								if($key['available_rooms']){ 
-									$output .= '<tr><td>' . _RATE /*_ROOMS*/ . ':</td>';
-									$output .= '<td><select name="available_rooms" class="available_rooms_ddl" '.($allow_booking ? '' : 'disabled="disabled"').'>';
-										$options = '';
-										for($i = 1; $i <= $key['available_rooms']; $i++){
-											$room_price_i = $room_price * $i;
-											$room_price_i_formatted = Currencies::PriceFormat(($room_price * $i) / $currency_rate, '', '', $currency_format);
-											$options .= '<option value="'.$i.'-'.$room_price_i.'" '; 
-											$options .= ($i == '0') ? 'selected="selected" ' : '';
-											$options .= '>'.$i.(($i != 0) ? ' ('.$room_price_i_formatted.')' : '').'</option>';
-										}
-										$output .= $options.'</select>';									
-										if($params['nights'] > 1){
-											$output .= '<span class="rooms_description"> <span class="red">*</span> '._RATE_PER_NIGHT;
-											$output .= ': '.Currencies::PriceFormat(($room_price / $currency_rate) / $params['nights'], '', '', $currency_format).'</span>';
-										}									
-									$output .= '</td>';
-									$output .= '</tr>';
-									if($meal_plans[1] > 0){
-										$output .= '<tr>';
-											$output .= '<td>'._MEAL_PLANS.':</td>';
-											$output .= '<td>';
-											$output .= MealPlans::DrawMealPlansDDL($meal_plans, $currency_rate, $currency_format, $allow_booking, false);
-											$output .= '<span class="meal_plans_description"> <span class="red">*</span> '._PERSON_PER_NIGHT.'</span>';
-											$output .= '</td>';
-										$output .= '</tr>';									
-									}
-									if($allow_guests == 'yes' && $room[0]['max_guests'] > 0){
-										$output .= '<tr>';
-											$output .= '<td>'._GUESTS.':</td>';
-											$output .= '<td>';
-											$output .= $this->DrawGuestsDDL($room[0]['id'], $room[0]['max_guests'], $params, $currency_rate, $currency_format, $allow_booking, false);
-											$output .= '<span class="guests_description"> <span class="red">*</span> '._PER_NIGHT.'</span>';
-											$output .= '</td>';
-										$output .= '</tr>';
-									}
-								}
-								//$output .= '<tr><td colspan="2"><a class="price_link" href="javascript:void(0);" onclick="javascript:appToggleElement(\'row_prices_'.$room[0]['id'].'\')" title="'._CLICK_TO_SEE_PRICES.'">'._PRICES.' (+)</a></td></tr>';
-								$output .= '</table>';
-							$output .= '</div>';
-							$output .= '<div class="col-md-4">';
-								if($room[0]['first_room_image'] != '') $output .= '<a href="images/rooms_icons/'.$room[0]['first_room_image'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1">';
-								//$output .= '<img class="room_icon" src="images/rooms_icons/'.$room[0]['room_icon_thumb'].'" alt="" />';
-								$output .= '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />';
-								if($room[0]['first_room_image'] != '') $output .= '</a>';							
-								if($room[0]['room_picture_1'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_1'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1"></a>';					
-								if($room[0]['room_picture_2'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_2'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 2"></a>';					
-								if($room[0]['room_picture_3'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_3'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 3"></a>';
-								if($room[0]['room_picture_4'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_4'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 4"></a>';
-								if($room[0]['room_picture_5'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_5'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 5"></a>';								
-							$output .= '</div><div class="clear"><!-- --></div>';
-						$output .= '<div style="margin:10px 0 0 0;"><span id="row_prices_'.$room[0]['id'].'">'.self::GetRoomPricesTableVertical($room[0]['id']).'</span></div>';
-						if($allow_booking && $key['available_rooms']) $output .= '<div class="book-button"><input type="submit" class="form_button_middle" value="'._BOOK_NOW.' >" /></div><div class="clear"><!-- --></div>';
-						if($rooms_count <= ($rooms_total - 1)) $output .= '<div class="line-hor-2"><!-- --></div>';
+//							$output .= '<div class="col-md-4">';
+//								if($room[0]['first_room_image'] != '') $output .= '<a href="images/rooms_icons/'.$room[0]['first_room_image'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1">';
+//								//$output .= '<img class="room_icon" src="images/rooms_icons/'.$room[0]['room_icon_thumb'].'" alt="" />';
+//								$output .= '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />';
+//								if($room[0]['first_room_image'] != '') $output .= '</a>';
+//								if($room[0]['room_picture_1'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_1'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1"></a>';
+//								if($room[0]['room_picture_2'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_2'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 2"></a>';
+//								if($room[0]['room_picture_3'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_3'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 3"></a>';
+//								if($room[0]['room_picture_4'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_4'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 4"></a>';
+//								if($room[0]['room_picture_5'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_5'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 5"></a>';
+//							$output .= '</div><div class="clear"><!-- --></div>';
+
+//						$output .= '<div style="margin:10px 0 0 0;"><span id="row_prices_'.$room[0]['id'].'">'.self::GetRoomPricesTableVertical($room[0]['id']).'</span></div>';
+//						if($allow_booking && $key['available_rooms']) $output .= '<div class="book-button"><input type="submit" class="form_button_middle" value="'._BOOK_NOW.' >" /></div><div class="clear"><!-- --></div>';
+//						if($rooms_count <= ($rooms_total - 1)) $output .= '<div class="line-hor-2"><!-- --></div>';
 						//else $output .= '<tr><td colspan="2"><br /><td></tr>';
 						$output .= '</div>'.$nl;
 						$output .= '</form>'.$nl;
@@ -3185,11 +3253,12 @@ class Rooms extends MicroGrid {
 				'.draw_hidden_field('checkout_year_month', $params['to_year'].'-'.(int)$params['to_month'], false, 'checkout_year_month');
 			}
 			
-			$output .= '<div class="paging">';
+//			$output .= '<div class="paging">';
+            $output .= '<nav><ul class="pagination">';
 			for($page_ind = 1; $page_ind <= $total_pages; $page_ind++){
-				$output .= '<a class="paging_link" href="javascript:void(\'page|'.$page_ind.'\');" onclick="javascript:appFormSubmit(\'reservation-form\',\'page_number='.$page_ind.'\')">'.(($page_ind == $current_page) ? '<b>['.$page_ind.']</b>' : $page_ind).'</a> ';
+				$output .= '<li><a class="paging_link" href="javascript:void(\'page|'.$page_ind.'\');" onclick="javascript:appFormSubmit(\'reservation-form\',\'page_number='.$page_ind.'\')">'.(($page_ind == $current_page) ? '<b>['.$page_ind.']</b>' : $page_ind).'</a></li> ';
 			}
-			$output .= '</div>'; 
+			$output .= '</ul></nav>';
 			if($objLogin->IsLoggedInAsAdmin()) $output .= '<form>';
 		}
 
