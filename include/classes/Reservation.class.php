@@ -800,9 +800,17 @@ class Reservation {
 
 			// PAYMENT DETAILS
 			// ------------------------------------------------------------
-			echo '<tr><td colspan="11"><hr size="1" noshade="noshade" /></td></tr>';
-			echo '<tr><td colspan="11"><h4>'._PAYMENT_DETAILS.'</h4></td></tr>';
-			echo '<tr><td colspan="11">';
+            echo '<div class="clear"></div>';
+            echo '<br>';
+            echo '<div class="panel panel-default">';
+            echo '<header class="panel-heading panel-bgl">';
+            echo '<h2 class="panel-title">'._PAYMENT_DETAILS.'</h2>';
+            echo '</header>';
+            echo '<div class="panel-body panel-body-bg">';
+
+
+
+
 			echo '<table border="0" width="100%">';
 				if($payment_type_cnt > 1){
 					echo '<tr><td width="130px" nowrap>'._PAYMENT_TYPE.': &nbsp;</td><td> 
@@ -863,7 +871,9 @@ class Reservation {
 					}
 					echo '</td>';
 				echo '</tr>';			
-			echo '</table></td></tr>';
+			echo '</table>';
+            echo '</div>';
+            echo '</div>';
 			
 			if($payment_types_defined){			
 				// PROMO CODES OR DISCOUNT COUPONS
@@ -894,7 +904,7 @@ class Reservation {
 					  <tr valign="middle">
 						<td colspan="8" align="'.$class_right.'"></td>
 						<td align="'.$class_right.'" colspan="3">
-							'.(($payment_types_defined) ? '<input class="button" type="submit" value="'._SUBMIT_BOOKING.'" />' : '').' 
+							'.(($payment_types_defined) ? '<input class="button btn" type="submit" value="'._SUBMIT_BOOKING.'" />' : '').'
 						</td>
 					</tr>';
 				echo '</table>';
