@@ -96,8 +96,14 @@ if(Modules::IsModuleInstalled('booking')){
 			<?php echo _ALERT_REQUIRED_FILEDS; ?>
 		</p>		
 				
-		<?php echo $msg; ?>        
-		
+		<?php echo $msg; ?>
+
+        <div class="panel panel-default">
+        <header class="panel-heading">
+            <h2 class="panel-title"> <?php echo _PERSONAL_DETAILS; ?></h2>
+        </header>
+        <div class="panel-body">
+
 		<form action="<?php echo APPHP_BASE; ?>index.php?page=booking_details" method="post" name="frmRegistration" id="frmRegistration">
 		<?php draw_token_field(); ?>
 			<?php
@@ -291,6 +297,9 @@ if(Modules::IsModuleInstalled('booking')){
 			
 			</table>
 		</form>
+
+        </div>
+        </div>
 
 		<div id="fade" class="black_overlay" onclick="javascript:appCloseTermsAndConditions();"></div>
 		<div id="light">
