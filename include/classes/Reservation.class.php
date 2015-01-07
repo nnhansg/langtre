@@ -765,22 +765,24 @@ class Reservation {
 			// calculate percent
 			$vat_cost = (($order_price + $this->bookingInitialFee) * ($this->vatPercent / 100));
 			$cart_total = ($order_price + $this->bookingInitialFee) + $vat_cost;
-
+            echo '<div class="col-md-8"></div>';
+            echo '<div class="col-md-4">';
+            echo '<table width="100%">';
 			if($this->discountCampaignID != '' || $this->discountCoupon != ''){
 				echo '<tr>
-						<td class="td '.$class_left.'" colspan="3"><b><span style="color:#a60000">'._DISCOUNT.': ('.Currencies::PriceFormat($this->discountPercent, '%', 'right', $this->currencyFormat).')</span></b></td>
+						<td class="td '.$class_left.'" ><b><span style="color:#a60000">'._DISCOUNT.': ('.Currencies::PriceFormat($this->discountPercent, '%', 'right', $this->currencyFormat).')</span></b></td>
 						<td class="td '.$class_right.'" align="'.$class_right.'"><b><span style="color:#a60000">- '.Currencies::PriceFormat($discount_value, '', '', $this->currencyFormat).'</span></b></td>
 					</tr>';				
 			}
 			if(!empty($this->bookingInitialFee)){
 				echo '<tr>
-						<td class="td '.$class_left.'" colspan="3"><b>'._INITIAL_FEE.': </b></td>
+						<td class="td '.$class_left.'" ><b>'._INITIAL_FEE.': </b></td>
 						<td class="td '.$class_right.'" align="'.$class_right.'"><b>'.Currencies::PriceFormat($this->bookingInitialFee, '', '', $this->currencyFormat).'</b></td>
 					</tr>';								
 			}
 			if($this->vatIncludedInPrice == 'no'){
 				echo '<tr>
-						<td class="td '.$class_left.'" colspan="3"><b>'._VAT.': ('.Currencies::PriceFormat($this->vatPercent, '%', 'right', $this->currencyFormat, $this->GetVatPercentDecimalPoints($this->vatPercent)).')</b></td>
+						<td class="td '.$class_left.'" ><b>'._VAT.': ('.Currencies::PriceFormat($this->vatPercent, '%', 'right', $this->currencyFormat, $this->GetVatPercentDecimalPoints($this->vatPercent)).')</b></td>
 						<td class="td '.$class_right.'" align="'.$class_right.'">
 							<b><label id="reservation_vat">'.Currencies::PriceFormat($vat_cost, '', '', $this->currencyFormat).'</label></b>
 						</td>
@@ -788,11 +790,13 @@ class Reservation {
 			}
 			echo '<tr><td colspan="11" nowrap height="5px"></td></tr>
 				 <tr class="footer">
-					<td class="td '.$class_left.'" colspan="3"><b>'._TOTAL.':</b></td>
+					<td class="td '.$class_left.'" ><b>'._TOTAL.':</b></td>
 					<td class="td '.$class_right.'" align="'.$class_right.'">
 						<b><label id="reservation_total">'.Currencies::PriceFormat($cart_total, '', '', $this->currencyFormat).'</label></b>
 					</td>
 				 </tr>';
+            echo '</table>';
+            echo '</div>';
 
 			// PAYMENT DETAILS
 			// ------------------------------------------------------------
