@@ -887,8 +887,8 @@ class Reservation {
 					echo '<input type="text" class="discount_coupon" name="discount_coupon" id="discount_coupon" value="'.$this->discountCoupon.'" readonly="readonly" maxlength="32" />&nbsp;&nbsp;&nbsp;';
 					echo '<input type="button" class="button" id="discount_button" value="'._REMOVE.'" onclick="appGoToPage(\'index.php?page=booking_checkout\', \'&submition_type=remove_coupon&token='.Application::Get('token').'&discount_coupon=\'+jQuery(\'#discount_coupon\').val(), \'post\')" />';
 				}else{				
-					echo '<input type="text" class="discount_coupon" name="discount_coupon" id="discount_coupon" value="'.$this->discountCoupon.'" maxlength="32" />&nbsp;&nbsp;&nbsp;';
-					echo '<input type="button" class="button" id="discount_button" value="'._APPLY.'" onclick="appGoToPage(\'index.php?page=booking_checkout\', \'&submition_type=apply_coupon&token='.Application::Get('token').'&discount_coupon=\'+jQuery(\'#discount_coupon\').val(), \'post\')" />';
+					echo ' <input type="text" class="discount_coupon form-controll" name="discount_coupon" id="discount_coupon" value="'.$this->discountCoupon.'" maxlength="32" />&nbsp;&nbsp;&nbsp;';
+					echo ' <input type="button" class="button btn" id="discount_button" value="'._APPLY.'" onclick="appGoToPage(\'index.php?page=booking_checkout\', \'&submition_type=apply_coupon&token='.Application::Get('token').'&discount_coupon=\'+jQuery(\'#discount_coupon\').val(), \'post\')" />';
 				}
 				echo '</td>';
 				echo '</tr>';					
@@ -904,10 +904,10 @@ class Reservation {
 					  <tr valign="middle">
 						<td colspan="8" align="'.$class_right.'"></td>
 						<td align="'.$class_right.'" colspan="3">
-							'.(($payment_types_defined) ? '<input class="button btn" type="submit" value="'._SUBMIT_BOOKING.'" />' : '').'
 						</td>
 					</tr>';
 				echo '</table>';
+                echo '<br><br><div class="col-md-12 text-right">'.(($payment_types_defined) ? '<input class="button btn" type="submit" value="'._SUBMIT_BOOKING.'" />' : '').'</div>';
 				echo '<input type="hidden" id="hid_vat_percent" value="'.$this->vatPercent.'" />';
 				echo '<input type="hidden" id="hid_booking_initial_fee" value="'.$this->bookingInitialFee.'" />';
 				echo '<input type="hidden" id="hid_order_price" value="'.$order_price.'" />';
@@ -1118,8 +1118,19 @@ class Reservation {
 				'pre_payment_type'   => $pre_payment_type,
 				'pre_payment_value'  => $pre_payment_value,				
 			);
-	
-			$fisrt_part = '<table border="0" width="97%" align="center">
+            $fisrt_part = '';
+            /**Begin panel**/
+            $fisrt_part .= '<div class="clear"></div>';
+            $fisrt_part .= '<div class="panel panel-default">';
+            $fisrt_part .= '<header class="panel-heading panel-bgl">';
+            $fisrt_part .= '<h2 class="panel-title">PAYMENT INFO</h2>';
+            $fisrt_part .= '</header>';
+            $fisrt_part .= '<div class="panel-body panel-body-bg">';
+//            $fisrt_part .= '<div class="col-md-4">AAAAA</div>';
+//            $fisrt_part .= '<div class="col-md-4">VBBB</div>';
+//            $fisrt_part .= '<div class="col-md-4 text-left">VBBB</div>';
+
+			$fisrt_part .= '<table border="0" width="97%" align="center">
 				<tr><td width="20%">'._BOOKING_DATE.' </td><td width="2%"> : </td><td> '.format_date(date('Y-m-d H:i:s'), $this->fieldDateFormat, '', true).'</td></tr>						
 				<tr><td>'._ROOMS.' </td><td> : </td><td> '.(int)$this->roomsCount.'</td></tr>
 				<tr><td>'._BOOKING_PRICE.' </td><td width="2%"> : </td><td> '.Currencies::PriceFormat($order_price, '', '', $this->currencyFormat).'</td></tr>';
@@ -1149,8 +1160,15 @@ class Reservation {
 					$fisrt_part .= '<tr><td colspan="3" nowrap height="10px"></td></tr>';
 					$fisrt_part .= '<tr><td colspan="3"><h4>'._ADDITIONAL_INFO.'</h4>'.$additional_info.'</td></tr>';							
 				}
+            $fisrt_part .= '</table></div>';
+            $fisrt_part .= '</div>';
+            $fisrt_part .= '</div>';
 			
 			$second_part = '</table><br />';
+
+
+            $fisrt_part .= '<div class="clear"></div>';
+            /**End panel**/
 	
 			if($payment_type == 'poa'){	
 				
