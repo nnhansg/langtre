@@ -262,14 +262,14 @@ class Reservation {
 		if(count($this->arrReservation) > 0)
 		{
             /**Begin panel**/
-            echo '<div class="panel panel-default">';
-			echo '<header class="panel-heading">';
-            echo '<h2 class="panel-title">Table of contents</h2>';
-			echo '</header>';
-			echo '<div class="panel-body">';
-            echo '<div class="col-md-4">AAAAA</div><div class="col-md-4">VBBB</div><div class="col-md-4 text-left">VBBB</div>';
-            echo '</div>';
-            echo '</div>';
+//            echo '<div class="panel panel-default">';
+//			echo '<header class="panel-heading">';
+//            echo '<h2 class="panel-title">Table of contents</h2>';
+//			echo '</header>';
+//			echo '<div class="panel-body">';
+//            echo '<div class="col-md-4">AAAAA</div><div class="col-md-4">VBBB</div><div class="col-md-4 text-left">VBBB</div>';
+//            echo '</div>';
+//            echo '</div>';
             /**End panel**/
 
 //			echo '<table class="reservation_cart" border="0" width="100%" align="center" cellspacing="0" cellpadding="5"><thead>';
