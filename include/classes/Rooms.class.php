@@ -1599,6 +1599,13 @@ class Rooms extends MicroGrid {
 
 
 						$output .= '<div class="row room-item-bldr">'.$nl;
+                        $output .= '<div class="col-md-11">';
+                        $output .= '<table><tr>';
+                        $output .= '<td class=col-md-4>' . '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />' . '</td>';
+                        $output .= '<td class=col-md-4>B' . '</td>';
+                        $output .= '<td class=col-md-4>C' . '</td>';
+                        $output .= '</tr></table>';
+                        $output .= '</div>';
 							$output .= '<div class="left">';
 								$output .= '<table border="0" width="100%">';
 								$room_price = $this->GetRoomPrice($room[0]['id'], $params);

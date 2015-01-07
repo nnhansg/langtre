@@ -46,7 +46,7 @@ header('content-type: text/html; charset=utf-8');
 	<script type="text/javascript" src="<?php echo APPHP_BASE; ?>js/cart.js"></script>
 	<?php echo Application::SetLibraries(); ?>
         
-        <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700&subset=latin,vietnamese,latin-ext' rel='stylesheet' type='text/css' />
+<!--        <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700&subset=latin,vietnamese,latin-ext' rel='stylesheet' type='text/css' />-->
         <link href="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/css/orbit-1.2.3.css" rel="stylesheet" type="text/css">
         
         <script src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/jquery.min.js"></script>
@@ -75,7 +75,8 @@ header('content-type: text/html; charset=utf-8');
 	<!-- content -->
 	<div id="content">
 		<div class="wrapper">
-			<div class="aside maxheight">
+<!--			<div class="aside maxheight">-->
+            <div class="col-md-3">
 				<div class="box maxheight">
 					<div class="inner">
 						<!-- LEFT COLUMN -->
@@ -95,7 +96,8 @@ header('content-type: text/html; charset=utf-8');
 				</div>
 			</div>
 			
-			<div class="content">                    
+<!--			<div class="content">                    -->
+            <div class="col-md-9">
 				<!-- MAIN CONTENT -->
 				<?php
 					if((Application::Get('page') != '') && file_exists('page/'.Application::Get('page').'.php')){
