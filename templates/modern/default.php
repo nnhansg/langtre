@@ -47,10 +47,16 @@ header('content-type: text/html; charset=utf-8');
         <link href="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/css/orbit-1.2.3.css" rel="stylesheet" type="text/css">
         
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/jquery-migrate-1.2.1.min.js"></script>
         <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/top-nav.js"></script>
         <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/jquery.orbit-1.2.3.min.js"></script>
+
+        <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/vendor/highslide/highslide-full.min.js"></script>
+        <link href="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/vendor/highslide/highslide.css" type="text/css" rel="stylesheet" />
+        <link href="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/vendor/highslide/highslide-override.css" type="text/css" rel="stylesheet" />
+		
+		<script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/js/all-ready.js"></script>
         
         <!-- Run the plugin slider -->
         <script type="text/javascript">

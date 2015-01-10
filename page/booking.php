@@ -20,8 +20,11 @@ if(Modules::IsModuleInstalled('booking')){
 		$from_date = isset($_POST['from_date']) ? prepare_input($_POST['from_date']) : '';
 		$to_date = isset($_POST['to_date']) ? prepare_input($_POST['to_date']) : '';
 		$nights  = isset($_POST['nights']) ? (int)$_POST['nights'] : '';
+		$rooms_quantity = isset($_POST['rooms_quantity']) ? (int)$_POST['rooms_quantity'] : '0';
+		$room_price = isset($_POST['room_price']) ? (float)$_POST['room_price'] : '0';
 		$adults = isset($_POST['adults']) ? (int)$_POST['adults'] : '0';
 		$children = isset($_POST['children']) ? (int)$_POST['children'] : '0';
+		
 		
 		$available_rooms  = isset($_POST['available_rooms']) ? prepare_input($_POST['available_rooms']) : '';
 		$available_rooms_parts = explode('-', $available_rooms);
@@ -44,7 +47,8 @@ if(Modules::IsModuleInstalled('booking')){
 		if($act == 'remove'){
 			$objReservation->RemoveReservation($rid);
 		}else{
-			$objReservation->AddToReservation($room_id, $from_date, $to_date, $nights, $rooms, $price, $adults, $children, $meal_plan_id, $hotel_id, $guests, $guest_fee);				
+			// $objReservation->AddToReservation($room_id, $from_date, $to_date, $nights, $rooms, $price, $adults, $children, $meal_plan_id, $hotel_id, $guests, $guest_fee);
+			$objReservation->AddToReservation($room_id, $from_date, $to_date, $nights, $rooms_quantity, $rooms_quantity * $room_price, $adults, $children, $meal_plan_id, $hotel_id, $guests, $guest_fee);
 		}
 		
 		if($objLogin->IsLoggedInAsAdmin()) draw_title_bar(prepare_breadcrumbs(array(_BOOKING=>'')));

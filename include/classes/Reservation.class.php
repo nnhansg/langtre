@@ -342,14 +342,14 @@ class Reservation {
 								<table width="100%">
 								<tr>
 									<td width="40%"><img src="images/rooms_icons/'.$room_icon_first.'" alt="" width="100%" /></td>
-									<td>
+									<td style="vertical-align: top;">
 									'._ROOM_PRICE.': '.Currencies::PriceFormat(($val['price'] / $this->currencyRate), '', '', $this->currencyFormat).'<br>
 									'._MEAL_PLANS.': '.Currencies::PriceFormat(($val['meal_plan_price'] / $this->currencyRate), '', '', $this->currencyFormat) . '<br>
 									'._GUESTS_FEE.': '.Currencies::PriceFormat(($val['guests_fee'] / $this->currencyRate), '', '', $this->currencyFormat).'<br>
 									'._RATE_PER_NIGHT.': '.Currencies::PriceFormat(($room_price_w_meal_guest / $this->currencyRate) / $val['nights'], '', '', $this->currencyFormat).'<br>
 									</td>
 								</tr>
-								<tr><td colspan="2">'.Rooms::GetRoomPricesTableVertical($key).'</td></tr>
+								<tr style="display: none;"><td colspan="2">'.Rooms::GetRoomPricesTableVertical($key).'</td></tr>
 								</table>
 								</span>
 								<div class="line_item_booking"><!-- --></div>

@@ -409,11 +409,13 @@ class MealPlans extends MicroGrid {
 		//$meal_plans_total = Currencies::PriceFormat(($meal_plans[0][$i]['price'] * $params['nights'] * $params['max_adults']) / $currency_rate, '', '', $currency_format);
 		//$output .= '<option value="'.$meal_plans[0][$i]['id'].'">'.$meal_plans[0][$i]['name'].' '.$meal_plans_per_night.' x '.$params['nights'].'x '.$params['max_adults'].' = '.$meal_plans_total.'</option>';
 		$output = '<select name="meal_plans" class="available_rooms_ddl" '.($enabled ? '' : 'disabled="disabled"').'>';
+
 		for($i = 0; $i < $meal_plans[1]; $i++){
 			$meal_plans_per_night = Currencies::PriceFormat($meal_plans[0][$i]['price'] / $currency_rate, '', '', $currency_format);
 			$selected_option = (($meal_plans[0][$i]['is_default'] == 1) ? ' selected="selected"' : '');												
 			$output .= '<option value="'.$meal_plans[0][$i]['id'].'"'.$selected_option.'>'.$meal_plans[0][$i]['name'].' ('.$meal_plans_per_night.')</option>';
 		}													
+
 		$output .= '</select>';
 
 		if($draw) echo $output;

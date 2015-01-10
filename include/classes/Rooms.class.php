@@ -172,6 +172,7 @@ class Rooms extends MicroGrid {
 									'.$this->tableName.'.max_guests,
 									'.$this->tableName.'.room_count,
 									'.$this->tableName.'.default_price,
+									'.$this->tableName.'.default_price_flexible_offer,
 									'.$this->tableName.'.additional_guest_fee,
 									'.$this->tableName.'.room_icon,
 									'.$this->tableName.'.room_icon_thumb,
@@ -265,6 +266,7 @@ class Rooms extends MicroGrid {
 								'.$this->tableName.'.max_guests,
 								'.$this->tableName.'.room_count,
 								'.$this->tableName.'.default_price,
+								'.$this->tableName.'.default_price_flexible_offer,
 								'.$this->tableName.'.additional_guest_fee,
 								'.$this->tableName.'.beds,
 								'.$this->tableName.'.bathrooms,
@@ -301,7 +303,8 @@ class Rooms extends MicroGrid {
 				'beds'           => array('title'=>_BEDS, 'type'=>'enum', 'width'=>'', 'required'=>false, 'readonly'=>false, 'default'=>'', 'source'=>$this->arrBeds, 'default_option'=>false, 'unique'=>false, 'javascript_event'=>'', 'view_type'=>'dropdownlist', 'multi_select'=>false),
 				'bathrooms'      => array('title'=>_BATHROOMS, 'type'=>'enum', 'width'=>'', 'required'=>false, 'readonly'=>false, 'default'=>'', 'source'=>$this->arrBathrooms, 'default_option'=>false, 'unique'=>false, 'javascript_event'=>'', 'view_type'=>'dropdownlist', 'multi_select'=>false),
 				'room_area'      => array('title'=>_ROOM_AREA, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'5', 'default'=>'0', 'validation_type'=>'float|positive', 'validation_maximum'=>'999', 'post_html'=>' m<sup>2</sup>'),
-				'default_price'  => array('title'=>_DEFAULT_PRICE, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'10', 'default'=>'0', 'validation_type'=>'float|positive', 'pre_html'=>$default_currency.' '),
+				'default_price'  => array('title'=>_DEFAULT_PRICE_LIMITED_OFFER, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'10', 'default'=>'0', 'validation_type'=>'float|positive', 'pre_html'=>$default_currency.' '),
+				'default_price_flexible_offer'  => array('title'=>_DEFAULT_PRICE_FlEXIBLE_OFFER, 'type'=>'textbox',  'width'=>'80px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'10', 'default'=>'0', 'validation_type'=>'float|positive', 'pre_html'=>$default_currency.' '),
 				'additional_guest_fee' => array('title'=>_ADDITIONAL_GUEST_FEE, 'type'=>'textbox',  'width'=>'60px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'10', 'default'=>'0', 'validation_type'=>'float|positive', 'pre_html'=>$default_currency.' '),
 				'priority_order' => array('title'=>_ORDER, 'type'=>'textbox',  'width'=>'35px', 'required'=>true, 'readonly'=>false, 'maxlength'=>'3', 'default'=>'0', 'validation_type'=>'numeric|positive'),
 				'is_active'      => array('title'=>_ACTIVE, 'type'=>'checkbox', 'readonly'=>false, 'default'=>'1', 'true_value'=>'1', 'false_value'=>'0'),
@@ -337,7 +340,8 @@ class Rooms extends MicroGrid {
 				'beds'           => array('title'=>_BEDS, 'type'=>'label'),
 				'bathrooms'      => array('title'=>_BATHROOMS, 'type'=>'label'),
 				'room_area'      => array('title'=>_ROOM_AREA, 'type'=>'label', 'format'=>'currency', 'format_parameter'=>$this->currencyFormat.'|2', 'post_html'=>' m<sup>2</sup>'),
-				'default_price'  => array('title'=>_DEFAULT_PRICE, 'type'=>'label', 'format'=>'currency', 'format_parameter'=>$this->currencyFormat.'|2', 'pre_html'=>$default_currency),
+				'default_price'  => array('title'=>_DEFAULT_PRICE_LIMITED_OFFER, 'type'=>'label', 'format'=>'currency', 'format_parameter'=>$this->currencyFormat.'|2', 'pre_html'=>$default_currency),
+				'default_price_flexible_offer'  => array('title'=>_DEFAULT_PRICE_FlEXIBLE_OFFER, 'type'=>'label', 'format'=>'currency', 'format_parameter'=>$this->currencyFormat.'|2', 'pre_html'=>$default_currency),
 				'additional_guest_fee'  => array('title'=>_ADDITIONAL_GUEST_FEE, 'type'=>'label', 'format'=>'currency', 'format_parameter'=>$this->currencyFormat.'|2', 'pre_html'=>$default_currency),
 				'priority_order' => array('title'=>_ORDER, 'type'=>'label'),
 				'is_active'      => array('title'=>_ACTIVE, 'type'=>'enum', 'source'=>$arr_is_active),
@@ -578,6 +582,7 @@ class Rooms extends MicroGrid {
 				WHERE id = '.(int)$rid.'
 				'.(!empty($this->hotelsList) ? ' AND '.TABLE_ROOMS.'.hotel_id IN ('.$this->hotelsList.')' : '');
 		$room = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
 		if($room[1] > 0){
 			$default_price = $room[0]['default_price'];
 			$max_adults = $room[0]['max_adults'];
@@ -745,9 +750,13 @@ class Rooms extends MicroGrid {
 			$output .= '  <td style="background-color:#ffcc33;">'.$currency_l_sign.' <input type="text" name="price_'.$room[0][$i]['id'].'_sat" value="'.(isset($_POST['price_'.$room[0][$i]['id'].'_sat']) ? prepare_input($_POST['price_'.$room[0][$i]['id'].'_sat']) : $room[0][$i]['sat']).'" maxlength="7" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
 			$output .= '  <td style="background-color:#ffcc33;">'.$currency_l_sign.' <input type="text" name="price_'.$room[0][$i]['id'].'_sun" value="'.(isset($_POST['price_'.$room[0][$i]['id'].'_sun']) ? prepare_input($_POST['price_'.$room[0][$i]['id'].'_sun']) : $room[0][$i]['sun']).'" maxlength="7" style="padding:0 2px;text-align:'.$text_align.';width:'.$width.'" /> '.$currency_r_sign.'</td>';
 			$output .= '  <td width="30px" align="center">'.(($room[0][$i]['is_default'] != 1) ? '<img src="images/delete.gif" alt="'._DELETE_WORD.'" title="'._DELETE_WORD.'" style="cursor:pointer;" onclick="javascript:submitPriceForm(\'delete\',\''.$room[0][$i]['id'].'\')" />' : '').'</td>';
+			$output .= draw_hidden_field('is_default_' . $room[0][$i]['id'], $room[0][$i]['is_default'], false, 'is_default_' . $room[0][$i]['id']);
 			$output .= '</tr>';
-			if($ids_list != '') $ids_list .= ','.$room[0][$i]['id'];
-			else $ids_list = $room[0][$i]['id'];
+			
+			if ($ids_list != '') 
+				$ids_list .= ','.$room[0][$i]['id'];
+			else 
+				$ids_list = $room[0][$i]['id'];
 		}
 
 		$output .= '<tr><td colspan="11"></td><td colspan="2" style="height:5px;background-color:#ffcc33;"></td><td></td></tr>';
@@ -1291,7 +1300,7 @@ class Rooms extends MicroGrid {
 		$arrPrices = array();			
 		$count = 0;
 
-		foreach($ids_list_array as $key){
+		foreach ($ids_list_array as $key) {
             $price_type = (isset($_POST['price_type_'.$key]) ? prepare_input($_POST['price_type_'.$key]) : '1');
             $rooms_prices_extend_id= (isset($_POST['rooms_prices_extend_id_'.$key]) ? prepare_input($_POST['rooms_prices_extend_id_'.$key]) : 0);
             $adults    = (isset($_POST['adults_'.$key]) ? prepare_input($_POST['adults_'.$key]) : '1');
@@ -1304,6 +1313,7 @@ class Rooms extends MicroGrid {
 			$price_fri = (isset($_POST['price_'.$key.'_fri']) ? prepare_input($_POST['price_'.$key.'_fri']) : '0');
 			$price_sat = (isset($_POST['price_'.$key.'_sat']) ? prepare_input($_POST['price_'.$key.'_sat']) : '0');
 			$price_sun = (isset($_POST['price_'.$key.'_sun']) ? prepare_input($_POST['price_'.$key.'_sun']) : '0');
+			$is_default = (isset($_POST['is_default_' . $key]) ? prepare_input($_POST['is_default_' . $key]) : '0');
 			
 			if(!$this->IsFloat($guest_fee) || $guest_fee < 0){
 				$this->error = str_replace('_FIELD_', '<b>'._GUEST_FEE.'</b>', _FIELD_MUST_BE_NUMERIC_POSITIVE);
@@ -1345,7 +1355,7 @@ class Rooms extends MicroGrid {
 						fri = \''.$price_fri.'\',
 						sat = \''.$price_sat.'\',
 						sun = \''.$price_sun.'\',
-						is_default = '.(($count == 0) ? '1' : '0').'
+						is_default = ' . $is_default . '
 					WHERE id = '.$key.' AND room_id = '.(int)$rid;
 
             if(!database_void_query($sql)){
@@ -1357,16 +1367,16 @@ class Rooms extends MicroGrid {
 //            $listRoomsPriceExtend = RoomsPricesExtend::find;
 //            var_dump(RoomsPricesExtend::update_all());
 
-            $sql_update_rooms_prices_extend = 'UPDATE ' . TABLE_ROOMS_PRICES_EXTEND . '
-                                                SET price_type = ' . $price_type . '
-                                                WHERE id = ' . $rooms_prices_extend_id;
+            // $sql_update_rooms_prices_extend = 'UPDATE ' . TABLE_ROOMS_PRICES_EXTEND . '
+            //                                     SET price_type = ' . $price_type . '
+            //                                     WHERE id = ' . $rooms_prices_extend_id;
 
 //            echo $sql_update_rooms_prices_extend;
 //            echo '<br/>';
-            if(!database_void_query($sql_update_rooms_prices_extend)){
-                $this->error = _TRY_LATER;
-                return false;
-            }
+            // if(!database_void_query($sql_update_rooms_prices_extend)){
+            //     $this->error = _TRY_LATER;
+            //     return false;
+            // }
 
 			$count++;
 		}
@@ -1513,6 +1523,35 @@ class Rooms extends MicroGrid {
 			$sql .= ' WHERE room_id = '.(int)$this->curRecordId;
 			database_void_query($sql);	
 		}		
+
+		//
+
+		// Default price limited offer
+        $default_price_flexible_offer = isset($_POST['default_price_flexible_offer']) ? prepare_input($_POST['default_price_flexible_offer']) : '0';
+
+		$sql = 'SELECT * FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = ' . (int)$this->curRecordId . ' AND is_default = 1';
+		$rooms_prices_update = database_query($sql, DATA_AND_ROWS, ALL_ROWS); //var_dump($rooms_prices_update);
+
+		if ($rooms_prices_update[1] < 2) {
+			// Default price flexible offer
+	        $sql = 'INSERT INTO ' . TABLE_ROOMS_PRICES_EXTEND . ' (id, rooms_prices_id, price_type, terms) 
+					VALUES (NULL, ' . $rooms_prices_update[0][0]['id'] . ', 1, \'\')';
+			$result = database_void_query($sql);
+
+			$sql = 'SELECT MAX(id) max_id FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = ' . (int)$this->curRecordId  . ' AND is_default = 1';
+			$rooms_prices_new = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+	        $sql = 'INSERT INTO '.TABLE_ROOMS_PRICES.' (id, room_id, date_from, date_to, mon, tue, wed, thu, fri, sat, sun, is_default)
+					VALUES (NULL, ' . (int)$this->curRecordId . ', \'0000-00-00\', \'0000-00-00\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', 1)'; echo $sql . '<br/>';
+	        $result = database_void_query($sql);
+
+	        $sql = 'SELECT MAX(id) max_id FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = ' . (int)$this->curRecordId  . ' AND is_default = 1';
+			$rooms_prices_new = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+			$sql = 'INSERT INTO ' . TABLE_ROOMS_PRICES_EXTEND . ' (id, rooms_prices_id, price_type, terms) 
+					VALUES (NULL, ' . $rooms_prices_new[0]['max_id'] . ', 2, \'\')';
+			$result = database_void_query($sql);
+		}
 	}
 
     /**
@@ -1820,13 +1859,15 @@ class Rooms extends MicroGrid {
 					}
 					
 					$room = database_query(str_replace('_KEY_', $key['id'], $sql), DATA_AND_ROWS, FIRST_ROW_ONLY);
-					if($room[1] > 0){					
+
+                    if($room[1] > 0){
 						//$output .= '<br />';
 						$output .= '<form action="index.php?page=booking" method="post">'.$nl;
 						$output .= draw_hidden_field('hotel_id', $first_key, false).$nl;
 						$output .= draw_hidden_field('room_id', $room[0]['id'], false).$nl;
 						$output .= draw_hidden_field('from_date', $params['from_date'], false).$nl;
 						$output .= draw_hidden_field('to_date', $params['to_date'], false).$nl;
+						$output .= draw_hidden_field('rooms_quantity', $params['rooms_quantity'], false).$nl;
 						$output .= draw_hidden_field('nights', $params['nights'], false).$nl;
 						$output .= draw_hidden_field('adults', $params['max_adults'], false).$nl;
 						$output .= draw_hidden_field('children', $params['max_children'], false).$nl;
@@ -1836,24 +1877,43 @@ class Rooms extends MicroGrid {
 						$output .= draw_hidden_field('checkin_monthday', $params['from_day'], false).$nl;
 						$output .= draw_hidden_field('checkout_year_month', $params['to_year'].'-'.(int)$params['to_month'], false).$nl;
 						$output .= draw_hidden_field('checkout_monthday', $params['to_day'], false).$nl;
+						$output .= '<input class="price_type" type="hidden" value="1" name="price_type">' . $nl; // Default price type is Limited Offer
+
 						$output .= draw_token_field(false).$nl;
 						
+						$output .= '<div class="line-hor-title"><h3 class="headline">' . prepare_link('rooms', 'room_id', $room[0]['id'], $room[0]['loc_room_type'], $room[0]['loc_room_type'], '', _CLICK_TO_VIEW) . '</h3></div>';
 						$output .= '<div class="room-item-bldr">'.$nl;
-							$output .= '<div class="right">';
+							$output .= '<div class="left">';
+								if($room[0]['first_room_image'] != '') $output .= '<a href="images/rooms_icons/'.$room[0]['first_room_image'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1">';
+								//$output .= '<img class="room_icon" src="images/rooms_icons/'.$room[0]['room_icon_thumb'].'" alt="" />';
+								$output .= '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />';
+								if($room[0]['first_room_image'] != '') $output .= '</a>';							
+								if($room[0]['room_picture_1'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_1'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1"></a>';					
+								if($room[0]['room_picture_2'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_2'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 2"></a>';					
+								if($room[0]['room_picture_3'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_3'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 3"></a>';
+								if($room[0]['room_picture_4'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_4'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 4"></a>';
+								if($room[0]['room_picture_5'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_5'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 5"></a>';								
+							$output .= '</div>';
+
+							$output .= '<div class="left">' . $room[0]['loc_room_short_description'] . '</div>';
+
+							$output .= '<div class="left">';
 								$output .= '<table border="0" width="100%">';					
-								$room_price = $this->GetRoomPrice($room[0]['id'], $params);							
+								$room_price = $this->GetRoomPriceExtend($room[0]['id'], $params, 1); // Limited Offer
+								$room_price_2 = $this->GetRoomPriceExtend($room[0]['id'], $params, 2); // Flexible Offer
+
 								if(empty($key['available_rooms'])) $rooms_descr = '<span class="gray">('._FULLY_BOOKED.')</span>';
 								else if($room[0]['room_count'] > '1' && $key['available_rooms'] == '1') $rooms_descr = '<span class="red">('._ROOMS_LAST.')</span>';
 								else if($room[0]['room_count'] > '1' && $key['available_rooms'] <= '5') $rooms_descr = '<span class="red">('.$key['available_rooms'].' '._ROOMS_LEFT.')</span>';
 								else $rooms_descr = '<span class="green">('._AVAILABLE.')</span>';
 
-								$output .= '<tr><td colspan="2"><h3 class="headline">'.prepare_link('rooms', 'room_id', $room[0]['id'], $room[0]['loc_room_type'], $room[0]['loc_room_type'], '', _CLICK_TO_VIEW).' '.$rooms_descr.'</h3></td></tr>';
-								$output .= '<tr><td colspan="2" height="70px">'.$room[0]['loc_room_short_description'].'</td></tr>';
-								$output .= '<tr><td colspan="2" nowrap="nowrap" height="5px"></td></tr>';
+								// $output .= '<tr><td colspan="2"><h3 class="headline">'.prepare_link('rooms', 'room_id', $room[0]['id'], $room[0]['loc_room_type'], $room[0]['loc_room_type'], '', _CLICK_TO_VIEW).' '.$rooms_descr.'</h3></td></tr>';
+								
+								// $output .= '<tr><td colspan="2" nowrap="nowrap" height="5px"></td></tr>';
 								$output .= '<tr><td colspan="2">'._MAX_ADULTS.': '.$room[0]['max_adults'].(($allow_children == 'yes') ? ', '._MAX_CHILDREN.': '.$room[0]['max_children'] : '').'</td></tr>';
+
 								if($key['available_rooms']){ 
-									$output .= '<tr><td>' . _RATE /*_ROOMS*/ . ':</td>';
-									$output .= '<td><select name="available_rooms" class="available_rooms_ddl" '.($allow_booking ? '' : 'disabled="disabled"').'>';
+									$output .= '<tr style="display: none;"><td colspan="2">' . _RATE /*_ROOMS*/ . '<br/><select name="available_rooms" class="available_rooms_ddl" '.($allow_booking ? '' : 'disabled="disabled"').'>';
 										$options = '';
 										for($i = 1; $i <= $key['available_rooms']; $i++){
 											$room_price_i = $room_price * $i;
@@ -1869,42 +1929,211 @@ class Rooms extends MicroGrid {
 										}									
 									$output .= '</td>';
 									$output .= '</tr>';
+
 									if($meal_plans[1] > 0){
 										$output .= '<tr>';
-											$output .= '<td>'._MEAL_PLANS.':</td>';
-											$output .= '<td>';
-											$output .= MealPlans::DrawMealPlansDDL($meal_plans, $currency_rate, $currency_format, $allow_booking, false);
-											$output .= '<span class="meal_plans_description"> <span class="red">*</span> '._PERSON_PER_NIGHT.'</span>';
+											$output .= '<td colspan="2">'._MEAL_PLANS.'<br/>' . MealPlans::DrawMealPlansDDL($meal_plans, $currency_rate, $currency_format, $allow_booking, false);
+											// $output .= '<br/><span class="meal_plans_description"> <span class="red">*</span> '._PERSON_PER_NIGHT.'</span>';
 											$output .= '</td>';
 										$output .= '</tr>';									
 									}
 									if($allow_guests == 'yes' && $room[0]['max_guests'] > 0){
 										$output .= '<tr>';
-											$output .= '<td>'._GUESTS.':</td>';
-											$output .= '<td>';
-											$output .= $this->DrawGuestsDDL($room[0]['id'], $room[0]['max_guests'], $params, $currency_rate, $currency_format, $allow_booking, false);
-											$output .= '<span class="guests_description"> <span class="red">*</span> '._PER_NIGHT.'</span>';
+											$output .= '<td>'._GUESTS.'<br/>' . $this->DrawGuestsDDL($room[0]['id'], $room[0]['max_guests'], $params, $currency_rate, $currency_format, $allow_booking, false);
+											// $output .= '<br/><span class="guests_description"> <span class="red">*</span> '._PER_NIGHT.'</span>';
 											$output .= '</td>';
 										$output .= '</tr>';
 									}
 								}
 								//$output .= '<tr><td colspan="2"><a class="price_link" href="javascript:void(0);" onclick="javascript:appToggleElement(\'row_prices_'.$room[0]['id'].'\')" title="'._CLICK_TO_SEE_PRICES.'">'._PRICES.' (+)</a></td></tr>';
 								$output .= '</table>';
-							$output .= '</div>';
-							$output .= '<div class="left">';
-								if($room[0]['first_room_image'] != '') $output .= '<a href="images/rooms_icons/'.$room[0]['first_room_image'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1">';
-								//$output .= '<img class="room_icon" src="images/rooms_icons/'.$room[0]['room_icon_thumb'].'" alt="" />';
-								$output .= '<img class="room_icon_full" src="images/rooms_icons/'.$room[0]['first_room_image'].'" alt="" />';
-								if($room[0]['first_room_image'] != '') $output .= '</a>';							
-								if($room[0]['room_picture_1'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_1'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 1"></a>';					
-								if($room[0]['room_picture_2'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_2'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 2"></a>';					
-								if($room[0]['room_picture_3'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_3'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 3"></a>';
-								if($room[0]['room_picture_4'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_4'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 4"></a>';
-								if($room[0]['room_picture_5'] != '') $output .= '  <a href="images/rooms_icons/'.$room[0]['room_picture_5'].'" rel="lyteshow_'.$room[0]['id'].'" title="'._IMAGE.' 5"></a>';								
 							$output .= '</div><div class="clear"><!-- --></div>';
-						$output .= '<div style="margin:10px 0 0 0;"><span id="row_prices_'.$room[0]['id'].'">'.self::GetRoomPricesTableVertical($room[0]['id']).'</span></div>';
-						if($allow_booking && $key['available_rooms']) $output .= '<div class="book-button"><input type="submit" class="form_button_middle" value="'._BOOK_NOW.' >" /></div><div class="clear"><!-- --></div>';
-						if($rooms_count <= ($rooms_total - 1)) $output .= '<div class="line-hor-2"><!-- --></div>';
+
+						$output .= '<div style="margin:10px 0 0 0; display: none;"><span id="row_prices_'.$room[0]['id'].'">'.self::GetRoomPricesTableVertical($room[0]['id']).'</span></div>';
+						$output .= '<input class="room_price" type="hidden" value="' . $room_price . '" name="room_price">' . $nl; // Price of room seleted
+
+						if($allow_booking && $key['available_rooms']) {
+							// $output .= '<div class="book-button"><input type="submit" class="form_button_middle" value="'._BOOK_NOW.' >" /></div><div class="clear"><!-- --></div>';
+							$service_charge = $room_price * 0.05;
+							$vat = $room_price * 0.1;
+							$total = $room_price + $service_charge + $vat;
+
+							$service_charge_2 = $room_price_2 * 0.05;
+							$vat_2 = $room_price_2 * 0.1;
+							$total_2 = $room_price_2 + $service_charge_2 + $vat_2;
+
+							$output .= '<div class="line-hor-title price_type">
+											<div class="left">
+												<div class="title col-1-check-available">' . _LIMITED_OFFER . '</div>
+											</div>
+											<div class="left">
+												<div class="col-2-check-available">
+													<span class="terms-detail">' . _CANCEL_OR_CHANGE_FEE . '<br/><a href="javascript:void(0);" onclick="return hs.htmlExpand(this, { contentId: \'highslide-html-' . $room[0]['id'] . '-1\', headingText: \'Terms & Details - ' . _LIMITED_OFFER . '\' } )" class="highslide">' . _TERMS_DETAIL . '</a></span>
+													<div class="highslide-html-content" id="highslide-html-' . $room[0]['id'] . '-1">
+														<div class="highslide-header">
+															<ul>
+																<li class="highslide-move">
+																	<a href="#" onclick="return false"></a>
+																</li>
+																<li class="highslide-close">
+																	<a href="#" onclick="return hs.close(this)"></a>
+																</li>
+															</ul>
+														</div>
+														<div class="highslide-body terms-detail">
+															<h4>Bamboo Village Beach Resort & Spa</h4>
+															<p class="item">
+																38 Nguyen Dinh Chieu Street, Ham Tien Ward, Phan Thiet City, Binh Thuan Province, Vietnam<br>
+																Head Office: +84 62 3847 007<br/>
+																Sales Office: +84 8 38389358<br/>
+																Email Us: <a href="mailto:info@bamboovillageresortvn.com">info@bamboovillageresortvn.com</a>
+															</p>
+															<div class="price-detail">
+																<h4>Price detail</h4>
+																<div class="col-1-2">
+																	Room Price:
+																</div>
+																<div class="col-1-2 align-right">
+																	' . Currencies::PriceFormat(($room_price / $currency_rate), '', '', $currency_format) . '
+																</div>
+																<div class="clear"></div>
+																<div class="col-1-2">
+																	Service charge (5%/room/night):
+																</div>
+																<div class="col-1-2 align-right">
+																	' . Currencies::PriceFormat(($service_charge  / $currency_rate), '', '', $currency_format) . '
+																</div>
+																<div class="clear"></div>
+																<div class="col-1-2">
+																	VAT (10%):
+																</div>
+																<div class="col-1-2 align-right">
+																	' . Currencies::PriceFormat(($vat / $currency_rate), '', '', $currency_format) . '
+																</div>
+																<div class="clear"></div>
+																<div class="line"></div>
+																<div class="col-1-2">
+																	Total:
+																</div>
+																<div class="col-1-2 align-right">
+																	' . Currencies::PriceFormat(($total / $currency_rate), '', '', $currency_format) . '
+																</div>
+															</div>
+														</div>
+													    <div class="highslide-footer">
+													        <div>
+													            <span class="highslide-resize" title="Resize">
+													                <span></span>
+													            </span>
+													        </div>
+													    </div>
+													</div>
+												</div>
+											</div>
+											<div class="left">
+												<div class="col-3-check-available">
+													<span class="price">
+														' . Currencies::PriceFormat(($room_price / $currency_rate), '', '', $currency_format) . '<br/>
+													</span>
+													<span class="note">
+														' . _ROOM_PER_NIGHT . '<br/><br/>
+													</span>
+													<input name="book_price_type_1" type="button" class="price_type_button book_price_type_1" value="' . _BOOK_NOW . ' >"  data-room-price="' . $room_price . '" />
+												</div>
+											</div>
+											<div class="clear"><!-- --></div>
+										</div>
+										<div class="clear"><!-- --></div>';
+
+							$output .= '<div class="line-hor-title price_type">
+											<div class="left">
+												<div class="title col-1-check-available">' . _FLEXIBLE_OFFER . '</div>
+											</div>
+											<div class="left">
+												<div class="col-2-check-available">
+													<span class="terms-detail">' . _CANCEL_OR_CHANGE_NO_FEE . '<br/><a href="javascript:void(0);" onclick="return hs.htmlExpand(this, { contentId: \'highslide-html-' . $room[0]['id'] . '-2\', headingText: \'Terms & Details - ' . _FLEXIBLE_OFFER . '\' } )"
+													class="highslide">' . _TERMS_DETAIL . '</a></span>
+													<div class="highslide-html-content" id="highslide-html-' . $room[0]['id'] . '-2">
+														<div class="highslide-header">
+															<ul>
+																<li class="highslide-move">
+																	<a href="#" onclick="return false"></a>
+																</li>
+																<li class="highslide-close">
+																	<a href="#" onclick="return hs.close(this)"></a>
+																</li>
+															</ul>
+														</div>
+														<div class="highslide-body terms-detail">
+															<h4>Bamboo Village Beach Resort & Spa</h4>
+															<p class="item">
+																38 Nguyen Dinh Chieu Street, Ham Tien Ward, Phan Thiet City, Binh Thuan Province, Vietnam<br>
+																Head Office: +84 62 3847 007<br/>
+																Sales Office: +84 8 38389358<br/>
+																Email Us: <a href="mailto:info@bamboovillageresortvn.com">info@bamboovillageresortvn.com</a>
+															</p>
+															<div class="price-detail">
+																<h4>Price detail</h4>
+																<div class="col-1-2">
+																	Room Price:
+																</div>
+																<div class="col-1-2 align-right">
+																	' . Currencies::PriceFormat(($room_price_2 / $currency_rate), '', '', $currency_format) . '
+																</div>
+																<div class="clear"></div>
+																<div class="col-1-2">
+																	Service charge (5%/room/night):
+																</div>
+																<div class="col-1-2 align-right">
+																	' . Currencies::PriceFormat(($service_charge_2  / $currency_rate), '', '', $currency_format) . '
+																</div>
+																<div class="clear"></div>
+																<div class="col-1-2">
+																	VAT (10%):
+																</div>
+																<div class="col-1-2 align-right">
+																	' . Currencies::PriceFormat(($vat_2 / $currency_rate), '', '', $currency_format) . '
+																</div>
+																<div class="clear"></div>
+																<div class="line"></div>
+																<div class="col-1-2">
+																	Total:
+																</div>
+																<div class="col-1-2 align-right">
+																	' . Currencies::PriceFormat(($total_2 / $currency_rate), '', '', $currency_format) . '
+																</div>
+															</div>
+														</div>
+													    <div class="highslide-footer">
+													        <div>
+													            <span class="highslide-resize" title="Resize">
+													                <span></span>
+													            </span>
+													        </div>
+													    </div>
+													</div>
+												</div>
+											</div>
+											<div class="left">
+												<div class="col-3-check-available">
+													<span class="price">
+														' . Currencies::PriceFormat(($room_price_2 / $currency_rate), '', '', $currency_format) . '<br/>
+													</span>
+													<span class="note">
+														' . _ROOM_PER_NIGHT . '<br/><br/>
+													</span>
+													<input name="book_price_type_2" type="button" class="price_type_button book_price_type_2" value="' . _BOOK_NOW . ' >" data-room-price="' . $room_price_2 . '" />
+												</div>
+											</div>
+											<div class="clear"><!-- --></div>
+										</div>
+										<div class="clear"><!-- --></div>';
+						}
+
+						if($rooms_count <= ($rooms_total - 1)) {
+							$output .= '<div class="line-hor-2"><!-- --></div>';
+						}
+
 						//else $output .= '<tr><td colspan="2"><br /><td></tr>';
 						$output .= '</div>'.$nl;
 						$output .= '</form>'.$nl;
@@ -2159,7 +2388,7 @@ class Rooms extends MicroGrid {
                                     . '</div>';
                                 // draw prices table
                             $output .= '<div><h4>'._PRICES.'</h4></div>';
-                            $output .= '<div style="margin: 0 0 20px 0">'.self::GetRoomPricesTableVertical($room_id).'</div>';
+                            $output .= '<div style="margin: 0 0 20px 0; display: none;">'.self::GetRoomPricesTableVertical($room_id).'</div>';
                             $output .= '<div class="left">';
                                 
                                 if($back_button){ 
@@ -2207,7 +2436,7 @@ class Rooms extends MicroGrid {
 	 */
 	private function GetRoomPrice($room_id, $params)
 	{		
-		// improve: how to make it takes defult price if not found another ?
+		// improve: how to make it takes default price if not found another ?
 		// make check periods for 2, 3 days?
 		$debug = false;
 		
@@ -2300,6 +2529,128 @@ class Rooms extends MicroGrid {
         return $total_price;
 	}
 
+    /**
+     *	Get room price for a certain period of time
+     *		@param $room_id
+     *		@param $params
+     */
+    private function GetRoomPriceExtend($room_id, $params, $price_type = 1)
+    {
+        // improve: how to make it takes default price if not found another ?
+        // make check periods for 2, 3 days?
+        $debug = false;
+
+        $date_from = $params['from_year'].'-'.self::ConvertToDecimal($params['from_month']).'-'.self::ConvertToDecimal($params['from_day']);
+        $date_to = $params['to_year'].'-'.self::ConvertToDecimal($params['to_month']).'-'.self::ConvertToDecimal($params['to_day']);
+        $room_default_price = $this->GetRoomDefaultPriceExtend($room_id, $price_type);
+        $arr_week_default_price = $this->GetRoomWeekDefaultPriceExtend($room_id, $price_type);
+
+        // calculate available discounts for specific period of time
+        $arr_standard_discounts = Campaigns::GetCampaignInfo('', $date_from, $date_to, 'standard');
+
+        $total_price = '0';
+        $offset = 0;
+
+        while ($date_from < $date_to) {
+            $curr_date_from = $date_from;
+
+            $offset++;
+            $current = getdate(mktime(0, 0, 0, $params['from_month'], $params['from_day'] + $offset, $params['from_year']));
+            $date_from = $current['year'].'-'.self::ConvertToDecimal($current['mon']).'-'.self::ConvertToDecimal($current['mday']);
+
+            $curr_date_to = $date_from;
+            if ($debug) echo '<br> ('.$curr_date_from.' == '.$curr_date_to.') ';
+
+            $sql = 'SELECT rpr.`id` id,
+                          `room_id`,
+                          `date_from`,
+                          `date_to`,
+                          `adults`,
+                          `children`,
+                          `guest_fee`,
+                          `mon`,
+                          `tue`,
+                          `wed`,
+                          `thu`,
+                          `fri`,
+                          `sat`,
+                          `sun`,
+                          `is_default`,
+                          rprext.`id` rooms_prices_extend_id,
+                          `rooms_prices_id`,
+                          `price_type`,
+                          `terms`
+				FROM ' . TABLE_ROOMS_PRICES . ' rpr LEFT JOIN ' . TABLE_ROOMS_PRICES_EXTEND . ' rprext ON rpr.id = rprext.rooms_prices_id
+				WHERE rpr.room_id = ' . (int)$room_id . ' AND
+						rpr.adults >= '.(int)$params['max_adults'].' AND
+						rpr.children >= '.(int)$params['max_children'].' AND
+						(
+							(rpr.date_from <= \''.$curr_date_from.'\' AND rpr.date_to = \''.$curr_date_from.'\') OR
+							(rpr.date_from <= \''.$curr_date_from.'\' AND rpr.date_to >= \''.$curr_date_to.'\')
+						) AND
+						rpr.is_default = 0 AND
+						rprext.price_type = ' . $price_type . '
+				ORDER BY rpr.adults ASC, rpr.children ASC';
+
+            $room_info = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+            if ($room_info[1] > 0) {
+                $arr_week_price = $room_info[0];
+
+                // calculate total sum, according to week day prices
+                $start = $current_date = strtotime($curr_date_from);
+                $end = strtotime($curr_date_to);
+
+                while ($current_date < $end) {
+                    // take default weekday price if weekday price is empty
+                    if (empty($arr_week_price[strtolower(date('D', $current_date))])){
+                        if ($debug) 
+                        	echo '-'.$arr_week_default_price[strtolower(date('D', $current_date))];
+
+                        $room_price = $arr_week_default_price[strtolower(date('D', $current_date))];
+                    } else {
+                        if($debug) 
+                        	echo '='.$arr_week_price[strtolower(date('D', $current_date))];
+
+                        $room_price = $arr_week_price[strtolower(date('D', $current_date))];
+                    }
+
+                    if (isset($arr_standard_discounts[$curr_date_from])){
+                        $room_price = $room_price * (1 - ($arr_standard_discounts[$curr_date_from] / 100));
+                        
+                        if ($debug) 
+                        	echo ' after '.$arr_standard_discounts[$curr_date_from].'%= '.$room_price;
+                    }
+
+                    $total_price += $room_price;
+                    $current_date = strtotime('+1 day', $current_date);
+                }
+
+            } else {
+                // add default (standard) price
+                if($debug) 
+                	echo '>'.$arr_week_default_price[strtolower(date('D', strtotime($curr_date_from)))];
+
+                $t_price = $arr_week_default_price[strtolower(date('D', strtotime($curr_date_from)))];
+                
+                if (!empty($t_price)) 
+                	$room_price = $t_price;
+                else 
+                	$room_price = $room_default_price;
+
+                if(isset($arr_standard_discounts[$curr_date_from])){
+                    $room_price = $room_price * (1 - ($arr_standard_discounts[$curr_date_from] / 100));
+                    
+                    if($debug) 
+                    	echo ' after '.$arr_standard_discounts[$curr_date_from].'%= '.$room_price;
+                }
+
+                $total_price += $room_price;
+            }
+        }
+        return $total_price;
+    }
+
 	/**
 	 *	Get room guest price for a certain period of time
 	 *		@param $room_id
@@ -2373,10 +2724,50 @@ class Rooms extends MicroGrid {
 	}
 
 	/**
+	 *	Returns room default price
+	 *		@param $room_id
+	 */
+	private function GetRoomDefaultPriceExtend($room_id, $price_type = 1)
+	{	
+		$sql = 'SELECT rpr.`id` id,
+                          `room_id`,
+                          `date_from`,
+                          `date_to`,
+                          `adults`,
+                          `children`,
+                          `guest_fee`,
+                          `mon`,
+                          `tue`,
+                          `wed`,
+                          `thu`,
+                          `fri`,
+                          `sat`,
+                          `sun`,
+                          `is_default`,
+                          rprext.`id` rooms_prices_extend_id,
+                          `rooms_prices_id`,
+                          `price_type`,
+                          `terms`
+				FROM ' . TABLE_ROOMS_PRICES . ' rpr LEFT JOIN ' . TABLE_ROOMS_PRICES_EXTEND . ' rprext ON rpr.id = rprext.rooms_prices_id
+				WHERE rpr.room_id = ' . (int)$room_id . ' 
+						AND rpr.is_default = 1
+						AND rprext.price_type = ' . $price_type . ' 
+				ORDER BY rprext.price_type ASC';
+					
+		$room_info = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+		if($room_info[1] > 0) {
+			return $room_info[0][strtolower(date('D', time()))];
+		} else {
+			return $room_info[0]['default_price'];
+		}
+	}
+
+	/**
 	 *	Returns room week default price
 	 *		@param $room_id
 	 */
-	private function GetRoomWeekDefaultPrice($room_id)
+	private function GetRoomWeekDefaultPrice($room_id, $price_type = 1)
 	{		
 		$sql = 'SELECT
 					r.id,
@@ -2395,10 +2786,53 @@ class Rooms extends MicroGrid {
 				WHERE
 					r.id = '.(int)$room_id.' AND
 					rp.is_default = 1';					
+
 		$room_default_info = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
 		if($room_default_info[1] > 0){
 			return $room_default_info[0];
 		}
+
+		return array();
+	}
+
+	/**
+	 *	Returns room week default price
+	 *		@param $room_id
+	 */
+	private function GetRoomWeekDefaultPriceExtend($room_id, $price_type = 1)
+	{
+		$sql = 'SELECT rpr.`id` id,
+                          `room_id`,
+                          `date_from`,
+                          `date_to`,
+                          `adults`,
+                          `children`,
+                          `guest_fee`,
+                          `mon`,
+                          `tue`,
+                          `wed`,
+                          `thu`,
+                          `fri`,
+                          `sat`,
+                          `sun`,
+                          `is_default`,
+                          rprext.`id` rooms_prices_extend_id,
+                          `rooms_prices_id`,
+                          `price_type`,
+                          `terms`
+				FROM ' . TABLE_ROOMS_PRICES . ' rpr LEFT JOIN ' . TABLE_ROOMS_PRICES_EXTEND . ' rprext ON rpr.id = rprext.rooms_prices_id
+				WHERE rpr.room_id = ' . (int)$room_id . ' 
+						AND rpr.is_default = 1
+						AND rprext.price_type = ' . $price_type . ' 
+				ORDER BY rprext.price_type ASC';
+
+		$room_default_info = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
+
+		if ($room_default_info[1] > 0) {
+			return $room_default_info[0];
+		}
+
 		return array();
 	}
 

@@ -636,7 +636,7 @@ A.active                  { font-weight: bold; }
 }
 #footer a { color:#e3dad2;}
 #footer .nav { text-align:center; padding-bottom:25px;}
-#footer .nav li { display:inline;}c
+#footer .nav li { display:inline;}
 #footer .nav li a { padding:0 48px 0 45px; color:#e3dad2;}
 #footer-2 { margin:20px 0px 0px 0px; padding-bottom:20px; font-size:12px; text-align:center; }
 
@@ -832,6 +832,7 @@ TABLE.tblExtrasDetails TR TD SPAN { background-color:#e1e2e3; }
 .tbl_hotel_description .right {
 	float: left;
 }
+
 .line-hor-2 {
 	height: 30px;
 	width: 100%;
@@ -839,16 +840,38 @@ TABLE.tblExtrasDetails TR TD SPAN { background-color:#e1e2e3; }
 	padding: 0 30px;
 	background: #FFFEE8;
 }
+
+.line-hor-title {
+	/*height: 30px;*/
+	width: 100%;	
+	margin: 30px 0 30px -30px;
+	padding: 20px 30px;
+	background: #1e0f0b;
+}
+
+.price_type {
+	
+}
+
 .room-item-bldr {
 }
+
 .room-item-bldr .left {
 	float: left;
-	width: 64%;
+	width: 30%;
+	overflow: hidden;
+	padding-right: 5%;
 }
+
+.room-item-bldr .left:nth-child(3) {
+	padding-right: 0;
+}
+
 .room-item-bldr .right {
 	float: right;
-	width: 32%;
+	width: 30%;
 }
+
 .room-item-bldr .book-button{
 	float: right;
 	margin: 30px -30px 0 0;
@@ -974,4 +997,63 @@ table td {
 	float: left;
 	margin-top: 10px;
 	margin-right: 10px;
+}
+
+.terms-detail div,
+.terms-detail p {
+	font-size: 10px !important;
+}
+
+.terms-detail a {
+	color: #00b241;
+}
+
+.terms-detail h4 {
+	color: #000;
+	font-family: Archer,"Archer Medium","Times New Roman",sans-serif;
+	color: #00b241;
+	margin-top: 10px;
+}
+
+.terms-detail .col-1-2 {
+	width: 50%;
+	float: left;
+	padding: 5px 0 0 0;
+}
+
+.price-detail {
+	margin-top: 10px;
+}
+
+.price-detail .align-right {
+	text-align: right;
+}
+
+.price-detail .line {
+	height: 1px;
+	border-top: solid 2px #000;
+	margin: 10px 0;
+}
+
+.price_type .col-1-check-available {
+	text-align: center;
+	padding-top: 20%;
+}
+
+.price_type .col-2-check-available {
+	padding-top: 15%;
+}
+
+.price_type .col-3-check-available {
+	text-align: center;
+	border-left: solid 2px #4d3525;
+}
+
+.price_type .title {
+	color: #00b241;
+	text-transform: capitalize;
+}
+
+.price_type .price {
+	font-size: 120%;
 }
