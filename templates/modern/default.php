@@ -36,9 +36,6 @@ header('content-type: text/html; charset=utf-8');
 
 	<!-- Opacity Module -->
 	<link href="<?php echo APPHP_BASE; ?>modules/opacity/opacity.css" type="text/css" rel="stylesheet" />
-
-    <link href="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="<?php echo APPHP_BASE; ?>templates/<?php echo Application::Get('template');?>/bootstrap/js/bootstrap.min.js"></script>
         
 	<script type="text/javascript" src="<?php echo APPHP_BASE; ?>modules/opacity/opacity.js"></script>
 
