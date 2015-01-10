@@ -41,21 +41,21 @@ if (Application::Get('page') != 'home' ||
 </div>
 <div id="top-nav">
     <div id="menu-page-menu" class="clearfix">
-        <ul id="nav">
-			<?php
-				$urlLangTre = "http://langtre.ntitss.com.palm.arvixe.com";
-			?>
-            <li><a href="<?php echo $urlLangTre ?>/category/rooms/">Rooms</a>
-            </li>
-            <li> <a href="<?php echo $urlLangTre; ?>/category/dining/" title="Dining">Dining</a></li>
-            <li><a href="<?php echo $urlLangTre; ?>/category/spa-fitness/" title="spa and Fitness"> Spa &amp; Fitness</a></li>
-            <li> <a href="<?php echo $urlLangTre; ?>/category/offers/">Offers</a></li>
-            <li> <a href="<?php echo $urlLangTre; ?>/category/room/amenities/">Amenities</a></li>
-            <li> <a href="<?php echo $urlLangTre; ?>/gallery/">Gallery</a></li>
-            <li> <a href="<?php echo $urlLangTre; ?>/about-us/">About Us</a></li>
-			<li> <a href="<?php echo $urlLangTre; ?>/testimonials/">Testimonials</a></li>
-			<li> <a href="<?php echo $urlLangTre; ?>/resorts-policies/">Resort's Policies</a></li>			
-        </ul>
+<!--        <ul id="nav">-->
+<!--			--><?php
+//				$urlLangTre = "http://langtre.ntitss.com.palm.arvixe.com";
+//			?>
+<!--            <li><a href="--><?php //echo $urlLangTre ?><!--/category/rooms/">Rooms</a>-->
+<!--            </li>-->
+<!--            <li> <a href="--><?php //echo $urlLangTre; ?><!--/category/dining/" title="Dining">Dining</a></li>-->
+<!--            <li><a href="--><?php //echo $urlLangTre; ?><!--/category/spa-fitness/" title="spa and Fitness"> Spa &amp; Fitness</a></li>-->
+<!--            <li> <a href="--><?php //echo $urlLangTre; ?><!--/category/offers/">Offers</a></li>-->
+<!--            <li> <a href="--><?php //echo $urlLangTre; ?><!--/category/room/amenities/">Amenities</a></li>-->
+<!--            <li> <a href="--><?php //echo $urlLangTre; ?><!--/gallery/">Gallery</a></li>-->
+<!--            <li> <a href="--><?php //echo $urlLangTre; ?><!--/about-us/">About Us</a></li>-->
+<!--			<li> <a href="--><?php //echo $urlLangTre; ?><!--/testimonials/">Testimonials</a></li>-->
+<!--			<li> <a href="--><?php //echo $urlLangTre; ?><!--/resorts-policies/">Resort's Policies</a></li>			-->
+<!--        </ul>-->
     </div>
     <!--End #menu-page-menu -->
 

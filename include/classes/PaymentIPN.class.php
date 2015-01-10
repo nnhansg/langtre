@@ -310,7 +310,7 @@ class PaymentIPN {
 			$output .= $nl.draw_hidden_field('bn', 'PP-BuyNowBF', false);
 			
 			$output .= $nl.'<br />'._PAYPAL_NOTICE.'<br /><br />';
-			$output .= $nl.'<input type="image" style="border:0px" src="images/ppc_icons/btn_pp_paynow.gif" title="'._BOOK_NOW.'" value="Go To Payment" name="btnSubmit" />';
+			$output .= $nl.'<input type="image" class="btn" style="border:0px" src="images/ppc_icons/btn_pp_paynow.gif" title="'._BOOK_NOW.'" value="Go To Payment" name="btnSubmit" />';
 			$output .= $nl.'&nbsp; - '._OR.' - &nbsp;';
 			$output .= $nl.'<a href="javascript:void(0);" onclick="javascript:appGoTo(\'page=booking_details\')">'._BUTTON_CANCEL.'</a>';
 			$output .= $nl.'</form>';
@@ -341,7 +341,7 @@ class PaymentIPN {
 			$output .= $nl.'<tr>';
 			$output .= $nl.'<td>';
 			$output .= $nl.'<br />'._2CO_NOTICE.'<br /><br />';
-			$output .= $nl.'<input type="image" style="border:0px" src="images/ppc_icons/btn_2co_buynow.jpg" title="'._BOOK_NOW.'" value="Go To Payment" name="btnSubmit" />';
+			$output .= $nl.'<input type="image" class="btn" style="border:0px" src="images/ppc_icons/btn_2co_buynow.jpg" title="'._BOOK_NOW.'" value="Go To Payment" name="btnSubmit" />';
 			$output .= $nl.'&nbsp; - '._OR.' - &nbsp;';
 			$output .= $nl.'<a href="javascript:void(0);" onclick="javascript:appGoTo(\'page=booking_details\')">'._BUTTON_CANCEL.'</a>';
 			$output .= $nl.'</td>';
@@ -360,7 +360,7 @@ class PaymentIPN {
 			$output .= $nl.draw_hidden_field('tco_currency', Application::Get('currency_code'), false);
 			$output .= $nl.draw_hidden_field('custom', $pp_params['booking_number'], false);
 			$output .= $nl.'<br />'._2CO_NOTICE.'<br /><br />';
-			$output .= $nl.'<input type="image" style="border:0px" src="images/ppc_icons/btn_2co_buynow.jpg" title="'._BOOK_NOW.'" value="Go To Payment" name="btnSubmit" />';
+			$output .= $nl.'<input type="image" class="btn" style="border:0px" src="images/ppc_icons/btn_2co_buynow.jpg" title="'._BOOK_NOW.'" value="Go To Payment" name="btnSubmit" />';
 			$output .= $nl.'&nbsp; - '._OR.' - &nbsp;';
 			$output .= $nl.'<a href="javascript:void(0);" onclick="javascript:appGoTo(\'page=booking_details\')">'._BUTTON_CANCEL.'</a>';
 			$output .= $nl.'</form>';
@@ -391,7 +391,7 @@ class PaymentIPN {
 			$output .= $nl.'<tr>';
 			$output .= $nl.'<td>';
 			$output .= $nl.'<br />'._AUTHORIZE_NET_NOTICE.'<br /><br />';
-			$output .= $nl.'<input type="image" style="border:0px" src="images/ppc_icons/btn_authorize_buynow.gif" title="'._SUBMIT_PAYMENT.'" value="Go To Payment" name="btnSubmit" />';
+			$output .= $nl.'<input type="image" class="btn" style="border:0px" src="images/ppc_icons/btn_authorize_buynow.gif" title="'._SUBMIT_PAYMENT.'" value="Go To Payment" name="btnSubmit" />';
 			$output .= $nl.'&nbsp; - '._OR.' - &nbsp;';
 			$output .= $nl.'<a href="javascript:void(0);" onclick="javascript:appGoTo(\'page=booking_details\')">'._BUTTON_CANCEL.'</a>';
 			$output .= $nl.'</td>';
@@ -449,7 +449,7 @@ class PaymentIPN {
 			$output .= $nl.draw_hidden_field('x_state', $pp_params['state'], false);
 		
 			$output .= $nl.'<br />'._AUTHORIZE_NET_NOTICE.'<br /><br />';
-			$output .= $nl.'<input type="image" style="border:0px" src="images/ppc_icons/btn_authorize_buynow.gif" title="'._SUBMIT_PAYMENT.'" value="Go To Payment" name="btnSubmit" />';
+			$output .= $nl.'<input type="image" class="btn" style="border:0px" src="images/ppc_icons/btn_authorize_buynow.gif" title="'._SUBMIT_PAYMENT.'" value="Go To Payment" name="btnSubmit" />';
 			$output .= $nl.'&nbsp; - '._OR.' - &nbsp;';
 			$output .= $nl.'<a href="javascript:void(0);" onclick="javascript:appGoTo(\'page=booking_details\')">'._BUTTON_CANCEL.'</a>';
 			$output .= $nl.'</form>';
@@ -487,7 +487,7 @@ class PaymentIPN {
 
 		$output .= $nl.'<tr>';
 		$output .= $nl.'<td colspan="3">';
-		$output .= $nl.'<input type="submit" class="form_button" value="'._PLACE_ORDER.'" name="btnSubmit" />';
+		$output .= $nl.'<input type="submit" class="btn" value="'._PLACE_ORDER.'" name="btnSubmit" />';
 		$output .= $nl.'&nbsp; - '._OR.' - &nbsp;';
 		$output .= $nl.'<a href="javascript:void(0);" onclick="javascript:appGoTo(\'page=booking_details\')">'._BUTTON_CANCEL.'</a>';
 		$output .= $nl.'</td>';

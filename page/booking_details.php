@@ -96,8 +96,14 @@ if(Modules::IsModuleInstalled('booking')){
 			<?php echo _ALERT_REQUIRED_FILEDS; ?>
 		</p>		
 				
-		<?php echo $msg; ?>        
-		
+		<?php echo $msg; ?>
+
+        <div class="panel panel-default">
+        <header class="panel-heading panel-bgl">
+            <h2 class="panel-title"> <?php echo _PERSONAL_DETAILS; ?></h2>
+        </header>
+        <div class="panel-body panel-body-bg">
+
 		<form action="<?php echo APPHP_BASE; ?>index.php?page=booking_details" method="post" name="frmRegistration" id="frmRegistration">
 		<?php draw_token_field(); ?>
 			<?php
@@ -110,8 +116,7 @@ if(Modules::IsModuleInstalled('booking')){
 			?>
 			
 			<table cellspacing="1" cellpadding="2" width="100%">
-			<tbody>			
-			<tr><td colspan="3"><h4><?php echo _PERSONAL_DETAILS;?></h4><hr size="1" noshade="noshade" /></td></tr>	
+			<tbody>
 			<tr>
 				<td width="38%" align="right"><?php echo _FIRST_NAME;?></td>
 				<td><span class="mandatory_star">*</span></td>
@@ -122,6 +127,20 @@ if(Modules::IsModuleInstalled('booking')){
 				<td><span class="mandatory_star">*</span></td>
 				<td nowrap="nowrap"><input type="text" id="last_name" name="last_name" size="32" maxlength="32" value="<?php echo $last_name;?>" /></td>
 			</tr>
+            <tr>
+                <td align="right"><?php echo _ADDRESS;?></td>
+                <td><span class="mandatory_star">*</span></td>
+                <td nowrap="nowrap"><input type="text" id="b_address" name="b_address" size="32" maxlength="64" value="<?php echo $b_address;?>" /></td>
+            </tr>
+            <tr>
+                <td align="right"><?php echo _EMAIL_ADDRESS;?></td>
+                <td><span class="mandatory_star">*</span></td>
+                <td nowrap="nowrap">
+                    <?php echo _ENTER_EMAIL_ADDRESS;?>
+                    <br />
+                    <input type="text" id="email" name="email" size="32" maxlength="70" value="<?php echo $email;?>" />
+                </td>
+            </tr>
 			<tr>
 				<td align="right"><?php echo _BIRTH_DATE;?></td>
 				<td>&nbsp;</td>
@@ -129,73 +148,63 @@ if(Modules::IsModuleInstalled('booking')){
 					<?php echo draw_date_select_field('birth_date', $birth_date, '90', '0', false); ?>
 				</td>
 			</tr>
-			<tr>
+            <tr>
+                <td align="right"><?php echo _PHONE;?></td>
+                <td><span class="mandatory_star">*</span></td>
+                <td nowrap="nowrap"><input type="text" id="phone" name="phone" size="32" maxlength="32" value="<?php echo $phone;?>" /></td>
+            </tr>
+            <tr>
+                <td align="right"><?php echo _CITY;?></td>
+                <td><span class="mandatory_star">*</span></td>
+                <td nowrap="nowrap"><input type="text" id="b_city" name="b_city" size="32" maxlength="64" value="<?php echo $b_city;?>" /></td>
+            </tr>
+            <tr>
+                <td align="right"><?php echo _ZIP_CODE;?></td>
+                <td><span class="mandatory_star">*</span></td>
+                <td nowrap="nowrap"><input type="text" id="b_zipcode" name="b_zipcode" size="32" maxlength="32" value="<?php echo $b_zipcode;?>" /></td>
+            </tr>
+            <tr>
+                <td align="right"><?php echo _COUNTRY;?></td>
+                <td><span class="mandatory_star">*</span></td>
+                <td nowrap="nowrap">
+                    <?php
+                    Countries::DrawAllCountries('b_country', $b_country, true);
+                    ?>
+                </td>
+            </tr>
+			<tr class="hide">
 				<td align="right"><?php echo _COMPANY;?></td>
 				<td>&nbsp;</td>
 				<td nowrap="nowrap"><input type="text" id="company" name="company" size="32" maxlength="128" value="<?php echo $company;?>" /></td>
 			</tr>
-			<tr>
+			<tr class="hide">
 				<td align="right"><?php echo _WEB_SITE;?></td>
 				<td>&nbsp;</td>
 				<td nowrap="nowrap"><input type="text" id="url" name="url" size="32" maxlength="255" value="<?php echo $url;?>" /></td>
 			</tr>
 	
-			<tr><td colspan="3"><h4><?php echo _BILLING_ADDRESS;?></h4><hr size="1" noshade="noshade" /></td></tr>		    
-			<tr>
-				<td align="right"><?php echo _ADDRESS;?></td>
-				<td><span class="mandatory_star">*</span></td>
-				<td nowrap="nowrap"><input type="text" id="b_address" name="b_address" size="32" maxlength="64" value="<?php echo $b_address;?>" /></td>
-			</tr>	
-			<tr>
+			<tr class="hide"><td colspan="3"><h4><?php echo _BILLING_ADDRESS;?></h4><hr size="1" noshade="noshade" /></td></tr>
+
+			<tr class="hide">
 				<td align="right"><?php echo _ADDRESS_2;?></td>
 				<td>&nbsp;</td>
 				<td nowrap="nowrap"><input type="text" id="b_address_2" name="b_address_2" size="32" maxlength="64" value="<?php echo $b_address_2;?>" /></td>
-			</tr>	
-			<tr>
-				<td align="right"><?php echo _CITY;?></td>
-				<td><span class="mandatory_star">*</span></td>
-				<td nowrap="nowrap"><input type="text" id="b_city" name="b_city" size="32" maxlength="64" value="<?php echo $b_city;?>" /></td>
-			</tr>	
-			<tr>
-				<td align="right"><?php echo _ZIP_CODE;?></td>
-				<td><span class="mandatory_star">*</span></td>
-				<td nowrap="nowrap"><input type="text" id="b_zipcode" name="b_zipcode" size="32" maxlength="32" value="<?php echo $b_zipcode;?>" /></td>
 			</tr>
-			<tr>
-				<td align="right"><?php echo _COUNTRY;?></td>
-				<td><span class="mandatory_star">*</span></td>
-				<td nowrap="nowrap">				
-					<?php
-					    Countries::DrawAllCountries('b_country', $b_country, true);
-					?>
-				</td>
-			</tr>	
-			<tr>
+
+			<tr class="hide">
 				<td align="right"><?php echo _STATE_PROVINCE;?></td>
 				<td></td>
 				<td nowrap="nowrap"><input type="text" id="b_state" name="b_state" size="32" maxlength="64" value="<?php echo $b_state;?>" /></td>
-			</tr>					
-	
-			<tr><td height="20" colspan="3"><h4><?php echo _CONTACT_INFORMATION;?></h4><hr size="1" noshade="noshade" /></td></tr>
-			<tr>
-				<td align="right"><?php echo _PHONE;?></td>
-				<td><span class="mandatory_star">*</span></td>
-				<td nowrap="nowrap"><input type="text" id="phone" name="phone" size="32" maxlength="32" value="<?php echo $phone;?>" /></td>
 			</tr>
-			<tr>
+	
+			<tr class="hide"><td height="20" colspan="3"><h4><?php echo _CONTACT_INFORMATION;?></h4><hr size="1" noshade="noshade" /></td></tr>
+
+			<tr class="hide">
 				<td align="right"><?php echo _FAX;?></td>
 				<td></td>
 				<td nowrap="nowrap"><input type="text" id="fax" name="fax" size="32" maxlength="32" value="<?php echo $fax;?>" /></td>
 			</tr>
-			<tr>
-				<td align="right"><?php echo _EMAIL_ADDRESS;?></td>
-				<td><span class="mandatory_star">*</span></td>
-				<td nowrap="nowrap">				 
-					<?php echo _ENTER_EMAIL_ADDRESS;?>
-					<br />
-					<input type="text" id="email" name="email" size="32" maxlength="70" value="<?php echo $email;?>" />
-				</td>
-			</tr>
+
 	
 			<?php if($current_customer_id != '' && $m == 'edit'){ ?>
 				<tr>
@@ -287,6 +296,9 @@ if(Modules::IsModuleInstalled('booking')){
 			
 			</table>
 		</form>
+
+        </div>
+        </div>
 
 		<div id="fade" class="black_overlay" onclick="javascript:appCloseTermsAndConditions();"></div>
 		<div id="light">

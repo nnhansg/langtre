@@ -261,29 +261,39 @@ class Reservation {
 	
 		if(count($this->arrReservation) > 0)
 		{
-			echo '<table class="reservation_cart" border="0" width="100%" align="center" cellspacing="0" cellpadding="5"><thead>';
-			echo '<tr class="header">				
-				<th class="'.$class_left.'" width="25px">&nbsp;</th>
-				<th align="'.$class_left.'">'._ROOM_TYPE.'</th>
-				<th align="center" width="60px">'._FROM.'</th>
-				<th align="center" width="60px">'._TO.'</th>
-				<th width="40px" align="center">&nbsp;'._NIGHTS.'&nbsp;</th>
-				<th width="40px" align="center">&nbsp;'._ROOMS.'&nbsp;</th>
-				<th width="70px" colspan="3" align="center">'._OCCUPANCY.'</th>
-				'.(($meal_plans_count) ? '<th width="65px" align="center">'._MEAL_PLANS.'</th>' : '<th style="padding:0px;">&nbsp;</th>').'
-				<th width="65px" class="'.$class_right.'">'._PRICE.'</th>
-			</tr>';
+            /**Begin panel**/
+//            echo '<div class="panel panel-default">';
+//			echo '<header class="panel-heading">';
+//            echo '<h2 class="panel-title">Table of contents</h2>';
+//			echo '</header>';
+//			echo '<div class="panel-body">';
+//            echo '<div class="col-md-4">AAAAA</div><div class="col-md-4">VBBB</div><div class="col-md-4 text-left">VBBB</div>';
+//            echo '</div>';
+//            echo '</div>';
+            /**End panel**/
 
-			echo '<tr style="font-size:10px;background-color:transparent;">				
-				<th colspan="6"></th>
-				<th align="center">'._ADULT.'</th>
-				'.(($allow_children == 'yes') ? '<th align="center">'._CHILD.'</th>' : '<th></th>').'
-				'.(($allow_guests == 'yes') ? '<th align="center">'._GUEST.'</th>' : '<th></th>').' 
-				<th colspan="2"></th>
-			</tr>';
-			
-			echo '</thead>
-			';
+//			echo '<table class="reservation_cart" border="0" width="100%" align="center" cellspacing="0" cellpadding="5"><thead>';
+//			echo '<tr class="header">
+//				<th class="'.$class_left.'" width="25px">&nbsp;</th>
+//				<th align="'.$class_left.'">'._ROOM_TYPE.'</th>
+//				<th align="center" width="60px">'._FROM.'</th>
+//				<th align="center" width="60px">'._TO.'</th>
+//				<th width="40px" align="center">&nbsp;'._NIGHTS.'&nbsp;</th>
+//				<th width="40px" align="center">&nbsp;'._ROOMS.'&nbsp;</th>
+//				<th width="70px" colspan="3" align="center">'._OCCUPANCY.'</th>
+//				'.(($meal_plans_count) ? '<th width="65px" align="center">'._MEAL_PLANS.'</th>' : '<th style="padding:0px;">&nbsp;</th>').'
+//				<th width="65px" class="'.$class_right.'">'._PRICE.'</th>
+//			</tr>';
+//
+//			echo '<tr style="font-size:10px;background-color:transparent;">
+//				<th colspan="6"></th>
+//				<th align="center">'._ADULT.'</th>
+//				'.(($allow_children == 'yes') ? '<th align="center">'._CHILD.'</th>' : '<th></th>').'
+//				'.(($allow_guests == 'yes') ? '<th align="center">'._GUEST.'</th>' : '<th></th>').'
+//				<th colspan="2"></th>
+//			</tr>';
+//
+//			echo '</thead>';
 
 			$order_price = 0;
 			$objRoom = new Rooms();
@@ -320,51 +330,71 @@ class Reservation {
 					$room_icon_thumb = ($result[0]['room_icon_thumb'] != '') ? $result[0]['room_icon_thumb'] : 'no_image.png';
 					$room_icon_first = ($result[0]['first_room_image'] != '') ? $result[0]['first_room_image'] : 'no_image.png';
 					$room_price_w_meal_guest = ($val['price'] + $val['meal_plan_price'] + $val['guests_fee']);
-					
-					echo '<tr>
-							<td align="center"><a href="index.php?page=booking&act=remove&rid='.$key.'"><img src="images/remove.gif" width="16" height="16" border="0" title="'._REMOVE_ROOM_FROM_CART.'" alt="" /></a></td>							
-							<td>
-								<b>'.prepare_link('rooms', 'room_id', $result[0]['id'], $result[0]['loc_room_type'], $result[0]['loc_room_type'], '', _CLICK_TO_VIEW).'</b><br />
-								'.$result[0]['hotel_name'].'
-							</td>
-							<td align="center">'.format_date($val['from_date'], $this->fieldDateFormat, '', true).'</td>
-							<td align="center">'.format_date($val['to_date'], $this->fieldDateFormat, '', true).'</td>
-							<td align="center">'.$val['nights'].'</td>
-							<td align="center">'.$val['rooms'].'</td>
-							<td align="center">'.$val['adults'].'</td>
-							'.(($allow_children == 'yes') ? '<td align="center">'.$val['children'].'</td>' : '<td></td>').'
-							'.(($allow_guests == 'yes') ? '<td align="center">'.$val['guests'].'</td>' : '<td></td>').'
-							'.(($meal_plans_count) ? '<td align="center" style="cursor:help;" title="'.(($val['nights'] > 1) ? _RATE_PER_NIGHT_AVG : _RATE_PER_NIGHT).'">'.$val['meal_plan_name'].'</td>' : '<td></td>').'
-							<td align="'.$class_right.'">'.Currencies::PriceFormat($room_price_w_meal_guest / $this->currencyRate, '', '', $this->currencyFormat).'<!--&nbsp;<a class="price_link" href="javascript:void(0);" onclick="javascript:appToggleElement(\'row_prices_'.$key.'\')" title="'._CLICK_TO_SEE_PRICES.'">(+)</a>--></td>
-						</tr>
-					    <tr><td colspan="11" align="'.$class_left.'">
-								<span id="row_prices_'.$key.'" style="margin:5px 10px;">
-								<table width="100%">
-								<tr>
-									<td width="40%"><img src="images/rooms_icons/'.$room_icon_first.'" alt="" width="100%" /></td>
-									<td>
-									'._ROOM_PRICE.': '.Currencies::PriceFormat(($val['price'] / $this->currencyRate), '', '', $this->currencyFormat).'<br>
+
+                    /**Begin panel**/
+                    echo '<div class="panel panel-default">';
+                    echo '<header class="panel-heading panel-bgl">';
+                    echo '<h2 class="panel-title">'.prepare_link('rooms', 'room_id', $result[0]['id'], $result[0]['loc_room_type'], $result[0]['loc_room_type'], '', _CLICK_TO_VIEW).'</b>
+								'.$result[0]['hotel_name'].'</h2>';
+                    echo '</header>';
+                    echo '<div class="panel-body">';
+                    echo '<div class="col-md-4"><img src="images/rooms_icons/'.$room_icon_first.'" alt="" width="100%" /></div>';
+                    echo '<div class="col-md-4">'._ROOM_PRICE.': '.Currencies::PriceFormat(($val['price'] / $this->currencyRate), '', '', $this->currencyFormat).'<br>
 									'._MEAL_PLANS.': '.Currencies::PriceFormat(($val['meal_plan_price'] / $this->currencyRate), '', '', $this->currencyFormat) . '<br>
 									'._GUESTS_FEE.': '.Currencies::PriceFormat(($val['guests_fee'] / $this->currencyRate), '', '', $this->currencyFormat).'<br>
-									'._RATE_PER_NIGHT.': '.Currencies::PriceFormat(($room_price_w_meal_guest / $this->currencyRate) / $val['nights'], '', '', $this->currencyFormat).'<br>
-									</td>
-								</tr>
-								<tr><td colspan="2">'.Rooms::GetRoomPricesTableVertical($key).'</td></tr>
-								</table>
-								</span>
-								<div class="line_item_booking"><!-- --></div>
-							</td>
-						</tr>';
+									'._RATE_PER_NIGHT.': '.Currencies::PriceFormat(($room_price_w_meal_guest / $this->currencyRate) / $val['nights'], '', '', $this->currencyFormat).'</div>';
+                    echo '<div class="col-md-3 "></div>';
+                    echo '<div class="col-md-1 text-right"><a href="index.php?page=booking&act=remove&rid='.$key.'"><img src="images/remove.gif" width="16" height="16" border="0" title="'._REMOVE_ROOM_FROM_CART.'" alt="" /></a></div>';
+                    echo '</div>';
+                    echo '</div>';
+                    /**End panel**/
+
+//					echo '<tr>
+//							<td align="center"><a href="index.php?page=booking&act=remove&rid='.$key.'"><img src="images/remove.gif" width="16" height="16" border="0" title="'._REMOVE_ROOM_FROM_CART.'" alt="" /></a></td>
+//							<td>
+//								<b>'.prepare_link('rooms', 'room_id', $result[0]['id'], $result[0]['loc_room_type'], $result[0]['loc_room_type'], '', _CLICK_TO_VIEW).'</b><br />
+//								'.$result[0]['hotel_name'].'
+//							</td>
+//							<td align="center">'.format_date($val['from_date'], $this->fieldDateFormat, '', true).'</td>
+//							<td align="center">'.format_date($val['to_date'], $this->fieldDateFormat, '', true).'</td>
+//							<td align="center">'.$val['nights'].'</td>
+//							<td align="center">'.$val['rooms'].'</td>
+//							<td align="center">'.$val['adults'].'</td>
+//							'.(($allow_children == 'yes') ? '<td align="center">'.$val['children'].'</td>' : '<td></td>').'
+//							'.(($allow_guests == 'yes') ? '<td align="center">'.$val['guests'].'</td>' : '<td></td>').'
+//							'.(($meal_plans_count) ? '<td align="center" style="cursor:help;" title="'.(($val['nights'] > 1) ? _RATE_PER_NIGHT_AVG : _RATE_PER_NIGHT).'">'.$val['meal_plan_name'].'</td>' : '<td></td>').'
+//							<td align="'.$class_right.'">'.Currencies::PriceFormat($room_price_w_meal_guest / $this->currencyRate, '', '', $this->currencyFormat).'<!--&nbsp;<a class="price_link" href="javascript:void(0);" onclick="javascript:appToggleElement(\'row_prices_'.$key.'\')" title="'._CLICK_TO_SEE_PRICES.'">(+)</a>--></td>
+//						</tr>
+//					    <tr><td colspan="11" align="'.$class_left.'">
+//								<span id="row_prices_'.$key.'" style="margin:5px 10px;">
+//								<table width="100%">
+//								<tr>
+//									<td width="40%"><img src="images/rooms_icons/'.$room_icon_first.'" alt="" width="100%" /></td>
+//									<td>
+//									'._ROOM_PRICE.': '.Currencies::PriceFormat(($val['price'] / $this->currencyRate), '', '', $this->currencyFormat).'<br>
+//									'._MEAL_PLANS.': '.Currencies::PriceFormat(($val['meal_plan_price'] / $this->currencyRate), '', '', $this->currencyFormat) . '<br>
+//									'._GUESTS_FEE.': '.Currencies::PriceFormat(($val['guests_fee'] / $this->currencyRate), '', '', $this->currencyFormat).'<br>
+//									'._RATE_PER_NIGHT.': '.Currencies::PriceFormat(($room_price_w_meal_guest / $this->currencyRate) / $val['nights'], '', '', $this->currencyFormat).'<br>
+//									</td>
+//								</tr>
+//								<tr><td colspan="2">'.Rooms::GetRoomPricesTableVertical($key).'</td></tr>
+//								</table>
+//								</span>
+//								<div class="line_item_booking"><!-- --></div>
+//							</td>
+//						</tr>';
 					$order_price += ($room_price_w_meal_guest / $this->currencyRate);					
 				}
 			}
 
-			// draw sub-total row			
-			echo '<tr>
-					<td colspan="7"></td>
-					<td class="td '.$class_left.'" colspan="2"><b>'._SUBTOTAL.': </b></td>
-					<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b>'.Currencies::PriceFormat($order_price, '', '', $this->currencyFormat).'</b></td>
-				</tr>';				
+			// draw sub-total row
+            echo '<div class="col-md-9 text-right"><strong>'._SUBTOTAL.': </strong></div>';
+            echo '<div class="col-md-3 text-right"><strong>'.Currencies::PriceFormat($order_price, '', '', $this->currencyFormat).' </strong></div>';
+//			echo '<table><tr>
+//					<td colspan="7"></td>
+//					<td class="td '.$class_left.'" colspan="2"><b>'._SUBTOTAL.': </b></td>
+//					<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b>'.Currencies::PriceFormat($order_price, '', '', $this->currencyFormat).'</b></td>
+//				</tr></table>';
 
 			//echo '<tr><td colspan="11" nowrap="nowrap" height="15px"></td></tr>';
 			
@@ -377,47 +407,57 @@ class Reservation {
 			$cart_total = ($order_price + $this->bookingInitialFee) + $vat_cost;
 			
 			if($this->discountCampaignID != '' || $this->discountCoupon != ''){
-				echo '<tr>
-						<td colspan="7"></td>
-						<td class="td '.$class_left.'" colspan="2"><b><span style="color:#a60000">'._DISCOUNT.': ('.Currencies::PriceFormat($this->discountPercent, '%', 'right', $this->currencyFormat).')</span></b></td>
-						<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b><span style="color:#a60000">- '.Currencies::PriceFormat($discount_value, '', '', $this->currencyFormat).'</span></b></td>
-					</tr>';				
+                echo '<div class="col-md-9 text-right"><strong>'._DISCOUNT.': </strong></div>';
+                echo '<div class="col-md-3 text-right"><strong>'.Currencies::PriceFormat($discount_value, '', '', $this->currencyFormat).' </strong></div>';
+//				echo '<tr>
+//						<td colspan="7"></td>
+//						<td class="td '.$class_left.'" colspan="2"><b><span style="color:#a60000">'._DISCOUNT.': ('.Currencies::PriceFormat($this->discountPercent, '%', 'right', $this->currencyFormat).')</span></b></td>
+//						<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b><span style="color:#a60000">- '.Currencies::PriceFormat($discount_value, '', '', $this->currencyFormat).'</span></b></td>
+//					</tr>';
 			}
 			if(!empty($this->bookingInitialFee)){
-				echo '<tr>
-						<td colspan="7"></td>
-						<td class="td '.$class_left.'" colspan="2"><b>'._INITIAL_FEE.': </b></td>
-						<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b>'.Currencies::PriceFormat($this->bookingInitialFee, '', '', $this->currencyFormat).'</b></td>
-					</tr>';								
+                echo '<div class="col-md-9 text-right"><strong>'._INITIAL_FEE.': </strong></div>';
+                echo '<div class="col-md-3 text-right"><strong>'.Currencies::PriceFormat($this->bookingInitialFee, '', '', $this->currencyFormat).' </strong></div>';
+//                echo '<tr>
+//						<td colspan="7"></td>
+//						<td class="td '.$class_left.'" colspan="2"><b>'._INITIAL_FEE.': </b></td>
+//						<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b>'.Currencies::PriceFormat($this->bookingInitialFee, '', '', $this->currencyFormat).'</b></td>
+//					</tr>';
 			}
 			if($this->vatIncludedInPrice == 'no'){
-				echo '<tr> 
-						<td colspan="7"></td>
-						<td class="td '.$class_left.'" colspan="2"><b>'._VAT.': ('.Currencies::PriceFormat($this->vatPercent, '%', 'right', $this->currencyFormat, $this->GetVatPercentDecimalPoints($this->vatPercent)).')</b></td>
-						<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b>'.Currencies::PriceFormat($vat_cost, '', '', $this->currencyFormat).'</b></td>
-					</tr>';
+                echo '<div class="col-md-9 text-right"><strong>'._VAT.': ('.Currencies::PriceFormat($this->vatPercent, '%', 'right', $this->currencyFormat, $this->GetVatPercentDecimalPoints($this->vatPercent)).'): </strong></div>';
+                echo '<div class="col-md-3 text-right"><strong>'.Currencies::PriceFormat($vat_cost, '', '', $this->currencyFormat).' </strong></div>';
+//				echo '<tr>
+//						<td colspan="7"></td>
+//						<td class="td '.$class_left.'" colspan="2"><b>'._VAT.': ('.Currencies::PriceFormat($this->vatPercent, '%', 'right', $this->currencyFormat, $this->GetVatPercentDecimalPoints($this->vatPercent)).')</b></td>
+//						<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b>'.Currencies::PriceFormat($vat_cost, '', '', $this->currencyFormat).'</b></td>
+//					</tr>';
 			}
-			echo '
-				<tr class="footer">
-					<td colspan="7"></td>
-					<td class="td '.$class_left.'" colspan="2"><b>'._TOTAL.':</b></td>
-					<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b>'.Currencies::PriceFormat($cart_total, '', '', $this->currencyFormat).'</b></td>
-				</tr>
-				<tr>
-					<td colspan="7"></td>
-					<td colspan="3"></td>
-					<td align="'.$class_right.'">
-						
-					</td>
-				</tr>
-				</table>
-				<div style="float: right;">
-					<input type="button" class="form_button" onclick="javascript:appGoTo(\'page=booking_details\')" value="'._BOOK.'" />
-				</div>
-				<div class="clear"></div>';
+            echo '<div class="col-md-9 text-right"><strong>'._TOTAL.':</strong></div>';
+            echo '<div class="col-md-3 text-right"><strong>'.Currencies::PriceFormat($cart_total, '', '', $this->currencyFormat).' </strong></div>';
+            echo '<div class="col-md-12 text-right"><br><input type="button" class="btn btn-default btn-lg" onclick="javascript:appGoTo(\'page=booking_details\')" value="'._BOOK.' " /></div>';
+//			echo '
+//				<tr class="footer">
+//					<td colspan="7"></td>
+//					<td class="td '.$class_left.'" colspan="2"><b>'._TOTAL.':</b></td>
+//					<td class="td '.$class_right.'" align="'.$class_right.'" colspan="2"><b>'.Currencies::PriceFormat($cart_total, '', '', $this->currencyFormat).'</b></td>
+//				</tr>
+//				<tr>
+//					<td colspan="7"></td>
+//					<td colspan="3"></td>
+//					<td align="'.$class_right.'">
+//
+//					</td>
+//				</tr>
+//				</table>
+//				<div style="float: right;">
+//					<input type="button" class="btn btn-default btn-lg" onclick="javascript:appGoTo(\'page=booking_details\')" value="'._BOOK.' " />
+//				</div>
+//				<div class="clear"></div>';
 		}else{
 			draw_message(_RESERVATION_CART_IS_EMPTY_ALERT, true, true);
 		}
+        //echo "<script>window.location.href='/index.php?page=booking_details'</script>";
 	}
 
     /** 
@@ -504,10 +544,16 @@ class Reservation {
 			'.draw_hidden_field('task', 'do_booking', false).'
 			'.draw_hidden_field('selected_user', $this->selectedUser, false).'
 			'.draw_token_field(false);
-			
+
+            echo '<div class="panel panel-default">';
+            echo '<header class="panel-heading panel-bgl">';
+            echo '<h2 class="panel-title">'._BILLING_DETAILS.'</h2>';
+            echo '</header>';
+            echo '<div class="panel-body panel-body-bg">';
+
 			echo '<table class="reservation_cart" border="0" width="99%" align="center" cellspacing="0" cellpadding="5">
 			<tr>
-				<td colspan="2"><h4>'._BILLING_DETAILS.' &nbsp;';
+				<td colspan="2">';
 					if($objLogin->IsLoggedIn()){
 						if($objLogin->IsLoggedInAsCustomer()){
 							echo '<a style="font-size:13px;" href="javascript:void(0);" onclick="javascript:appGoTo(\'customer=my_account\')">['._EDIT_WORD.']</a>	';
@@ -542,7 +588,7 @@ class Reservation {
 					}else{
 						echo '<a style="font-size:13px;" href="javascript:void(0);" onclick="javascript:appGoTo(\'page=booking_details\',\'&m=edit\')">['._EDIT_WORD.']</a>	';
 					}
-					echo '</h4>
+					echo '
 				</td>
 			</tr>
 			<tr>
@@ -560,29 +606,35 @@ class Reservation {
 				echo '</td>
 				<td></td>
 			</tr>
-			</table><br />';
+			</table>';
+            echo '</div>';
+            echo '</div>';
 
-			echo '<table class="reservation_cart" border="0" width="99%" align="center" cellspacing="0" cellpadding="5">
-			<tr><td colspan="10"><h4>'._RESERVATION_DETAILS.'</h4></td></tr>
-			<tr class="header">
-				<th class="'.$class_left.'" width="40px">&nbsp;</th>
-				<th align="'.$class_left.'">'._ROOM_TYPE.'</th>
-				<th align="center">'._FROM.'</th>
-				<th align="center">'._TO.'</th>
-				<th width="60px" align="center">'._NIGHTS.'</th>								
-				<th width="50px" align="center">'._ROOMS.'</th>
-				<th width="70px" colspan="3" align="center">'._OCCUPANCY.'</th>
-				'.(($meal_plans_count) ? '<th width="60px" align="center">'._MEAL_PLANS.'</th>' : '<th style="padding:0px;">&nbsp;</th>').'
-				<th class="'.$class_right.'" width="80px" align="'.$class_right.'">'._PRICE.'</th>
-			</tr>';
+            echo '<header class="panel-heading panel-bgl">';
+            echo '<h2 class="panel-title">'._RESERVATION_DETAILS.'</h2>';
+            echo '</header>';
 
-			echo '<tr style="font-size:10px;background-color:transparent;">				
-				<th colspan="6"></th>
-				<th align="center">'._ADULT.'</th>
-				'.(($allow_children == 'yes') ? '<th align="center">'._CHILD.'</th>' : '<th></th>').'
-				'.(($allow_guests == 'yes') ? '<th align="center">'._GUEST.'</th>' : '<th></th>').' 
-				<th colspan="2"></th>
-			</tr>';
+
+//			echo '<table class="reservation_cart" border="0" width="99%" align="center" cellspacing="0" cellpadding="5">
+//			<tr class="header">
+//				<th class="'.$class_left.'" width="40px">&nbsp;</th>
+//				<th align="'.$class_left.'">'._ROOM_TYPE.'</th>
+//				<th align="center">'._FROM.'</th>
+//				<th align="center">'._TO.'</th>
+//				<th width="60px" align="center">'._NIGHTS.'</th>
+//				<th width="50px" align="center">'._ROOMS.'</th>
+//				<th width="70px" colspan="3" align="center">'._OCCUPANCY.'</th>
+//				'.(($meal_plans_count) ? '<th width="60px" align="center">'._MEAL_PLANS.'</th>' : '<th style="padding:0px;">&nbsp;</th>').'
+//				<th class="'.$class_right.'" width="80px" align="'.$class_right.'">'._PRICE.'</th>
+//			</tr>';
+//
+//			echo '<tr style="font-size:10px;background-color:transparent;">
+//				<th colspan="6"></th>
+//				<th align="center">'._ADULT.'</th>
+//				'.(($allow_children == 'yes') ? '<th align="center">'._CHILD.'</th>' : '<th></th>').'
+//				'.(($allow_guests == 'yes') ? '<th align="center">'._GUEST.'</th>' : '<th></th>').'
+//				<th colspan="2"></th>
+//			</tr>';
 			
 			$order_price=0;
 			foreach ($this->arrReservation as $key => $val)
@@ -609,54 +661,101 @@ class Reservation {
 				if($result[1] > 0){
 					$room_icon_thumb = ($result[0]['room_icon_thumb'] != '') ? $result[0]['room_icon_thumb'] : 'no_image.png';
 					$room_price_w_meal_guest = ($val['price'] + $val['meal_plan_price'] + $val['guests_fee']);
-					echo '<tr>
-							<td><img src="images/rooms_icons/'.$room_icon_thumb.'" alt="" width="32px" height="32px" /></td>							
-							<td>
-								<b>'.prepare_link('rooms', 'room_id', $result[0]['id'], $result[0]['loc_room_type'], $result[0]['loc_room_type'], '', _CLICK_TO_VIEW).'</b><br>
-								'.$result[0]['hotel_name'].'
-							</td>							
-							<td align="center">'.format_date($val['from_date'], $this->fieldDateFormat, '', true).'</td>
-							<td align="center">'.format_date($val['to_date'], $this->fieldDateFormat, '', true).'</td>							
-							<td align="center">'.$val['nights'].'</td>
-							<td align="center">'.$val['rooms'].'</td>
-							<td align="center">'.$val['adults'].'</td>
-							'.(($allow_children == 'yes') ? '<td align="center">'.$val['children'].'</td>' : '<td></td>').'
-							'.(($allow_guests == 'yes') ? '<td align="center">'.$val['guests'].'</td>' : '<td></td>').'
-							'.(($meal_plans_count) ? '<td align="center">'.$val['meal_plan_name'].'</td>' : '<td></td>').'
-							<td align="'.$class_right.'">'.Currencies::PriceFormat($room_price_w_meal_guest / $this->currencyRate, '', '', $this->currencyFormat).'&nbsp;</td>
-						</tr>';
+
+                    echo '<div class="panel panel-default">';
+                    echo '<header class="panel-heading panel-bgl">';
+                    echo '<h2 class="panel-title">'.prepare_link('rooms', 'room_id', $result[0]['id'], $result[0]['loc_room_type'], $result[0]['loc_room_type'], '', _CLICK_TO_VIEW).'</b><br>
+								'.$result[0]['hotel_name'].'</h2>';
+                    echo '</header>';
+                    echo '<div class="panel-body panel-body-bg">';
+                    echo '<div class="col-md-4"><img src="images/rooms_icons/'.$room_icon_thumb.'" /></div>';
+                    echo '<div class="col-md-4">';
+                    echo 'From date: '.format_date($val['from_date'], $this->fieldDateFormat, '', true).'<br>
+                            To date: '.format_date($val['to_date'], $this->fieldDateFormat, '', true).'<br>
+							Nights: '.$val['nights'].'<br>
+							Rooms: '.$val['rooms'].'</br>
+							Adults: '.$val['adults'].'<br>
+							'.(($allow_children == 'yes') ? ''.$val['children'].'' : '<br>').'
+							'.(($allow_guests == 'yes') ? ''.$val['guests'].'' : '<br>').'
+							'.(($meal_plans_count) ? ''.$val['meal_plan_name'].'' : '<br>');
+                    echo '</div>';
+                    echo '<div class="col-md-4"><strong>'.Currencies::PriceFormat($room_price_w_meal_guest / $this->currencyRate, '', '', $this->currencyFormat).'</strong></div>';
+                    echo '</div>';
+                    echo '</div>';
+
+//                    echo '<tr>
+//							<td><img src="images/rooms_icons/'.$room_icon_thumb.'" alt="" width="32px" height="32px" /></td>
+//							<td>
+//								<b>'.prepare_link('rooms', 'room_id', $result[0]['id'], $result[0]['loc_room_type'], $result[0]['loc_room_type'], '', _CLICK_TO_VIEW).'</b><br>
+//								'.$result[0]['hotel_name'].'
+//							</td>
+//							<td align="center">'.format_date($val['from_date'], $this->fieldDateFormat, '', true).'</td>
+//							<td align="center">'.format_date($val['to_date'], $this->fieldDateFormat, '', true).'</td>
+//							<td align="center">'.$val['nights'].'</td>
+//							<td align="center">'.$val['rooms'].'</td>
+//							<td align="center">'.$val['adults'].'</td>
+//							'.(($allow_children == 'yes') ? '<td align="center">'.$val['children'].'</td>' : '<td></td>').'
+//							'.(($allow_guests == 'yes') ? '<td align="center">'.$val['guests'].'</td>' : '<td></td>').'
+//							'.(($meal_plans_count) ? '<td align="center">'.$val['meal_plan_name'].'</td>' : '<td></td>').'
+//							<td align="'.$class_right.'">'.Currencies::PriceFormat($room_price_w_meal_guest / $this->currencyRate, '', '', $this->currencyFormat).'&nbsp;</td>
+//						</tr>';
 					$order_price += ($room_price_w_meal_guest / $this->currencyRate);
 				}
 			}
 			
-			// draw sub-total row			
-			echo '<tr>
-					<td colspan="7"></td>
-					<td class="td '.$class_left.'" colspan="3"><b>'._SUBTOTAL.':</b></td>
-					<td class="td '.$class_right.'" align="'.$class_right.'">
-						<b>'.Currencies::PriceFormat($order_price, '', '', $this->currencyFormat).'</b>
-					</td>
-				 </tr>';
-
+			// draw sub-total row
+            echo '<div class="row col-md-11 text-right"><b>'._SUBTOTAL.':</b> <b>'.Currencies::PriceFormat($order_price, '', '', $this->currencyFormat).'</b></div>';
+//			echo '<table><tr>
+//					<td colspan="7"></td>
+//					<td class="td '.$class_left.'" colspan="3"><b>'._SUBTOTAL.':</b></td>
+//					<td class="td '.$class_right.'" align="'.$class_right.'">
+//						<b>'.Currencies::PriceFormat($order_price, '', '', $this->currencyFormat).'</b>
+//					</td>
+//				 </tr>';
+//            echo '</table>';
+//            echo '</div>';
+//            echo '</div>';
+//            echo '<table>';
 			//echo '<tr><td colspan="10" nowrap height="5px"></td></tr>';
 			//echo '<tr><td colspan="11"><hr size="1" noshade="noshade" /></td></tr>';
 			
 			// EXTRAS
 			// ------------------------------------------------------------
+            echo '<div class="clear"></div>';
+            echo '<br>';
 			if($extras[1]){
-				echo '<tr><td colspan="11"><hr size="1" noshade="noshade" /></td></tr>';
-				echo '<tr><td colspan="11"><h4>'._EXTRAS.'</h4></td></tr>';				
-				echo '<tr><td colspan="11"><table width="340px">';				
-				for($i=0; $i<$extras[1]; $i++){
-					echo '<tr>';
-					echo '<td wrap="wrap">'.$extras[0][$i]['name'].' <span class="help" title="'.$extras[0][$i]['description'].'">[?]</span></td>';
-					echo '<td>&nbsp;</td>';
-					echo '<td align="right">'.Currencies::PriceFormat($extras[0][$i]['price'] / $this->currencyRate, '', '', $this->currencyFormat).'</td>';
-					echo '<td>&nbsp;</td>';
-					echo '<td>'.draw_numbers_select_field('extras_'.$extras[0][$i]['id'], '', '0', $extras[0][$i]['maximum_count'], 1, 'extras_ddl', 'onchange="appUpdateTotalSum('.$i.',this.value,'.(int)$extras[1].')"', false).'</td>';
-					echo '</tr>';
-				}
-				echo '</table></td></tr>';								
+                echo '<div class="panel panel-default">';
+                echo '<header class="panel-heading panel-bgl">';
+                echo '<h2 class="panel-title">'._EXTRAS.'</h2>';
+                echo '</header>';
+                echo '<div class="panel-body panel-body-bg">';
+                echo '<table width="80%">';
+                for($i=0; $i<$extras[1]; $i++){
+                    echo '<tr>';
+                    echo '<td wrap="wrap">'.$extras[0][$i]['name'].' <span class="help" title="'.$extras[0][$i]['description'].'">[?]</span></td>';
+                    echo '<td>&nbsp;</td>';
+                    echo '<td align="right">'.Currencies::PriceFormat($extras[0][$i]['price'] / $this->currencyRate, '', '', $this->currencyFormat).'</td>';
+                    echo '<td>&nbsp;</td>';
+                    echo '<td>'.draw_numbers_select_field('extras_'.$extras[0][$i]['id'], '', '0', $extras[0][$i]['maximum_count'], 1, 'extras_ddl', 'onchange="appUpdateTotalSum('.$i.',this.value,'.(int)$extras[1].')"', false).'</td>';
+                    echo '</tr>';
+                }
+                echo '</table>';
+                echo '</div>';
+                echo '</div>';
+
+//				echo '<tr><td colspan="11"><hr size="1" noshade="noshade" /></td></tr>';
+//				echo '<tr><td colspan="11"><h4>'._EXTRAS.'</h4></td></tr>';
+//				echo '<tr><td colspan="11"><table width="340px">';
+//				for($i=0; $i<$extras[1]; $i++){
+//					echo '<tr>';
+//					echo '<td wrap="wrap">'.$extras[0][$i]['name'].' <span class="help" title="'.$extras[0][$i]['description'].'">[?]</span></td>';
+//					echo '<td>&nbsp;</td>';
+//					echo '<td align="right">'.Currencies::PriceFormat($extras[0][$i]['price'] / $this->currencyRate, '', '', $this->currencyFormat).'</td>';
+//					echo '<td>&nbsp;</td>';
+//					echo '<td>'.draw_numbers_select_field('extras_'.$extras[0][$i]['id'], '', '0', $extras[0][$i]['maximum_count'], 1, 'extras_ddl', 'onchange="appUpdateTotalSum('.$i.',this.value,'.(int)$extras[1].')"', false).'</td>';
+//					echo '</tr>';
+//				}
+//				echo '</table></td></tr>';
 			}
 			
 			// calculate discount
@@ -666,25 +765,24 @@ class Reservation {
 			// calculate percent
 			$vat_cost = (($order_price + $this->bookingInitialFee) * ($this->vatPercent / 100));
 			$cart_total = ($order_price + $this->bookingInitialFee) + $vat_cost;
-
+            echo '<div class="col-md-8"></div>';
+            echo '<div class="col-md-4">';
+            echo '<table width="100%">';
 			if($this->discountCampaignID != '' || $this->discountCoupon != ''){
 				echo '<tr>
-						<td colspan="7"></td>
-						<td class="td '.$class_left.'" colspan="3"><b><span style="color:#a60000">'._DISCOUNT.': ('.Currencies::PriceFormat($this->discountPercent, '%', 'right', $this->currencyFormat).')</span></b></td>
+						<td class="td '.$class_left.'" ><b><span style="color:#a60000">'._DISCOUNT.': ('.Currencies::PriceFormat($this->discountPercent, '%', 'right', $this->currencyFormat).')</span></b></td>
 						<td class="td '.$class_right.'" align="'.$class_right.'"><b><span style="color:#a60000">- '.Currencies::PriceFormat($discount_value, '', '', $this->currencyFormat).'</span></b></td>
 					</tr>';				
 			}
 			if(!empty($this->bookingInitialFee)){
 				echo '<tr>
-						<td colspan="7"></td>
-						<td class="td '.$class_left.'" colspan="3"><b>'._INITIAL_FEE.': </b></td>
+						<td class="td '.$class_left.'" ><b>'._INITIAL_FEE.': </b></td>
 						<td class="td '.$class_right.'" align="'.$class_right.'"><b>'.Currencies::PriceFormat($this->bookingInitialFee, '', '', $this->currencyFormat).'</b></td>
 					</tr>';								
 			}
 			if($this->vatIncludedInPrice == 'no'){
 				echo '<tr>
-						<td colspan="7"></td>
-						<td class="td '.$class_left.'" colspan="3"><b>'._VAT.': ('.Currencies::PriceFormat($this->vatPercent, '%', 'right', $this->currencyFormat, $this->GetVatPercentDecimalPoints($this->vatPercent)).')</b></td>
+						<td class="td '.$class_left.'" ><b>'._VAT.': ('.Currencies::PriceFormat($this->vatPercent, '%', 'right', $this->currencyFormat, $this->GetVatPercentDecimalPoints($this->vatPercent)).')</b></td>
 						<td class="td '.$class_right.'" align="'.$class_right.'">
 							<b><label id="reservation_vat">'.Currencies::PriceFormat($vat_cost, '', '', $this->currencyFormat).'</label></b>
 						</td>
@@ -692,18 +790,27 @@ class Reservation {
 			}
 			echo '<tr><td colspan="11" nowrap height="5px"></td></tr>
 				 <tr class="footer">
-					<td colspan="7"></td>
-					<td class="td '.$class_left.'" colspan="3"><b>'._TOTAL.':</b></td>
+					<td class="td '.$class_left.'" ><b>'._TOTAL.':</b></td>
 					<td class="td '.$class_right.'" align="'.$class_right.'">
 						<b><label id="reservation_total">'.Currencies::PriceFormat($cart_total, '', '', $this->currencyFormat).'</label></b>
 					</td>
 				 </tr>';
+            echo '</table>';
+            echo '</div>';
 
 			// PAYMENT DETAILS
 			// ------------------------------------------------------------
-			echo '<tr><td colspan="11"><hr size="1" noshade="noshade" /></td></tr>';
-			echo '<tr><td colspan="11"><h4>'._PAYMENT_DETAILS.'</h4></td></tr>';
-			echo '<tr><td colspan="11">';
+            echo '<div class="clear"></div>';
+            echo '<br>';
+            echo '<div class="panel panel-default">';
+            echo '<header class="panel-heading panel-bgl">';
+            echo '<h2 class="panel-title">'._PAYMENT_DETAILS.'</h2>';
+            echo '</header>';
+            echo '<div class="panel-body panel-body-bg">';
+
+
+
+
 			echo '<table border="0" width="100%">';
 				if($payment_type_cnt > 1){
 					echo '<tr><td width="130px" nowrap>'._PAYMENT_TYPE.': &nbsp;</td><td> 
@@ -764,7 +871,9 @@ class Reservation {
 					}
 					echo '</td>';
 				echo '</tr>';			
-			echo '</table></td></tr>';
+			echo '</table>';
+            echo '</div>';
+            echo '</div>';
 			
 			if($payment_types_defined){			
 				// PROMO CODES OR DISCOUNT COUPONS
@@ -778,8 +887,8 @@ class Reservation {
 					echo '<input type="text" class="discount_coupon" name="discount_coupon" id="discount_coupon" value="'.$this->discountCoupon.'" readonly="readonly" maxlength="32" />&nbsp;&nbsp;&nbsp;';
 					echo '<input type="button" class="button" id="discount_button" value="'._REMOVE.'" onclick="appGoToPage(\'index.php?page=booking_checkout\', \'&submition_type=remove_coupon&token='.Application::Get('token').'&discount_coupon=\'+jQuery(\'#discount_coupon\').val(), \'post\')" />';
 				}else{				
-					echo '<input type="text" class="discount_coupon" name="discount_coupon" id="discount_coupon" value="'.$this->discountCoupon.'" maxlength="32" />&nbsp;&nbsp;&nbsp;';
-					echo '<input type="button" class="button" id="discount_button" value="'._APPLY.'" onclick="appGoToPage(\'index.php?page=booking_checkout\', \'&submition_type=apply_coupon&token='.Application::Get('token').'&discount_coupon=\'+jQuery(\'#discount_coupon\').val(), \'post\')" />';
+					echo ' <input type="text" class="discount_coupon form-controll" name="discount_coupon" id="discount_coupon" value="'.$this->discountCoupon.'" maxlength="32" />&nbsp;&nbsp;&nbsp;';
+					echo ' <input type="button" class="button btn" id="discount_button" value="'._APPLY.'" onclick="appGoToPage(\'index.php?page=booking_checkout\', \'&submition_type=apply_coupon&token='.Application::Get('token').'&discount_coupon=\'+jQuery(\'#discount_coupon\').val(), \'post\')" />';
 				}
 				echo '</td>';
 				echo '</tr>';					
@@ -795,10 +904,10 @@ class Reservation {
 					  <tr valign="middle">
 						<td colspan="8" align="'.$class_right.'"></td>
 						<td align="'.$class_right.'" colspan="3">
-							'.(($payment_types_defined) ? '<input class="button" type="submit" value="'._SUBMIT_BOOKING.'" />' : '').' 
 						</td>
 					</tr>';
 				echo '</table>';
+                echo '<br><br><div class="col-md-12 text-right">'.(($payment_types_defined) ? '<input class="button btn" type="submit" value="'._SUBMIT_BOOKING.'" />' : '').'</div>';
 				echo '<input type="hidden" id="hid_vat_percent" value="'.$this->vatPercent.'" />';
 				echo '<input type="hidden" id="hid_booking_initial_fee" value="'.$this->bookingInitialFee.'" />';
 				echo '<input type="hidden" id="hid_order_price" value="'.$order_price.'" />';
@@ -1009,8 +1118,19 @@ class Reservation {
 				'pre_payment_type'   => $pre_payment_type,
 				'pre_payment_value'  => $pre_payment_value,				
 			);
-	
-			$fisrt_part = '<table border="0" width="97%" align="center">
+            $fisrt_part = '';
+            /**Begin panel**/
+            $fisrt_part .= '<div class="clear"></div>';
+            $fisrt_part .= '<div class="panel panel-default">';
+            $fisrt_part .= '<header class="panel-heading panel-bgl">';
+            $fisrt_part .= '<h2 class="panel-title">PAYMENT INFO</h2>';
+            $fisrt_part .= '</header>';
+            $fisrt_part .= '<div class="panel-body panel-body-bg">';
+//            $fisrt_part .= '<div class="col-md-4">AAAAA</div>';
+//            $fisrt_part .= '<div class="col-md-4">VBBB</div>';
+//            $fisrt_part .= '<div class="col-md-4 text-left">VBBB</div>';
+
+			$fisrt_part .= '<table border="0" width="97%" align="center">
 				<tr><td width="20%">'._BOOKING_DATE.' </td><td width="2%"> : </td><td> '.format_date(date('Y-m-d H:i:s'), $this->fieldDateFormat, '', true).'</td></tr>						
 				<tr><td>'._ROOMS.' </td><td> : </td><td> '.(int)$this->roomsCount.'</td></tr>
 				<tr><td>'._BOOKING_PRICE.' </td><td width="2%"> : </td><td> '.Currencies::PriceFormat($order_price, '', '', $this->currencyFormat).'</td></tr>';
@@ -1040,8 +1160,15 @@ class Reservation {
 					$fisrt_part .= '<tr><td colspan="3" nowrap height="10px"></td></tr>';
 					$fisrt_part .= '<tr><td colspan="3"><h4>'._ADDITIONAL_INFO.'</h4>'.$additional_info.'</td></tr>';							
 				}
+            $fisrt_part .= '</table></div>';
+            $fisrt_part .= '</div>';
+            $fisrt_part .= '</div>';
 			
 			$second_part = '</table><br />';
+
+
+            $fisrt_part .= '<div class="clear"></div>';
+            /**End panel**/
 	
 			if($payment_type == 'poa'){	
 				

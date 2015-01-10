@@ -134,7 +134,7 @@ function draw_sub_title_bar($title, $draw = true, $tag = 'h3')
  */
 function draw_content_start()
 {
-	echo '<div class="center_box_content">';
+	echo '<div class="row">';
 }
 
 /**

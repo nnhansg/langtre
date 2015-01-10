@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<atom:link href="http://bookinglangtre.ntitss.com.palm.arvixe.com/feeds/rss.xml" rel="self" type="application/rss+xml" />
+<atom:link href="http://localhost:91/feeds/rss.xml" rel="self" type="application/rss+xml" />
 <title>Bamboo Village</title>
-<link>http://bookinglangtre.ntitss.com.palm.arvixe.com/feeds/rss.xml</link>
+<link>http://localhost:91/feeds/rss.xml</link>
 <description>Bamboo Village</description>
 <language>en-us</language>
 <copyright>(c) copyright</copyright>
-<pubDate>Wed, 31 Dec 2014 18:04:36 ICT</pubDate>
+<pubDate>Wed, 07 Jan 2015 20:58:42 ICT</pubDate>
 <image>
-<url>http://bookinglangtre.ntitss.com.palm.arvixe.com/images/icons/logo.png</url>
+<url>http://localhost:91/images/icons/logo.png</url>
 <title>Bamboo Village</title>
-<link>http://bookinglangtre.ntitss.com.palm.arvixe.com/feeds/rss.xml</link>
+<link>http://localhost:91/feeds/rss.xml</link>
 </image>
 </channel>
 </rss>
