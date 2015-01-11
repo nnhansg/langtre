@@ -3246,7 +3246,7 @@ class Rooms extends MicroGrid {
 							$output2 .= '<option value="'.$val.'" '.(($checkout_selected_year_month == $val) ? 'selected="selected"' : '').'>'.get_month_local(date('n', $cur_time)).' \''.date('y', $cur_time).'</option>';
 						}
 					$output2 .= '</select>';
-					if($show_calendar) $output2 .= '<a class="calendar" onclick="cShowCalendar(this,\'calendar\',\'checkout\');" href="javascript:void(0);"><img title="'._PICK_DATE.'" alt="calendar" src="templates/'.Application::Get('template').'/images/button-calendar.png" width="22 /></a>';
+					if($show_calendar) $output2 .= '<a class="calendar" onclick="cShowCalendar(this,\'calendar\',\'checkout\');" href="javascript:void(0);"><img title="'._PICK_DATE.'" alt="calendar" src="templates/'.Application::Get('template').'/images/button-calendar.png" width="22" /></a>';
 					
 		$output3 = '<label class="label-inline">'._ROOMS.': </label>
 					<select class="max_occupation" name="rooms_quantity" id="rooms_quantity">';
@@ -3376,7 +3376,7 @@ class Rooms extends MicroGrid {
 			}			
 
 			$selected_sort_by = isset($_POST['sort_by']) ? prepare_input($_POST['sort_by']) : '';
-			$output_sort_by = _SORT_BY.': <select class="star_rating" name="sort_by">
+			$output_sort_by = '<label class="label-inline">'._SORT_BY.': </label><select class="star_rating" name="sort_by">
 					<option'.(($selected_sort_by == '5-1') ? ' selected="selected"' : '').' value="5-1">'._STARS_5_1.'</option>
 					<option'.(($selected_sort_by == '1-5') ? ' selected="selected"' : '').' value="1-5">'._STARS_1_5.'</option>
 				</select>&nbsp;';
@@ -3418,17 +3418,28 @@ class Rooms extends MicroGrid {
 					$output2 .= '</select>';
 					if($show_calendar) $output2 .= '<a class="calendar" onclick="cShowCalendar(this,\'calendar\',\'checkout\');" href="javascript:void(0);"><img title="'._PICK_DATE.'" alt="calendar" src="templates/'.Application::Get('template').'/images/button-calendar.png" width="22" /></a>';
 					
-		$output3 = _ADULTS.':
-					<select class="max_occupation" name="max_adults" id="max_adults">';
+		$output3 = '<label class="label-inline">'._ROOMS.': </label>
+					<select class="max_occupation" name="rooms_quantity" id="rooms_quantity" style="float: left; margin-right: 40px !important;">';
+        $rooms_quantity = isset($_POST['rooms_quantity']) ? (int)$_POST['rooms_quantity'] : '1';
+        $maximum_rooms = 100;
+
+        for($i=1; $i<=$maximum_rooms; $i++){
+            $output3 .= '<option value="'.$i.'" '.(($rooms_quantity == $i) ? 'selected="selected"' : '').'>'.$i.'&nbsp;</option>';
+        }
+
+        $output3 .= '</select>';
+
+        $output3 .= '<label class="label-inline">'._ADULTS.': </label>
+					<select class="max_occupation" name="max_adults" id="max_adults"  style="float: left; margin-right: 40px !important;">';
 						$max_adults = isset($_POST['max_adults']) ? (int)$_POST['max_adults'] : '1';
 						for($i=1; $i<=$maximum_adults; $i++){
 							$output3 .= '<option value="'.$i.'" '.(($max_adults == $i) ? 'selected="selected"' : '').'>'.$i.'&nbsp;</option>';
 						}
-					$output3 .= '</select>&nbsp;';
+					$output3 .= '</select>';
 					
 					if($allow_children == 'yes'){
-						$output3 .= _CHILDREN.': ';
-						$output3 .= '<select class="max_occupation" name="max_children" id="max_children">';
+						$output3 .= '<label class="label-inline">'._CHILDREN.': </label>';
+						$output3 .= '<select class="max_occupation" name="max_children" id="max_children" style="float: left; margin-right: 40px !important;">';
 							$max_children = isset($_POST['max_children']) ? (int)$_POST['max_children'] : '0';
 							for($i=0; $i<=$maximum_children; $i++){
 								$output3 .= '<option value="'.$i.'" '.(($max_children == $i) ? 'selected="selected"' : '').'>'.$i.'&nbsp;</option>';
@@ -3485,7 +3496,7 @@ class Rooms extends MicroGrid {
 		else return $output;
 	}
         
-        /**
+    /**
 	 *	Draws search availability block 3 - ChoNoi Group
 	 *	    @param $show_calendar
 	 *	    @param $room_id
@@ -3536,7 +3547,7 @@ class Rooms extends MicroGrid {
 			}			
 
 			$selected_sort_by = isset($_POST['sort_by']) ? prepare_input($_POST['sort_by']) : '';
-			$output_sort_by = _SORT_BY.': <select class="star_rating" name="sort_by">
+			$output_sort_by = '<label class="label-inline">'._SORT_BY.': </label><select class="star_rating" name="sort_by">
 					<option'.(($selected_sort_by == '5-1') ? ' selected="selected"' : '').' value="5-1">'._STARS_5_1.'</option>
 					<option'.(($selected_sort_by == '1-5') ? ' selected="selected"' : '').' value="1-5">'._STARS_1_5.'</option>
 				</select>&nbsp;';
@@ -3578,22 +3589,33 @@ class Rooms extends MicroGrid {
 					$output2 .= '</select>';
 					if($show_calendar) $output2 .= '<a class="calendar" onclick="cShowCalendar(this,\'calendar\',\'checkout\');" href="javascript:void(0);"><img title="'._PICK_DATE.'" alt="calendar" src="templates/'.Application::Get('template').'/images/button-calendar.png" width="22" /></a>';
 					
-		$output3 = '<div><label class="label-inline">'._ADULTS.':</label>
+		$output3 = '<label class="label-inline">'._ROOMS.': </label>
+					<select class="max_occupation" name="rooms_quantity" id="rooms_quantity">';
+        $rooms_quantity = isset($_POST['rooms_quantity']) ? (int)$_POST['rooms_quantity'] : '1';
+        $maximum_rooms = 100;
+
+        for($i=1; $i<=$maximum_rooms; $i++){
+            $output3 .= '<option value="'.$i.'" '.(($rooms_quantity == $i) ? 'selected="selected"' : '').'>'.$i.'&nbsp;</option>';
+        }
+
+        $output3 .= '</select><div style="width:100%; clear:both; height:4px;"></div>';
+
+        $output3 .= '<label class="label-inline">'._ADULTS.': </label>
 					<select class="max_occupation" name="max_adults" id="max_adults">';
 						$max_adults = isset($_POST['max_adults']) ? (int)$_POST['max_adults'] : '1';
 						for($i=1; $i<=$maximum_adults; $i++){
 							$output3 .= '<option value="'.$i.'" '.(($max_adults == $i) ? 'selected="selected"' : '').'>'.$i.'&nbsp;</option>';
 						}
-					$output3 .= '</select></div>';
+					$output3 .= '</select><div style="width:100%; clear:both; height:4px;"></div>';
 					
 					if($allow_children == 'yes'){
-						$output3 .= '<div><label class="label-inline">'._CHILDREN.':</label>';
+						$output3 .= '<label class="label-inline">'._CHILDREN.':</label>';
 						$output3 .= '<select class="max_occupation" name="max_children" id="max_children">';
 							$max_children = isset($_POST['max_children']) ? (int)$_POST['max_children'] : '0';
 							for($i=0; $i<=$maximum_children; $i++){
 								$output3 .= '<option value="'.$i.'" '.(($max_children == $i) ? 'selected="selected"' : '').'>'.$i.'&nbsp;</option>';
 							}
-						$output3 .= '</select></div>';
+						$output3 .= '</select><div style="width:100%; clear:both; height:4px;"></div>';
 					}
 					
 		if($inline){
