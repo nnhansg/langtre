@@ -12,8 +12,8 @@ defined('APPHP_EXEC') or die('Restricted Access');
 
 $objReservation = new Reservation();
 
-//--------------------------------------------------------------------------
-// *** redirect if reservation cart is empty
+// //--------------------------------------------------------------------------
+// // *** redirect if reservation cart is empty
 if($objReservation->IsCartEmpty()){
 	header('location: index.php?page=booking');
 	echo '<p>if your browser doesn\'t support redirection please click <a href="index.php?page=booking">here</a>.</p>';        
@@ -53,13 +53,14 @@ if(Modules::IsModuleInstalled('booking')){
 		$booking_payment_output = '';
 		
 		if(empty($task)){
-			header('location: index.php?page=booking_checkout');
+			header('location: index.php?page=booking_checkout&m=edit&mbkco=3');
 			exit;
 		}
 		
 		if($task == 'do_booking'){
-			$result = $objReservation->DoReservation($payment_type, $additional_info, $extras, $pre_payment_type, $pre_payment_value);			
+			$result = $objReservation->DoReservation($payment_type, $additional_info, $extras, $pre_payment_type, $pre_payment_value);
 			$booking_payment_output .= $objReservation->error;
+
 			if($result == true){
 				$booking_payment_output .= $objReservation->DrawReservation($payment_type, $additional_info, $extras, $pre_payment_type, $pre_payment_value, false);
 			}

@@ -325,7 +325,7 @@ class Reservation {
 							<td align="center"><a href="index.php?page=booking&act=remove&rid='.$key.'"><img src="images/remove.gif" width="16" height="16" border="0" title="'._REMOVE_ROOM_FROM_CART.'" alt="" /></a></td>							
 							<td>
 								<b>'.prepare_link('rooms', 'room_id', $result[0]['id'], $result[0]['loc_room_type'], $result[0]['loc_room_type'], '', _CLICK_TO_VIEW).'</b><br />
-								'.$result[0]['hotel_name'].'
+								
 							</td>
 							<td align="center">'.format_date($val['from_date'], $this->fieldDateFormat, '', true).'</td>
 							<td align="center">'.format_date($val['to_date'], $this->fieldDateFormat, '', true).'</td>
@@ -480,11 +480,13 @@ class Reservation {
 					 LEFT OUTER JOIN '.TABLE_COUNTRIES.' ON '.$table_name.'.b_country = '.TABLE_COUNTRIES.'.abbrv AND '.TABLE_COUNTRIES.'.is_active = 1
 				  WHERE '.$table_name.'.id = '.(int)$this->currentCustomerID;				  
 		}
+
 		$result = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
-		if($result[1] <= 0){
-			draw_message(_RESERVATION_CART_IS_EMPTY_ALERT, true, true);
-			return false;
-		}
+		
+		// if($result[1] <= 0){
+		// 	draw_message(_RESERVATION_CART_IS_EMPTY_ALERT, true, true);
+		// 	return false;
+		// }
 
 		if(count($this->arrReservation) > 0)
 		{
@@ -505,7 +507,7 @@ class Reservation {
 			'.draw_hidden_field('selected_user', $this->selectedUser, false).'
 			'.draw_token_field(false);
 			
-			echo '<table class="reservation_cart" border="0" width="99%" align="center" cellspacing="0" cellpadding="5">
+			echo '<table class="reservation_cart hide" border="0" width="99%" align="center" cellspacing="0" cellpadding="5">
 			<tr>
 				<td colspan="2"><h4>'._BILLING_DETAILS.' &nbsp;';
 					if($objLogin->IsLoggedIn()){
@@ -610,10 +612,10 @@ class Reservation {
 					$room_icon_thumb = ($result[0]['room_icon_thumb'] != '') ? $result[0]['room_icon_thumb'] : 'no_image.png';
 					$room_price_w_meal_guest = ($val['price'] + $val['meal_plan_price'] + $val['guests_fee']);
 					echo '<tr>
-							<td><img src="images/rooms_icons/'.$room_icon_thumb.'" alt="" width="32px" height="32px" /></td>							
+							<td><a href="index.php?page=booking_checkout&act=remove&rid='.$key.'"><img src="images/remove.gif" width="16" height="16" border="0" title="'._REMOVE_ROOM_FROM_CART.'" alt="" /></a></td>
 							<td>
 								<b>'.prepare_link('rooms', 'room_id', $result[0]['id'], $result[0]['loc_room_type'], $result[0]['loc_room_type'], '', _CLICK_TO_VIEW).'</b><br>
-								'.$result[0]['hotel_name'].'
+								
 							</td>							
 							<td align="center">'.format_date($val['from_date'], $this->fieldDateFormat, '', true).'</td>
 							<td align="center">'.format_date($val['to_date'], $this->fieldDateFormat, '', true).'</td>							

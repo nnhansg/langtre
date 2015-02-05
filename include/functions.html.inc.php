@@ -74,8 +74,8 @@ function draw_reservation_bar($current_tab = '', $is_draw = true, $links_allowed
 	
 	$output = '<table class="reservation_tabs" align="center" border="0">';
 	$output .= '<tr>';
-	$output .= ' <td class="'.(($current_tab == 'selected_rooms') ? 'reservation_tab_active' : (($selected_rooms_link) ? 'reservation_tab_selected' : 'reservation_tab')).'">'.(($selected_rooms_link) ? '<a href="index.php?page=booking">'._SELECTED_ROOMS.'</a>' : _SELECTED_ROOMS).'</td>';
-	$output .= ' <td class="'.(($current_tab == 'booking_details') ? 'reservation_tab_active' : (($selected_rooms_link) ? 'reservation_tab_selected' : 'reservation_tab')).'">'.(($booking_details_link) ? '<a href="index.php?page=booking_details'.($objLogin->IsLoggedInAsAdmin() ? '' : '&m=edit').'">'._BOOKING_DETAILS.'</a>' : _BOOKING_DETAILS).'</td>';
+	$output .= ' <td class="'.(($current_tab == 'selected_rooms') ? 'reservation_tab_active' : (($selected_rooms_link) ? 'reservation_tab_selected' : 'reservation_tab')).' hide">'.(($selected_rooms_link) ? '<a href="index.php?page=booking">'._SELECTED_ROOMS.'</a>' : _SELECTED_ROOMS).'</td>';
+	$output .= ' <td class="'.(($current_tab == 'booking_details') ? 'reservation_tab_active' : (($selected_rooms_link) ? 'reservation_tab_selected' : 'reservation_tab')).' hide">'.(($booking_details_link) ? '<a href="index.php?page=booking_details'.($objLogin->IsLoggedInAsAdmin() ? '' : '&m=edit').'">'._BOOKING_DETAILS.'</a>' : _BOOKING_DETAILS).'</td>';
 	$output .= ' <td class="'.(($current_tab == 'reservation') ? 'reservation_tab_active' : 'reservation_tab').'">'._RESERVATION.'</td>';
 	$output .= ' <td class="'.(($current_tab == 'payment') ? 'reservation_tab_active' : 'reservation_tab').'">'._PAYMENT.'</td>';
 	$output .= '</tr>';

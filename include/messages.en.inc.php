@@ -737,7 +737,7 @@ define("_NO_RECORDS_UPDATED","No records were updated!");
 define("_NO_ROOMS_FOUND","Sorry, there are no rooms that match your search. Please change your search criteria to see more rooms.");
 define("_NO_ENOUGH_ROOMS_FOUND","Sorry, there are no enough rooms that match your search. Please change your search criteria to see more rooms.");
 define("_NO_TEMPLATE","no template");
-define("_NO_USER_EMAIL_EXISTS_ALERT","It seems that you already booked rooms with us! <br>Please click <a href=index.php?customer=reset_account>here</a> to reset your username and get a temporary password. ");
+define("_NO_USER_EMAIL_EXISTS_ALERT","It seems that you already booked rooms with us! <br>Please click <a class='alert-link' href=index.php?customer=reset_account>here</a> to reset your username and get a temporary password. ");
 define("_NO_WRITE_ACCESS_ALERT","Please check you have write access to following directories:");
 define("_OCCUPANCY","Occupancy");
 define("_OCTOBER","October");

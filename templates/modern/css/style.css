@@ -999,6 +999,10 @@ table td {
 	margin-right: 10px;
 }
 
+.terms-detail {
+	padding: 10px;
+}
+
 .terms-detail div,
 .terms-detail p {
 	font-size: 10px !important;
@@ -1056,4 +1060,17 @@ table td {
 
 .price_type .price {
 	font-size: 120%;
+}
+
+.hide {
+	visibility: hidden;
+	display: none;
+}
+
+.alert-link {
+	color: #FCF9BD;
+}
+
+.no-padding {
+	padding: 0;
 }

@@ -63,6 +63,7 @@ class Rooms extends MicroGrid {
 		if(isset($_POST['max_guests'])) $this->params['max_guests'] = prepare_input($_POST['max_guests']);
 		if(isset($_POST['room_count'])) $this->params['room_count'] = prepare_input($_POST['room_count']);		
 		if(isset($_POST['default_price'])) $this->params['default_price'] = prepare_input($_POST['default_price']);
+		if(isset($_POST['default_price_flexible_offer'])) $this->params['default_price_flexible_offer'] = prepare_input($_POST['default_price_flexible_offer']);
 		if(isset($_POST['additional_guest_fee'])) $this->params['additional_guest_fee'] = prepare_input($_POST['additional_guest_fee']);		
 		if(isset($_POST['priority_order'])) $this->params['priority_order'] = prepare_input($_POST['priority_order']);
 		if(isset($_POST['beds'])) $this->params['beds'] = prepare_input($_POST['beds']);
@@ -1542,7 +1543,7 @@ class Rooms extends MicroGrid {
 			$rooms_prices_new = database_query($sql, DATA_AND_ROWS, FIRST_ROW_ONLY);
 
 	        $sql = 'INSERT INTO '.TABLE_ROOMS_PRICES.' (id, room_id, date_from, date_to, mon, tue, wed, thu, fri, sat, sun, is_default)
-					VALUES (NULL, ' . (int)$this->curRecordId . ', \'0000-00-00\', \'0000-00-00\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', 1)'; echo $sql . '<br/>';
+					VALUES (NULL, ' . (int)$this->curRecordId . ', \'0000-00-00\', \'0000-00-00\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', \''.$default_price_flexible_offer.'\', 1)'; // echo $sql . '<br/>';
 	        $result = database_void_query($sql);
 
 	        $sql = 'SELECT MAX(id) max_id FROM '.TABLE_ROOMS_PRICES.' WHERE room_id = ' . (int)$this->curRecordId  . ' AND is_default = 1';
@@ -1613,7 +1614,7 @@ class Rooms extends MicroGrid {
 					'.(($room_id != '') ? ' AND r.id='.(int)$room_id : '').'
 					'.(($max_adults != '') ? ' AND r.max_adults >= '.(int)$max_adults : '').'
 					'.(($max_children != '') ? ' AND r.max_children >= '.(int)$max_children : '').'
-				ORDER BY '.$order_by_clause;
+				ORDER BY r.default_price ASC, '.$order_by_clause;
 
 		$rooms = database_query($sql, DATA_AND_ROWS, ALL_ROWS);
 		if($rooms[1] > 0){
@@ -1821,7 +1822,7 @@ class Rooms extends MicroGrid {
 					INNER JOIN '.TABLE_ROOMS_DESCRIPTION.' rd ON r.id = rd.room_id
 				WHERE
 					r.id = _KEY_ AND
-					rd.language_id = \''.$lang.'\'';
+					rd.language_id = \''.$lang.'\' ';
 
 		if(count($this->arrAvailableRooms) == 1){
 
@@ -1862,7 +1863,9 @@ class Rooms extends MicroGrid {
 
                     if($room[1] > 0){
 						//$output .= '<br />';
-						$output .= '<form action="index.php?page=booking" method="post">'.$nl;
+						// $output .= '<form action="index.php?page=booking" method="post">'.$nl;
+						$output .= '<form action="index.php?page=booking_checkout&mbkco=3" method="post">'.$nl;
+						// $output .= '<form action="http://google.com" method="post">'.$nl;
 						$output .= draw_hidden_field('hotel_id', $first_key, false).$nl;
 						$output .= draw_hidden_field('room_id', $room[0]['id'], false).$nl;
 						$output .= draw_hidden_field('from_date', $params['from_date'], false).$nl;
@@ -1968,7 +1971,7 @@ class Rooms extends MicroGrid {
 											</div>
 											<div class="left">
 												<div class="col-2-check-available">
-													<span class="terms-detail">' . _CANCEL_OR_CHANGE_FEE . '<br/><a href="javascript:void(0);" onclick="return hs.htmlExpand(this, { contentId: \'highslide-html-' . $room[0]['id'] . '-1\', headingText: \'Terms & Details - ' . _LIMITED_OFFER . '\' } )" class="highslide">' . _TERMS_DETAIL . '</a></span>
+													<span class="terms-detail no-padding">' . _CANCEL_OR_CHANGE_FEE . '<br/><a href="javascript:void(0);" onclick="return hs.htmlExpand(this, { contentId: \'highslide-html-' . $room[0]['id'] . '-1\', headingText: \'Terms & Details - ' . _LIMITED_OFFER . '\' } )" class="highslide">' . _TERMS_DETAIL . '</a></span>
 													<div class="highslide-html-content" id="highslide-html-' . $room[0]['id'] . '-1">
 														<div class="highslide-header">
 															<ul>
@@ -2018,6 +2021,38 @@ class Rooms extends MicroGrid {
 																<div class="col-1-2 align-right">
 																	' . Currencies::PriceFormat(($total / $currency_rate), '', '', $currency_format) . '
 																</div>
+																<p class="item">&nbsp;</p>
+															</div>
+															<div class="price-detail">
+																<h4>Deposit Requirement</h4>
+																<p class="item">
+																	* A deposit for the booking must be received within one week of booking confirmation; otherwise the reservation will be void.
+																</p>
+																<p class="item">
+																	* All guests must have a credit card to occupy a unit or make a deposit to: Beneficiary’s name: Bamboo Village Beach Resort & Spa - Account Number: 102 02 00000 92145 (USD) Or Account Number: 102 01 0000 336145 (VND) at Vietnam Bank for Industry and Trade (SWIFT CODE: ICBVVNVX) Binh Thuan Branch.
+																</p>
+															</div>
+															<div class="price-detail">
+																<h4>Cancellation Policy</h4>
+																<p class="item">
+																	The Resort reserves the right to:
+																	(a). Charge 50% of the deposit for notifications between 7 days and 24 hours before check-in time; or, (b). Charge 100% of the deposit for no-shows and later notifications; or: (c) Withhold 10% of the booking value against the deposit as handling fee for other earlier notifications;<br/>
+																	The remainder (a & c) will be retained for next bookings within 6 months after the cancelled one and not refundable.
+																</p>
+															</div>
+															<div class="price-detail">
+																<h4>Other Information</h4>
+																<p class="item">
+																	* Extra bed: (maximum 1 per room) VND 735,000 each with breakfast.<br/>
+																	* Free room charge for one child under 5 years old sharing room with parents without extra bed.<br/>
+																	* One extra bed is automatically chargeable if 2 children under 12 sharing room with parents;<br/>
+																	* Rooms will be held till 4:00 pm unless otherwise guaranteed.<br/>
+																	* Group rates discount negotiable.<br/>
+																	* Check-in time: 2:00 pm.<br/>
+																	* Check-out time: 12:00 noon.<br/>
+																	* 50% of one room night will be charged for late check-out.<br/>
+																	* One full room night will be charged for late check-out after 6:00 pm.
+																</p>
 															</div>
 														</div>
 													    <div class="highslide-footer">
@@ -2051,7 +2086,7 @@ class Rooms extends MicroGrid {
 											</div>
 											<div class="left">
 												<div class="col-2-check-available">
-													<span class="terms-detail">' . _CANCEL_OR_CHANGE_NO_FEE . '<br/><a href="javascript:void(0);" onclick="return hs.htmlExpand(this, { contentId: \'highslide-html-' . $room[0]['id'] . '-2\', headingText: \'Terms & Details - ' . _FLEXIBLE_OFFER . '\' } )"
+													<span class="terms-detail no-padding">' . _CANCEL_OR_CHANGE_NO_FEE . '<br/><a href="javascript:void(0);" onclick="return hs.htmlExpand(this, { contentId: \'highslide-html-' . $room[0]['id'] . '-2\', headingText: \'Terms & Details - ' . _FLEXIBLE_OFFER . '\' } )"
 													class="highslide">' . _TERMS_DETAIL . '</a></span>
 													<div class="highslide-html-content" id="highslide-html-' . $room[0]['id'] . '-2">
 														<div class="highslide-header">
@@ -2102,6 +2137,37 @@ class Rooms extends MicroGrid {
 																<div class="col-1-2 align-right">
 																	' . Currencies::PriceFormat(($total_2 / $currency_rate), '', '', $currency_format) . '
 																</div>
+															</div>
+															<div class="price-detail">
+																<h4>Deposit Requirement</h4>
+																<p class="item">
+																	* A deposit for the booking must be received within one week of booking confirmation; otherwise the reservation will be void.
+																</p>
+																<p class="item">
+																	* All guests must have a credit card to occupy a unit or make a deposit to: Beneficiary’s name: Bamboo Village Beach Resort & Spa - Account Number: 102 02 00000 92145 (USD) Or Account Number: 102 01 0000 336145 (VND) at Vietnam Bank for Industry and Trade (SWIFT CODE: ICBVVNVX) Binh Thuan Branch.
+																</p>
+															</div>
+															<div class="price-detail">
+																<h4>Cancellation Policy</h4>
+																<p class="item">
+																	The Resort reserves the right to:
+																	(a). Charge 50% of the deposit for notifications between 7 days and 24 hours before check-in time; or, (b). Charge 100% of the deposit for no-shows and later notifications; or: (c) Withhold 10% of the booking value against the deposit as handling fee for other earlier notifications;<br/>
+																	The remainder (a & c) will be retained for next bookings within 6 months after the cancelled one and not refundable.
+																</p>
+															</div>
+															<div class="price-detail">
+																<h4>Other Information</h4>
+																<p class="item">
+																	* Extra bed: (maximum 1 per room) VND 735,000 each with breakfast.<br/>
+																	* Free room charge for one child under 5 years old sharing room with parents without extra bed.<br/>
+																	* One extra bed is automatically chargeable if 2 children under 12 sharing room with parents;<br/>
+																	* Rooms will be held till 4:00 pm unless otherwise guaranteed.<br/>
+																	* Group rates discount negotiable.<br/>
+																	* Check-in time: 2:00 pm.<br/>
+																	* Check-out time: 12:00 noon.<br/>
+																	* 50% of one room night will be charged for late check-out.<br/>
+																	* One full room night will be charged for late check-out after 6:00 pm.
+																</p>
 															</div>
 														</div>
 													    <div class="highslide-footer">
@@ -2208,7 +2274,8 @@ class Rooms extends MicroGrid {
 							else if($room[0]['room_count'] > '1' && $v_val['available_rooms'] <= '5') $rooms_descr = '<span class="red">('.$v_val['available_rooms'].' '._ROOMS_LEFT.')</span>';
 							else $rooms_descr = '<span class="green">('._AVAILABLE.')</span>';
 
-							$output .= '<form action="index.php?page=booking" method="post">'.$nl;
+							// $output .= '<form action="index.php?page=booking" method="post">'.$nl;
+							$output .= '<form action="index.php?page=booking_checkout&mbkco=3" method="post">'.$nl;
 							$output .= draw_hidden_field('hotel_id', $key, false).$nl;
 							$output .= draw_hidden_field('room_id', $room[0]['id'], false).$nl;
 							$output .= draw_hidden_field('from_date', $params['from_date'], false).$nl;

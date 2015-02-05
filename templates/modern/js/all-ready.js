@@ -18,4 +18,5 @@ $(document).ready(function() {
 	hs.outlineType = 'rounded-white';
 	hs.showCredits = false;
 	hs.wrapperClassName = 'draggable-header';
+	hs.minWidth = 600;
 });
