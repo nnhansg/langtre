@@ -81,6 +81,10 @@ class Application {
 		'currency_symbol'   => '',
 		'currency_rate'     => '',
 		'currency_symbol_place' => '',
+		'currency_exchange_code' => '',
+		'currency_exchange_symbol' => '',
+		'currency_exchange_rate' => '',
+		'currency_exchange_symbol_place' => '',
 
 		'token'             => '',		
 
@@ -221,6 +225,11 @@ class Application {
 				self::$params['currency_symbol'] = $currency_info['symbol'];
 				self::$params['currency_rate']   = $currency_info['rate'];
 				self::$params['currency_symbol_place'] = $currency_info['symbol_placement'];
+				$currency_exchange_info = Currencies::GetCurrencyInfo('USD');
+				self::$params['currency_exchange_code']   = $currency_exchange_info['code'];
+				self::$params['currency_exchange_symbol'] = $currency_exchange_info['symbol'];
+				self::$params['currency_exchange_rate']   = $currency_exchange_info['rate'];
+				self::$params['currency_exchange_symbol_place'] = $currency_exchange_info['symbol_placement'];
 			}
 		}
 
