@@ -231,7 +231,6 @@ class PaymentIPN {
 	{
 		$nl = "\n";
 		$output = '';
-		
 		if($mode == 'test'){
 			$output .= $nl.'<tr><td colspan="3" nowrap height="10px">';
 			$output .= $nl.'<form action="index.php?page=booking_notify_paypal" method="post" name="payform">';
@@ -273,7 +272,10 @@ class PaymentIPN {
 					$pp_params['paypal_form_fields_count']++;
 					$output .= $nl.draw_hidden_field('item_name_'.$pp_params['paypal_form_fields_count'], _VAT, false);
 					$output .= $nl.draw_hidden_field('quantity_'.$pp_params['paypal_form_fields_count'], '1', false);
-					$output .= $nl.draw_hidden_field('amount_'.$pp_params['paypal_form_fields_count'], number_format($pp_params['vat_cost'], '2', '.', ','), false);
+					// Convert VAT tax from VND to USD payment
+					$vat_cost_exchange = $pp_params['vat_cost'] / $pp_params['currency_exchange_rate'];
+					var_dump($vat_cost_exchange);
+					$output .= $nl.draw_hidden_field('amount_'.$pp_params['paypal_form_fields_count'], number_format($vat_cost_exchange, '2', '.', ','), false);
 				}									
 			}else{
 				$output .= $nl.draw_hidden_field('cmd', '_xclick', false);
@@ -283,7 +285,9 @@ class PaymentIPN {
 			}
 			$output .= $nl.draw_hidden_field('custom', $pp_params['booking_number'], false);
 			$output .= $nl.draw_hidden_field('lc', 'US', false);
-			$output .= $nl.draw_hidden_field('currency_code', $pp_params['currency_code'], false);
+//			$output .= $nl.draw_hidden_field('currency_code', $pp_params['currency_code'], false);
+			// Huy Nguyen : Change currency code from VND to USD
+			$output .= $nl.draw_hidden_field('currency_code', $pp_params['currency_exchange_code'], false);
 			$output .= $nl.draw_hidden_field('cn', '', false);
 			$output .= $nl.draw_hidden_field('no_shipping', '1', false);
 			$output .= $nl.draw_hidden_field('rm', '1', false);

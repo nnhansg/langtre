@@ -96,6 +96,8 @@ class Reservation {
 			//$default_currency_info = Currencies::GetDefaultCurrencyInfo();
 			$this->currencyCode = Application::Get('currency_code');
 			$this->currencyRate = Application::Get('currency_rate');
+			$this->currency_exchange_code = Application::Get('currency_exchange_code');
+			$this->currency_exchange_rate = Application::Get('currency_exchange_rate');
 		}		
 
 		// prepare VAT percent
@@ -141,7 +143,9 @@ class Reservation {
 					$this->paypal_form_fields_count++;					
 					$this->paypal_form_fields .= draw_hidden_field('item_name_'.$this->paypal_form_fields_count, _ROOM_TYPE.': '.$val['room_type'], false);
 					$this->paypal_form_fields .= draw_hidden_field('quantity_'.$this->paypal_form_fields_count, $val['rooms'], false);
-					$this->paypal_form_fields .= draw_hidden_field('amount_'.$this->paypal_form_fields_count, number_format((($val['price'] / $this->currencyRate) / $val['rooms']), '2', '.', ','), false);
+					// Covert room price from VND to USD
+					$room_price_exchange = ($val['price'] / $this->currency_exchange_rate) / $val['rooms'];
+					$this->paypal_form_fields .= draw_hidden_field('amount_'.$this->paypal_form_fields_count, number_format($room_price_exchange, '2', '.', ','), false);
 				}
 			}
 		}
@@ -1001,6 +1005,8 @@ class Reservation {
 				'cc_expires_year'     => '',
 				
 				'currency_code'      => Application::Get('currency_code'),
+				'currency_exchange_code'=> $this->currency_exchange_code,
+				'currency_exchange_rate' => $this->currency_exchange_rate,
 				'additional_info'    => $additional_info,
 				'discount_value'     => $discount_value,
 				'extras_param'       => $extras_param,
